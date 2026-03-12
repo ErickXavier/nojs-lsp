@@ -1,0 +1,136 @@
+{
+  "name": "nojs-lsp",
+  "displayName": "No.JS LSP",
+  "description": "Language server for the No.JS framework — completions, hover docs, diagnostics, and more",
+  "version": "0.1.0",
+  "publisher": "EXS",
+  "license": "MIT",
+  "icon": "logo.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ErickXavier/nojs-lsp"
+  },
+  "keywords": [
+    "nojs",
+    "no.js",
+    "html",
+    "lsp",
+    "autocomplete",
+    "language-server",
+    "lsp"
+  ],
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters"
+  ],
+  "activationEvents": [
+    "onLanguage:html"
+  ],
+  "main": "./out/client/src/extension.js",
+  "bin": {
+    "nojs-language-server": "./bin/nojs-language-server.js"
+  },
+  "contributes": {
+    "html": {
+      "customData": [
+        "./data/nojs-custom-data.json"
+      ]
+    },
+    "snippets": [
+      {
+        "language": "html",
+        "path": "./snippets/nojs.json"
+      }
+    ],
+    "configuration": {
+      "title": "No.JS",
+      "properties": {
+        "nojs.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VS Code and the No.JS language server."
+        },
+        "nojs.validation.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable all No.JS diagnostics."
+        },
+        "nojs.completion.filters": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show filter completions in pipe expressions."
+        },
+        "nojs.customFilters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Additional custom filter names to include in completions."
+        },
+        "nojs.customValidators": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Additional custom validator names to include in completions."
+        },
+        "nojs.devtools.enabled": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable live connection to a running NoJS app via Chrome DevTools Protocol for live expression evaluation."
+        },
+        "nojs.devtools.port": {
+          "type": "number",
+          "default": 9222,
+          "description": "Chrome DevTools Protocol port (start Chrome with --remote-debugging-port=9222)."
+        },
+        "nojs.devtools.host": {
+          "type": "string",
+          "default": "localhost",
+          "description": "Chrome DevTools Protocol host."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.mjs",
+    "watch": "node esbuild.mjs --watch",
+    "lint": "eslint client/src server/src --ext .ts",
+    "test": "jest",
+    "test:e2e:compile": "tsc -p test/e2e/tsconfig.json",
+    "test:e2e": "npm run compile && npm run test:e2e:compile && node out/test/e2e/runTest.js",
+    "package": "vsce package",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/jest": "^29.5.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^20.11.0",
+    "@types/vscode": "^1.75.0",
+    "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^2.22.0",
+    "esbuild": "^0.20.2",
+    "glob": "^13.0.6",
+    "jest": "^29.7.0",
+    "mocha": "^11.7.5",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "vscode-html-languageservice": "^5.2.0",
+    "vscode-languageclient": "^9.0.0",
+    "vscode-languageserver": "^9.0.0",
+    "vscode-languageserver-textdocument": "^1.0.0"
+  }
+}

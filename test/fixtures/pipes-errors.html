@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NoJS Test Fixture — Dynamic Attributes, Pipes, Error Conditions</title>
+  <script src="https://cdn.jsdelivr.net/npm/@erickxavier/no-js@1.5/cdn.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== DYNAMIC ATTRIBUTE BINDING (bind-*) ===== -->
+
+  <a bind-href="'/users/' + userId">Profile</a>
+  <img bind-src="avatarUrl" bind-alt="'Avatar of ' + username" />
+  <input bind-placeholder="placeholder" bind-disabled="!isEditable" bind-value="inputValue" />
+  <div bind-id="'section-' + sectionId" bind-title="tooltipText"></div>
+  <div bind-class="dynamicClasses" bind-style="dynamicStyles"></div>
+  <link bind-href="themeUrl" />
+  <meta bind-content="pageDescription" />
+  <iframe bind-src="iframeUrl"></iframe>
+  <video bind-src="videoUrl" bind-poster="posterUrl"></video>
+  <source bind-src="sourceUrl" bind-type="mimeType" />
+
+
+  <!-- ===== PIPES (FILTER CHAINS) ===== -->
+
+  <!-- Single filter -->
+  <span bind="message | uppercase"></span>
+
+  <!-- Multiple chained filters -->
+  <span bind="text | trim | lowercase | truncate:50"></span>
+
+  <!-- Filter with multiple arguments -->
+  <span bind="price | currency:'BRL':'pt-BR'"></span>
+  <span bind="items | where:'status':'active'"></span>
+  <span bind="values | between:10:100"></span>
+
+  <!-- Filters in different directive contexts -->
+  <div if="items | count > 0">Has items</div>
+  <li each="users | sort:'name'" bind="name | capitalize"></li>
+  <p bind="date | date:'DD/MM/YYYY' | uppercase"></p>
+
+  <!-- Edge cases: spaces around pipes -->
+  <span bind="value  |  trim  |  uppercase"></span>
+  <span bind="val|trim|upper"></span>
+
+
+  <!-- ===== ERROR CONDITIONS ===== -->
+
+  <!-- Orphaned else (no preceding if) -->
+  <div>
+    <p>Some text</p>
+    <span else>This should warn — no if before it</span>
+  </div>
+
+  <!-- Orphaned else-if (no preceding if) -->
+  <div>
+    <p>Some text</p>
+    <span else-if="condition">This should warn too</span>
+  </div>
+
+  <!-- Missing required value -->
+  <div get>Should warn: get requires URL value</div>
+  <div post>Should warn: post requires URL value</div>
+  <div each>Should warn: each requires expression</div>
+
+  <!-- Unknown filter -->
+  <span bind="name | nonExistentFilter"></span>
+  <span bind="value | foobar:123"></span>
+
+  <!-- Unknown animation -->
+  <div if="show" animate-enter="bouncyBounce" animate-leave="spinAway">Bad animations</div>
+
+  <!-- Invalid event modifier -->
+  <button on:click.prevnt="doSomething()">Typo in modifier</button>
+  <button on:click.stahp="doSomething()">Wrong modifier</button>
+
+  <!-- Duplicate state declarations -->
+  <div state="{ count: 0 }">
+    <div state="{ count: 1 }">Duplicate count</div>
+  </div>
+
+  <!-- Empty expression on directives that require value -->
+  <div if="">Empty if condition</div>
+  <div bind="">Empty bind expression</div>
+  <div model="">Empty model</div>
+
+  <!-- Valid: directives that DON'T require values -->
+  <div cloak>OK — cloak is boolean</div>
+  <div else>OK when after if</div>
+  <div route-view>OK — no value needed</div>
+
+  <!-- Event with multiple modifiers (valid) -->
+  <button on:click.prevent.stop.once="handle()">Multiple valid modifiers</button>
+
+  <!-- Deeply nested context -->
+  <div state="{ users: [{name: 'A'}, {name: 'B'}] }">
+    <ul>
+      <li each="users" as="user">
+        <span bind="user.name | uppercase"></span>
+        <span bind="$index + 1 + '. ' + user.name"></span>
+        <button on:click.prevent="removeUser($index)">Remove</button>
+      </li>
+    </ul>
+  </div>
+
+</body>
+</html>

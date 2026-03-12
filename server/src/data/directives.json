@@ -1,0 +1,621 @@
+{
+  "directives": [
+    {
+      "name": "state",
+      "pattern": false,
+      "priority": 0,
+      "valueType": "object",
+      "valueDescription": "JS object literal",
+      "requiresValue": true,
+      "companions": [
+        { "name": "persist", "type": "boolean", "description": "No.JS: Persist state to localStorage" },
+        { "name": "persist-key", "type": "string", "description": "No.JS: Custom localStorage key" }
+      ],
+      "documentation": "Declares reactive state on the element. The value is evaluated as a JavaScript object literal.\n\n**Example:**\n```html\n<div state=\"{ count: 0, name: 'World' }\">\n```\n\n**Companions:** `persist`, `persist-key`",
+      "category": "state"
+    },
+    {
+      "name": "store",
+      "pattern": false,
+      "priority": 0,
+      "valueType": "string",
+      "valueDescription": "Store name string",
+      "requiresValue": true,
+      "companions": [
+        { "name": "value", "type": "expression", "description": "No.JS: Initial store data as JS object literal" }
+      ],
+      "documentation": "Declares a named global store accessible via `$store.name`.\n\n**Example:**\n```html\n<div store=\"cart\" value=\"{ items: [], total: 0 }\">\n```\n\n**Companion:** `value`",
+      "category": "state"
+    },
+    {
+      "name": "computed",
+      "pattern": false,
+      "priority": 2,
+      "valueType": "string",
+      "valueDescription": "Property name string",
+      "requiresValue": true,
+      "companions": [
+        { "name": "expr", "type": "expression", "description": "No.JS: Expression to evaluate" }
+      ],
+      "documentation": "Declares a computed property that auto-updates when dependencies change.\n\n**Example:**\n```html\n<div computed=\"fullName\" expr=\"firstName + ' ' + lastName\">\n```\n\n**Companion:** `expr`",
+      "category": "state"
+    },
+    {
+      "name": "watch",
+      "pattern": false,
+      "priority": 2,
+      "valueType": "expression",
+      "valueDescription": "Expression to watch",
+      "requiresValue": true,
+      "companions": [
+        { "name": "on:change", "type": "statement", "description": "No.JS: Handler executed on change; receives $old, $new" }
+      ],
+      "documentation": "Watches an expression for changes and runs a handler.\n\n**Example:**\n```html\n<div watch=\"count\" on:change=\"console.log($old, $new)\">\n```\n\n**Companion:** `on:change`\n**Handler variables:** `$old`, `$new`",
+      "category": "state"
+    },
+    {
+      "name": "get",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "url",
+      "valueDescription": "URL string or expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "as", "type": "identifier", "description": "No.JS: Variable name for response data" },
+        { "name": "loading", "type": "templateId", "description": "No.JS: Template ID shown while loading" },
+        { "name": "error", "type": "templateId", "description": "No.JS: Template ID shown on error" },
+        { "name": "empty", "type": "templateId", "description": "No.JS: Template ID shown when response is empty" },
+        { "name": "success", "type": "templateId", "description": "No.JS: Template ID shown on success" },
+        { "name": "then", "type": "expression", "description": "No.JS: Expression executed on success" },
+        { "name": "redirect", "type": "string", "description": "No.JS: Path to redirect after success" },
+        { "name": "confirm", "type": "string", "description": "No.JS: Confirmation message before request" },
+        { "name": "refresh", "type": "number", "description": "No.JS: Auto-refresh interval in ms" },
+        { "name": "cached", "type": "boolean", "description": "No.JS: Enable response caching" },
+        { "name": "body", "type": "expression", "description": "No.JS: Request body expression" },
+        { "name": "headers", "type": "expression", "description": "No.JS: Custom request headers object" },
+        { "name": "var", "type": "identifier", "description": "No.JS: Variable name for additional data" },
+        { "name": "into", "type": "string", "description": "No.JS: Store name to put response into" },
+        { "name": "retry", "type": "number", "description": "No.JS: Number of retry attempts" },
+        { "name": "retry-delay", "type": "number", "description": "No.JS: Delay between retries in ms" },
+        { "name": "params", "type": "expression", "description": "No.JS: Query parameters object" },
+        { "name": "debounce", "type": "number", "description": "No.JS: Debounce delay in ms" }
+      ],
+      "documentation": "Performs an HTTP GET request and makes response data available.\n\n**Example:**\n```html\n<div get=\"/api/users\" as=\"users\" loading=\"spinner-tpl\">\n  <li each=\"user in users\" bind=\"user.name\">\n</div>\n```\n\n**Companions:** `as`, `loading`, `error`, `empty`, `success`, `then`, `redirect`, `confirm`, `refresh`, `cached`, `body`, `headers`, `var`, `into`, `retry`, `retry-delay`, `params`, `debounce`",
+      "category": "http"
+    },
+    {
+      "name": "post",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "url",
+      "valueDescription": "URL string or expression",
+      "requiresValue": true,
+      "companionsSameAs": "get",
+      "companions": [],
+      "documentation": "Performs an HTTP POST request. Same companions as `get`.\n\n**Example:**\n```html\n<form post=\"/api/users\" body=\"{ name, email }\" as=\"result\">\n```",
+      "category": "http"
+    },
+    {
+      "name": "put",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "url",
+      "valueDescription": "URL string or expression",
+      "requiresValue": true,
+      "companionsSameAs": "get",
+      "companions": [],
+      "documentation": "Performs an HTTP PUT request. Same companions as `get`.",
+      "category": "http"
+    },
+    {
+      "name": "patch",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "url",
+      "valueDescription": "URL string or expression",
+      "requiresValue": true,
+      "companionsSameAs": "get",
+      "companions": [],
+      "documentation": "Performs an HTTP PATCH request. Same companions as `get`.",
+      "category": "http"
+    },
+    {
+      "name": "delete",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "url",
+      "valueDescription": "URL string or expression",
+      "requiresValue": true,
+      "companionsSameAs": "get",
+      "companions": [],
+      "documentation": "Performs an HTTP DELETE request. Same companions as `get`.",
+      "category": "http"
+    },
+    {
+      "name": "bind",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Binds element's text content to a JS expression. Updates reactively.\n\n**Example:**\n```html\n<span bind=\"user.name\">\n<p bind=\"items.length + ' items'\">\n```",
+      "category": "binding"
+    },
+    {
+      "name": "bind-html",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression (HTML string)",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Binds element's innerHTML to a JS expression.\n\n**Example:**\n```html\n<div bind-html=\"richContent\">\n```",
+      "category": "binding"
+    },
+    {
+      "name": "model",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "path",
+      "valueDescription": "Variable path",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Two-way data binding for form elements (INPUT, SELECT, TEXTAREA).\n\n**Example:**\n```html\n<input model=\"username\">\n<select model=\"selectedOption\">\n<textarea model=\"message\">\n```",
+      "category": "binding"
+    },
+    {
+      "name": "if",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render when true" },
+        { "name": "else", "type": "templateId", "description": "No.JS: Template ID to render when false" },
+        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
+        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
+        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
+        { "name": "transition", "type": "string", "description": "No.JS: CSS transition name" },
+        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+      ],
+      "documentation": "Conditionally renders the element. Removes from DOM when expression is false.\n\n**Example:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else-if=\"isGuest\">Hello Guest</div>\n<div else>Please log in</div>\n```\n\n**Companions:** `then`, `else`, `animate-enter`, `animate-leave`, `transition`, `animate-duration`",
+      "category": "conditional"
+    },
+    {
+      "name": "else-if",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render when true" }
+      ],
+      "documentation": "Conditional branch after `if`. Must follow a sibling with `if` or `else-if`.\n\n**Example:**\n```html\n<div else-if=\"isAdmin\">Admin panel</div>\n```\n\n**Companion:** `then`",
+      "category": "conditional"
+    },
+    {
+      "name": "else",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
+      ],
+      "documentation": "Fallback branch after `if` or `else-if`. Must follow a sibling with `if` or `else-if`.\n\n**Example:**\n```html\n<div else>Default content</div>\n```\n\n**Companion:** `then`",
+      "category": "conditional"
+    },
+    {
+      "name": "show",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
+        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
+        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
+        { "name": "transition", "type": "string", "description": "No.JS: CSS transition name" },
+        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+      ],
+      "documentation": "Toggles element visibility via CSS `display`. Element stays in DOM.\n\n**Example:**\n```html\n<div show=\"isVisible\">Visible when true</div>\n```\n\n**Companions:** `animate-enter`, `animate-leave`, `transition`, `animate-duration`",
+      "category": "conditional"
+    },
+    {
+      "name": "hide",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
+        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
+        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
+        { "name": "transition", "type": "string", "description": "No.JS: CSS transition name" },
+        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+      ],
+      "documentation": "Opposite of `show`. Hides element via CSS `display: none` when true.\n\n**Example:**\n```html\n<div hide=\"isLoading\">Content</div>\n```",
+      "category": "conditional"
+    },
+    {
+      "name": "switch",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "expression",
+      "valueDescription": "JS expression",
+      "requiresValue": true,
+      "companions": [],
+      "childAttributes": [
+        { "name": "case", "type": "string", "description": "No.JS: Value to match" },
+        { "name": "default", "type": "boolean", "description": "No.JS: Default fallback" },
+        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
+      ],
+      "documentation": "Switch statement. Children use `case`, `default`, and `then` attributes.\n\n**Example:**\n```html\n<div switch=\"role\">\n  <p case=\"admin\">Admin panel</p>\n  <p case=\"user\">Dashboard</p>\n  <p default>Guest view</p>\n</div>\n```",
+      "category": "conditional"
+    },
+    {
+      "name": "each",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "iterable",
+      "valueDescription": "\"item in list\" syntax",
+      "requiresValue": true,
+      "companions": [
+        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
+        { "name": "else", "type": "templateId", "description": "No.JS: Template ID for empty list" },
+        { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
+        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
+        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
+        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
+        { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
+        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+      ],
+      "documentation": "Loops over an iterable collection.\n\n**Example:**\n```html\n<li each=\"user in users\" bind=\"user.name\">\n```\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
+      "category": "loop"
+    },
+    {
+      "name": "foreach",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "string",
+      "valueDescription": "Item variable name",
+      "requiresValue": true,
+      "companions": [
+        { "name": "from", "type": "path", "description": "No.JS: List path to iterate" },
+        { "name": "index", "type": "identifier", "description": "No.JS: Custom index variable name" },
+        { "name": "else", "type": "templateId", "description": "No.JS: Template ID for empty list" },
+        { "name": "filter", "type": "expression", "description": "No.JS: Filter expression" },
+        { "name": "sort", "type": "string", "description": "No.JS: Property to sort by" },
+        { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
+        { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
+        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
+        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
+        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
+        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
+        { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
+        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+      ],
+      "documentation": "Alternative loop with more options.\n\n**Example:**\n```html\n<li foreach=\"user\" from=\"users\" bind=\"user.name\">\n<li foreach=\"item\" from=\"products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\">\n```\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`",
+      "category": "loop"
+    },
+    {
+      "name": "trigger",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "string",
+      "valueDescription": "Custom event name",
+      "requiresValue": true,
+      "companions": [
+        { "name": "trigger-data", "type": "expression", "description": "No.JS: Event detail data expression" }
+      ],
+      "documentation": "Dispatches a custom event.\n\n**Example:**\n```html\n<button on:click=\"count++\" trigger=\"countChanged\" trigger-data=\"count\">\n```\n\n**Companion:** `trigger-data`",
+      "category": "event"
+    },
+    {
+      "name": "ref",
+      "pattern": false,
+      "priority": 5,
+      "valueType": "identifier",
+      "valueDescription": "Reference name",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Declares a reference to this element, accessible via `$refs.name`.\n\n**Example:**\n```html\n<input ref=\"emailInput\">\n<!-- Access: $refs.emailInput.value -->\n```",
+      "category": "reference"
+    },
+    {
+      "name": "use",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "templateId",
+      "valueDescription": "Template ID",
+      "requiresValue": true,
+      "companions": [
+        { "name": "var-*", "type": "expression", "description": "No.JS: Slot parameter (pattern: var-name=\"expr\")" }
+      ],
+      "documentation": "Inserts a `<template>` by ID, optionally passing slot parameters.\n\n**Example:**\n```html\n<template id=\"greeting\">\n  <h1 bind=\"name\"></h1>\n</template>\n<div use=\"greeting\" var-name=\"'World'\">\n```\n\n**Companions:** `var-*` (slot parameters)",
+      "category": "template"
+    },
+    {
+      "name": "call",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "url",
+      "valueDescription": "URL string (supports interpolation)",
+      "requiresValue": true,
+      "companions": [
+        { "name": "method", "type": "string", "description": "No.JS: HTTP method (default: get)" },
+        { "name": "as", "type": "identifier", "description": "No.JS: Variable name for response data" },
+        { "name": "into", "type": "string", "description": "No.JS: Store name for response" },
+        { "name": "success", "type": "templateId", "description": "No.JS: Template ID on success" },
+        { "name": "error", "type": "templateId", "description": "No.JS: Template ID on error" },
+        { "name": "then", "type": "expression", "description": "No.JS: Expression on success" },
+        { "name": "confirm", "type": "string", "description": "No.JS: Confirmation message" },
+        { "name": "body", "type": "expression", "description": "No.JS: Request body expression" }
+      ],
+      "documentation": "HTTP call triggered by user action.\n\n**Example:**\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\">\n```\n\n**Companions:** `method`, `as`, `into`, `success`, `error`, `then`, `confirm`, `body`",
+      "category": "http"
+    },
+    {
+      "name": "validate",
+      "pattern": false,
+      "priority": 30,
+      "valueType": "string",
+      "valueDescription": "Validator rule string (pipe-separated)",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Form validation rule.\n\n**Example:**\n```html\n<input validate=\"required|email\">\n<input validate=\"min:5|max:100\">\n```\n\n**Built-in validators:** `required`, `email`, `url`, `min`, `max`, `between`, `match`, `phone`, `cpf`, `cnpj`, `creditcard`, `custom`",
+      "category": "form"
+    },
+    {
+      "name": "error-boundary",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "templateId",
+      "valueDescription": "Fallback template ID",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Wraps content with error handling. Shows fallback template on error.\n\n**Example:**\n```html\n<div error-boundary=\"error-tpl\">\n  <!-- content that might throw -->\n</div>\n```",
+      "category": "error"
+    },
+    {
+      "name": "t",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "string",
+      "valueDescription": "Translation key",
+      "requiresValue": true,
+      "companions": [
+        { "name": "t-html", "type": "boolean", "description": "No.JS: Render translation as HTML" }
+      ],
+      "documentation": "i18n translation. Value is the translation key.\n\n**Example:**\n```html\n<span t=\"greeting\" t-name=\"World\">\n```\n\n**Companions:** `t-*` (interpolation parameters), `t-html`\n\nInterpolation params are passed as `t-{param}` attributes.",
+      "category": "i18n"
+    },
+    {
+      "name": "i18n-ns",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "string",
+      "valueDescription": "Namespace path",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Sets i18n namespace for child elements.\n\n**Example:**\n```html\n<div i18n-ns=\"dashboard\">\n  <span t=\"title\"><!-- resolves dashboard.title --></span>\n</div>\n```",
+      "category": "i18n"
+    },
+    {
+      "name": "drag",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "expression",
+      "valueDescription": "Expression for dragged item value",
+      "requiresValue": true,
+      "companions": [
+        { "name": "drag-type", "type": "string", "description": "No.JS: Type identifier for the dragged item" },
+        { "name": "drag-effect", "type": "string", "description": "No.JS: Drag effect (copy, move, link, none)" },
+        { "name": "drag-handle", "type": "string", "description": "No.JS: CSS selector for drag handle" },
+        { "name": "drag-image", "type": "string", "description": "No.JS: CSS selector for custom drag image" },
+        { "name": "drag-image-offset", "type": "string", "description": "No.JS: Offset for drag image (x,y)" },
+        { "name": "drag-disabled", "type": "expression", "description": "No.JS: Expression to disable dragging" },
+        { "name": "drag-class", "type": "string", "description": "No.JS: CSS class while dragging" },
+        { "name": "drag-ghost-class", "type": "string", "description": "No.JS: CSS class for ghost element" },
+        { "name": "drag-group", "type": "string", "description": "No.JS: Group name for multi-select" }
+      ],
+      "documentation": "Makes element draggable.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
+      "category": "dnd"
+    },
+    {
+      "name": "drop",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "statement",
+      "valueDescription": "Statement to execute on drop",
+      "requiresValue": true,
+      "companions": [
+        { "name": "drop-accept", "type": "string", "description": "No.JS: Accepted drag types (comma-separated)" },
+        { "name": "drop-effect", "type": "string", "description": "No.JS: Drop effect (copy, move, link, none)" },
+        { "name": "drop-class", "type": "string", "description": "No.JS: CSS class on valid dragover" },
+        { "name": "drop-reject-class", "type": "string", "description": "No.JS: CSS class on invalid dragover" },
+        { "name": "drop-disabled", "type": "expression", "description": "No.JS: Expression to disable dropping" },
+        { "name": "drop-max", "type": "expression", "description": "No.JS: Max items accepted" },
+        { "name": "drop-sort", "type": "string", "description": "No.JS: Sort direction (vertical, horizontal, grid)" },
+        { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
+        { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: CSS class for placeholder" }
+      ],
+      "documentation": "Makes element a drop target.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
+      "category": "dnd"
+    },
+    {
+      "name": "drag-list",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "expression",
+      "valueDescription": "List path expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for items" },
+        { "name": "drag-list-key", "type": "string", "description": "No.JS: Unique key property" },
+        { "name": "drag-list-item", "type": "string", "description": "No.JS: Item variable name in template" },
+        { "name": "drop-sort", "type": "string", "description": "No.JS: Sort direction" },
+        { "name": "drag-type", "type": "string", "description": "No.JS: Type identifier" },
+        { "name": "drop-accept", "type": "string", "description": "No.JS: Accepted drag types" },
+        { "name": "drag-list-copy", "type": "boolean", "description": "No.JS: Copy instead of move" },
+        { "name": "drag-list-remove", "type": "boolean", "description": "No.JS: Remove from source after drag" },
+        { "name": "drag-disabled", "type": "expression", "description": "No.JS: Disable dragging" },
+        { "name": "drop-disabled", "type": "expression", "description": "No.JS: Disable dropping" },
+        { "name": "drop-max", "type": "expression", "description": "No.JS: Max items" },
+        { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
+        { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: Placeholder CSS class" },
+        { "name": "drag-class", "type": "string", "description": "No.JS: CSS class while dragging" },
+        { "name": "drop-class", "type": "string", "description": "No.JS: CSS class on valid dragover" },
+        { "name": "drop-reject-class", "type": "string", "description": "No.JS: CSS class on invalid dragover" },
+        { "name": "drop-settle-class", "type": "string", "description": "No.JS: CSS class during settle animation" },
+        { "name": "drop-empty-class", "type": "string", "description": "No.JS: CSS class when list is empty" }
+      ],
+      "documentation": "Sortable list with drag and drop support.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
+      "category": "dnd"
+    },
+    {
+      "name": "drag-multiple",
+      "pattern": false,
+      "priority": 16,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "drag-group", "type": "string", "description": "No.JS: Group name (required)" },
+        { "name": "drag-multiple-class", "type": "string", "description": "No.JS: CSS class for selected items" }
+      ],
+      "documentation": "Enables multi-select drag on `drag` elements.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
+      "category": "dnd"
+    },
+    {
+      "name": "base",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "url",
+      "valueDescription": "Base URL string",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Sets the base URL for all descendant fetch directives (`get`, `post`, `put`, `patch`, `delete`, `call`).\n\n**Example:**\n```html\n<div base=\"https://api.example.com/v1\">\n  <div get=\"/users\" as=\"users\"><!-- fetches https://api.example.com/v1/users --></div>\n</div>\n```",
+      "category": "http"
+    },
+    {
+      "name": "route",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Route path pattern",
+      "requiresValue": true,
+      "companions": [
+        { "name": "route-active", "type": "string", "description": "No.JS: CSS class added when route is active (default: 'active')" },
+        { "name": "route-active-exact", "type": "string", "description": "No.JS: CSS class added only on exact path match" }
+      ],
+      "documentation": "Turns an `<a>` element into a route link that navigates without page reload.\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<a route=\"/users/:id\" route-active=\"current\">User</a>\n```\n\n**Companions:** `route-active`, `route-active-exact`",
+      "category": "routing"
+    },
+    {
+      "name": "route-view",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "string",
+      "valueDescription": "Outlet name (optional, empty for default outlet)",
+      "requiresValue": false,
+      "companions": [
+        { "name": "src", "type": "string", "description": "No.JS: File-based routing folder path" },
+        { "name": "ext", "type": "string", "description": "No.JS: Template file extension (default: .html)" },
+        { "name": "route-index", "type": "string", "description": "No.JS: Index template name (default: 'index')" },
+        { "name": "i18n-ns", "type": "string", "description": "No.JS: i18n namespace for route templates" },
+        { "name": "transition", "type": "string", "description": "No.JS: CSS transition class prefix for route changes" }
+      ],
+      "documentation": "Route rendering outlet. Displays the template matching the current route.\n\n**Example:**\n```html\n<div route-view src=\"pages\" ext=\".tpl\"></div>\n\n<!-- Named outlet -->\n<div route-view=\"sidebar\" src=\"panels\"></div>\n```\n\n**Companions:** `src`, `ext`, `route-index`, `i18n-ns`, `transition`",
+      "category": "routing"
+    },
+    {
+      "name": "guard",
+      "pattern": false,
+      "priority": 5,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression",
+      "requiresValue": true,
+      "companions": [
+        { "name": "redirect", "type": "string", "description": "No.JS: Path to redirect to when guard fails" }
+      ],
+      "documentation": "Route guard that prevents navigation when the expression is falsy.\n\n**Example:**\n```html\n<template route=\"/admin\" guard=\"isLoggedIn\" redirect=\"/login\">\n  <h1>Admin Panel</h1>\n</template>\n```\n\n**Companion:** `redirect`",
+      "category": "routing"
+    },
+    {
+      "name": "include",
+      "pattern": false,
+      "priority": 1,
+      "valueType": "templateId",
+      "valueDescription": "Template ID to clone",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Synchronously clones an inline template into the current position. Used on `<template>` elements.\n\n**Example:**\n```html\n<template id=\"header\">\n  <h1>My App</h1>\n</template>\n\n<template include=\"header\"></template>\n```",
+      "category": "template"
+    }
+  ],
+  "patterns": [
+    {
+      "name": "bind-*",
+      "prefix": "bind-",
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression",
+      "requiresValue": true,
+      "documentation": "Dynamically binds an HTML attribute to a JS expression.\n\n**Example:**\n```html\n<a bind-href=\"url\">Link</a>\n<img bind-src=\"imageUrl\">\n```\n\n**Boolean attributes:** `disabled`, `readonly`, `checked`, `selected`, `hidden`, `required`\n\n**Common targets:** `href`, `src`, `class`, `title`, `alt`, `placeholder`, `action`, `value`",
+      "commonTargets": ["href", "src", "class", "title", "alt", "placeholder", "action", "value", "disabled", "readonly", "checked", "selected", "hidden", "required"],
+      "category": "binding"
+    },
+    {
+      "name": "class-*",
+      "prefix": "class-",
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression (or object/array for map/list)",
+      "requiresValue": true,
+      "documentation": "Conditionally applies CSS class(es).\n\n**Example:**\n```html\n<div class-active=\"isActive\">\n<div class-map=\"{ active: isActive, hidden: !show }\">\n<div class-list=\"['base', isActive ? 'active' : '']\">\n```\n\n**Sub-behaviors:** `class-map` (object → classes), `class-list` (array → classes)",
+      "subBehaviors": ["class-map", "class-list"],
+      "category": "styling"
+    },
+    {
+      "name": "style-*",
+      "prefix": "style-",
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression (CSS value)",
+      "requiresValue": true,
+      "documentation": "Dynamically sets a CSS style property. Attribute name is kebab-case, converted to camelCase.\n\n**Example:**\n```html\n<div style-color=\"textColor\">\n<div style-font-size=\"fontSize + 'px'\">\n<div style-map=\"{ color: textColor, fontSize: size + 'px' }\">\n```\n\n**Sub-behavior:** `style-map` (object → styles)",
+      "subBehaviors": ["style-map"],
+      "category": "styling"
+    },
+    {
+      "name": "on:*",
+      "prefix": "on:",
+      "priority": 20,
+      "valueType": "statement",
+      "valueDescription": "JS statement(s)",
+      "requiresValue": true,
+      "documentation": "Listens for DOM events and executes JS statement(s).\n\n**Example:**\n```html\n<button on:click=\"count++\">Increment</button>\n<form on:submit.prevent=\"handleSubmit()\">\n<input on:keydown.enter=\"search()\">\n```\n\n**Modifiers:** `.prevent`, `.stop`, `.once`, `.self`, `.debounce`, `.throttle`\n**Key modifiers:** `.enter`, `.escape`, `.tab`, `.space`, `.delete`, `.backspace`, `.up`, `.down`, `.left`, `.right`, `.ctrl`, `.alt`, `.shift`, `.meta`\n\n**Handler variables:** `$event`, `$el`",
+      "commonEvents": ["click", "submit", "input", "change", "focus", "blur", "keydown", "keyup", "keypress", "mouseenter", "mouseleave", "mouseover", "mouseout", "mousedown", "mouseup", "dblclick", "contextmenu", "wheel", "scroll", "resize", "load", "error", "touchstart", "touchend", "touchmove"],
+      "modifiers": {
+        "behavioral": ["prevent", "stop", "once", "self"],
+        "timing": ["debounce", "throttle"],
+        "key": ["enter", "escape", "tab", "space", "delete", "backspace", "up", "down", "left", "right", "ctrl", "alt", "shift", "meta"]
+      },
+      "category": "event"
+    }
+  ],
+  "lifecycleEvents": ["mounted", "init", "updated", "unmounted", "error"],
+  "contextKeys": ["$watch", "$notify", "$set", "$parent", "$refs", "$store", "$route", "$router", "$i18n", "$form", "$el", "$event", "$error"],
+  "loopContextVars": ["$index", "$count", "$first", "$last", "$even", "$odd"],
+  "eventHandlerVars": ["$event", "$el"],
+  "watchHandlerVars": ["$old", "$new"],
+  "dropHandlerVars": ["$drag", "$dragType", "$dragEffect", "$dropIndex", "$source", "$target", "$el"],
+  "animations": ["fadeIn", "fadeOut", "fadeInUp", "fadeInDown", "fadeOutUp", "fadeOutDown", "slideInLeft", "slideInRight", "slideOutLeft", "slideOutRight", "zoomIn", "zoomOut", "bounceIn", "bounceOut"]
+}

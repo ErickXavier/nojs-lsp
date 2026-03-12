@@ -1,0 +1,516 @@
+{
+  "version": 1.1,
+  "globalAttributes": [
+    {
+      "name": "state",
+      "description": { "kind": "markdown", "value": "No.JS: Declares reactive state. Value is a JS object literal.\n\n```html\n<div state=\"{ count: 0, name: 'World' }\">\n```\n\n**Companions:** `persist`, `persist-key`" }
+    },
+    {
+      "name": "store",
+      "description": { "kind": "markdown", "value": "No.JS: Declares a named global store.\n\n```html\n<div store=\"cart\" value=\"{ items: [], total: 0 }\">\n```\n\n**Companion:** `value`" }
+    },
+    {
+      "name": "computed",
+      "description": { "kind": "markdown", "value": "No.JS: Declares a computed property.\n\n```html\n<div computed=\"fullName\" expr=\"firstName + ' ' + lastName\">\n```\n\n**Companion:** `expr`" }
+    },
+    {
+      "name": "watch",
+      "description": { "kind": "markdown", "value": "No.JS: Watches an expression for changes.\n\n```html\n<div watch=\"count\" on:change=\"console.log($old, $new)\">\n```\n\n**Companion:** `on:change`" }
+    },
+    {
+      "name": "get",
+      "description": { "kind": "markdown", "value": "No.JS: HTTP GET request.\n\n```html\n<div get=\"/api/users\" as=\"users\" loading=\"spinner-tpl\">\n```\n\n**Companions:** `as`, `loading`, `error`, `empty`, `success`, `then`, `redirect`, `confirm`, `refresh`, `cached`, `body`, `headers`, `var`, `into`, `retry`, `retry-delay`, `params`, `debounce`" }
+    },
+    {
+      "name": "post",
+      "description": { "kind": "markdown", "value": "No.JS: HTTP POST request. Same companions as `get`.\n\n```html\n<form post=\"/api/users\" body=\"{ name: name }\" as=\"result\">\n```" }
+    },
+    {
+      "name": "put",
+      "description": { "kind": "markdown", "value": "No.JS: HTTP PUT request. Same companions as `get`." }
+    },
+    {
+      "name": "patch",
+      "description": { "kind": "markdown", "value": "No.JS: HTTP PATCH request. Same companions as `get`." }
+    },
+    {
+      "name": "delete",
+      "description": { "kind": "markdown", "value": "No.JS: HTTP DELETE request. Same companions as `get`." }
+    },
+    {
+      "name": "bind",
+      "description": { "kind": "markdown", "value": "No.JS: Binds element text content to a JS expression.\n\n```html\n<span bind=\"user.name\">\n```" }
+    },
+    {
+      "name": "bind-html",
+      "description": { "kind": "markdown", "value": "No.JS: Binds element innerHTML to a JS expression.\n\n```html\n<div bind-html=\"richContent\">\n```" }
+    },
+    {
+      "name": "model",
+      "description": { "kind": "markdown", "value": "No.JS: Two-way data binding for form elements (INPUT, SELECT, TEXTAREA).\n\n```html\n<input model=\"username\">\n```" }
+    },
+    {
+      "name": "if",
+      "description": { "kind": "markdown", "value": "No.JS: Conditionally renders element. Removes from DOM when false.\n\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else>Please log in</div>\n```\n\n**Companions:** `then`, `else`, `animate-enter`, `animate-leave`, `transition`, `animate-duration`" }
+    },
+    {
+      "name": "else-if",
+      "description": { "kind": "markdown", "value": "No.JS: Conditional branch after `if`.\n\n```html\n<div else-if=\"isAdmin\">Admin panel</div>\n```\n\n**Companion:** `then`" }
+    },
+    {
+      "name": "else",
+      "description": { "kind": "markdown", "value": "No.JS: Fallback branch after `if` or `else-if`. No value needed.\n\n```html\n<div else>Default content</div>\n```\n\n**Companion:** `then`" },
+      "valueSet": "v"
+    },
+    {
+      "name": "show",
+      "description": { "kind": "markdown", "value": "No.JS: Toggles element visibility via CSS `display`. Element stays in DOM.\n\n```html\n<div show=\"isVisible\">Visible content</div>\n```\n\n**Companions:** `animate-enter`, `animate-leave`, `transition`, `animate-duration`" }
+    },
+    {
+      "name": "hide",
+      "description": { "kind": "markdown", "value": "No.JS: Opposite of `show`. Hides element via CSS `display: none`.\n\n```html\n<div hide=\"isLoading\">Content</div>\n```\n\n**Companions:** `animate-enter`, `animate-leave`, `transition`, `animate-duration`" }
+    },
+    {
+      "name": "switch",
+      "description": { "kind": "markdown", "value": "No.JS: Switch statement. Children use `case`, `default`, `then`.\n\n```html\n<div switch=\"role\">\n  <p case=\"admin\">Admin panel</p>\n  <p case=\"user\">User dashboard</p>\n  <p default>Guest view</p>\n</div>\n```" }
+    },
+    {
+      "name": "each",
+      "description": { "kind": "markdown", "value": "No.JS: Loops over an iterable. Syntax: `\"item in list\"`.\n\n```html\n<li each=\"user in users\" bind=\"user.name\">\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`" }
+    },
+    {
+      "name": "foreach",
+      "description": { "kind": "markdown", "value": "No.JS: Alternative loop directive with more options.\n\n```html\n<li foreach=\"user\" from=\"users\" bind=\"user.name\">\n```\n\n**Companions:** `from`, `index`, `else`, `filter`, `sort`, `limit`, `offset`, `template`, animation attrs" }
+    },
+    {
+      "name": "trigger",
+      "description": { "kind": "markdown", "value": "No.JS: Dispatches a custom event.\n\n```html\n<button on:click=\"count++\" trigger=\"countChanged\" trigger-data=\"count\">\n```\n\n**Companion:** `trigger-data`" }
+    },
+    {
+      "name": "ref",
+      "description": { "kind": "markdown", "value": "No.JS: Declares a reference to this element, accessible via `$refs`.\n\n```html\n<input ref=\"emailInput\">\n<!-- Access via $refs.emailInput -->\n```" }
+    },
+    {
+      "name": "use",
+      "description": { "kind": "markdown", "value": "No.JS: Inserts a `<template>` by ID.\n\n```html\n<template id=\"user-card\">\n  <div bind=\"name\"></div>\n</template>\n<div use=\"user-card\" var-name=\"user.name\">\n```\n\n**Companions:** `var-*` (slot parameters)" }
+    },
+    {
+      "name": "call",
+      "description": { "kind": "markdown", "value": "No.JS: HTTP call triggered by user action (e.g., button click).\n\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\">\n```\n\n**Companions:** `method`, `as`, `into`, `success`, `error`, `then`, `confirm`, `body`" }
+    },
+    {
+      "name": "validate",
+      "description": { "kind": "markdown", "value": "No.JS: Form validation rule.\n\n```html\n<input validate=\"required|email\">\n<input validate=\"min:5|max:100\">\n```\n\nBuilt-in validators: `required`, `email`, `url`, `min`, `max`, `between`, `match`, `phone`, `cpf`, `cnpj`, `creditcard`, `custom`" }
+    },
+    {
+      "name": "error-boundary",
+      "description": { "kind": "markdown", "value": "No.JS: Wraps content with error handling. Value is the fallback template ID.\n\n```html\n<div error-boundary=\"error-tpl\">...</div>\n```" }
+    },
+    {
+      "name": "t",
+      "description": { "kind": "markdown", "value": "No.JS: i18n translation. Value is the translation key.\n\n```html\n<span t=\"greeting\" t-name=\"World\">\n```\n\n**Companions:** `t-*` (interpolation params), `t-html`" }
+    },
+    {
+      "name": "i18n-ns",
+      "description": { "kind": "markdown", "value": "No.JS: Sets i18n namespace for child elements.\n\n```html\n<div i18n-ns=\"dashboard\">\n  <span t=\"title\"><!-- dashboard.title --></span>\n</div>\n```" }
+    },
+    {
+      "name": "drag",
+      "description": { "kind": "markdown", "value": "No.JS: Makes element draggable.\n\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`" }
+    },
+    {
+      "name": "drop",
+      "description": { "kind": "markdown", "value": "No.JS: Makes element a drop target.\n\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Companions:** `drop-accept`, `drop-effect`, `drop-class`, `drop-reject-class`, `drop-disabled`, `drop-max`, `drop-sort`, `drop-placeholder`, `drop-placeholder-class`\n\n**Handler vars:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`" }
+    },
+    {
+      "name": "drag-list",
+      "description": { "kind": "markdown", "value": "No.JS: Sortable list with drag and drop.\n\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```\n\n**Companions:** `template`, `drag-list-key`, `drag-list-item`, `drop-sort`, `drag-type`, `drop-accept`, `drag-list-copy`, `drag-list-remove`, and more" }
+    },
+    {
+      "name": "drag-multiple",
+      "description": { "kind": "markdown", "value": "No.JS: Enables multi-select drag on `drag` elements.\n\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`" },
+      "valueSet": "v"
+    },
+    {
+      "name": "base",
+      "description": { "kind": "markdown", "value": "No.JS: Sets the base URL for all descendant fetch directives (`get`, `post`, `put`, `patch`, `delete`, `call`).\n\n```html\n<div base=\"https://api.example.com/v1\">\n  <div get=\"/users\" as=\"users\"></div>\n</div>\n```" }
+    },
+    {
+      "name": "persist",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `state`. Persists state to localStorage.\n\n```html\n<div state=\"{ count: 0 }\" persist>\n```" },
+      "valueSet": "v"
+    },
+    {
+      "name": "persist-key",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `state`. Custom localStorage key.\n\n```html\n<div state=\"{ count: 0 }\" persist persist-key=\"myState\">\n```" }
+    },
+    {
+      "name": "expr",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `computed`. The expression to evaluate.\n\n```html\n<div computed=\"total\" expr=\"price * quantity\">\n```" }
+    },
+    {
+      "name": "as",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives (`get`, `post`, etc.) and `call`. Names the response data variable.\n\n```html\n<div get=\"/api/users\" as=\"users\">\n```" }
+    },
+    {
+      "name": "loading",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Template ID to show while loading.\n\n```html\n<div get=\"/api/data\" as=\"data\" loading=\"spinner-tpl\">\n```" }
+    },
+    {
+      "name": "empty",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Template ID to show when response is empty." }
+    },
+    {
+      "name": "success",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Template ID to show on success." }
+    },
+    {
+      "name": "then",
+      "description": { "kind": "markdown", "value": "No.JS: Companion attribute. For HTTP directives: expression to run on success. For `if`/`else`/`else-if`: template ID to render.\n\n```html\n<div if=\"isAdmin\" then=\"admin-panel\">\n<div get=\"/api\" as=\"d\" then=\"console.log(d)\">\n```" }
+    },
+    {
+      "name": "redirect",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and router. Path to redirect to." }
+    },
+    {
+      "name": "confirm",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Shows confirmation dialog before executing.\n\n```html\n<button call=\"/api/delete/1\" confirm=\"Are you sure?\">\n```" }
+    },
+    {
+      "name": "refresh",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Auto-refresh interval in milliseconds.\n\n```html\n<div get=\"/api/notifications\" as=\"notifs\" refresh=\"30000\">\n```" }
+    },
+    {
+      "name": "cached",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Enables response caching." },
+      "valueSet": "v"
+    },
+    {
+      "name": "body",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Request body expression.\n\n```html\n<form post=\"/api/users\" body=\"{ name: name, email: email }\">\n```" }
+    },
+    {
+      "name": "headers",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Custom request headers object.\n\n```html\n<div get=\"/api/data\" headers=\"{ 'X-Custom': 'value' }\">\n```" }
+    },
+    {
+      "name": "var",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Variable name to store additional data." }
+    },
+    {
+      "name": "into",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Store name to put response data into.\n\n```html\n<button call=\"/api/cart\" into=\"cart\">\n```" }
+    },
+    {
+      "name": "retry",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Number of retry attempts on failure.\n\n```html\n<div get=\"/api/data\" retry=\"3\" retry-delay=\"1000\">\n```" }
+    },
+    {
+      "name": "retry-delay",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Delay between retries in milliseconds." }
+    },
+    {
+      "name": "params",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Query parameters object.\n\n```html\n<div get=\"/api/search\" params=\"{ q: query, page: page }\">\n```" }
+    },
+    {
+      "name": "debounce",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Debounce delay in milliseconds before making request." }
+    },
+    {
+      "name": "from",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `foreach`. Path to the list to iterate over.\n\n```html\n<li foreach=\"item\" from=\"items\">\n```" }
+    },
+    {
+      "name": "index",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `foreach`. Custom name for the index variable.\n\n```html\n<li foreach=\"item\" from=\"items\" index=\"i\">\n```" }
+    },
+    {
+      "name": "filter",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `foreach`. Filter expression for list items." }
+    },
+    {
+      "name": "sort",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `foreach`. Property name to sort by." }
+    },
+    {
+      "name": "limit",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `foreach`. Maximum number of items to display." }
+    },
+    {
+      "name": "offset",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `foreach`. Number of items to skip." }
+    },
+    {
+      "name": "template",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `each`, `foreach`, `drag-list`. Template ID to use for rendering items.\n\n```html\n<ul each=\"item in items\" template=\"item-tpl\">\n```" }
+    },
+    {
+      "name": "key",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `each`. Expression for unique item key to optimize DOM updates.\n\n```html\n<li each=\"user in users\" key=\"user.id\">\n```" }
+    },
+    {
+      "name": "method",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `call`. HTTP method to use.\n\n```html\n<button call=\"/api/item/1\" method=\"delete\">\n```" },
+      "valueSet": "httpMethods"
+    },
+    {
+      "name": "trigger-data",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `trigger`. Expression for event detail data.\n\n```html\n<button trigger=\"notify\" trigger-data=\"{ message: 'Hello' }\">\n```" }
+    },
+    {
+      "name": "case",
+      "description": { "kind": "markdown", "value": "No.JS: Child attribute for `switch`. Value to match against.\n\n```html\n<div switch=\"status\">\n  <p case=\"active\">Active</p>\n</div>\n```" }
+    },
+    {
+      "name": "default",
+      "description": { "kind": "markdown", "value": "No.JS: Child attribute for `switch`. Fallback when no `case` matches.\n\n```html\n<p default>Unknown status</p>\n```" },
+      "valueSet": "v"
+    },
+    {
+      "name": "t-html",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `t`. Render translation as HTML instead of text." },
+      "valueSet": "v"
+    },
+    {
+      "name": "animate",
+      "description": { "kind": "markdown", "value": "No.JS: Animation name for element enter/appear.\n\n```html\n<div if=\"show\" animate=\"fadeIn\">\n```" },
+      "valueSet": "animations"
+    },
+    {
+      "name": "animate-enter",
+      "description": { "kind": "markdown", "value": "No.JS: Animation name for element entering (alias for `animate`).\n\n```html\n<div if=\"show\" animate-enter=\"fadeIn\" animate-leave=\"fadeOut\">\n```" },
+      "valueSet": "animations"
+    },
+    {
+      "name": "animate-leave",
+      "description": { "kind": "markdown", "value": "No.JS: Animation name for element leaving.\n\n```html\n<div if=\"show\" animate-leave=\"fadeOut\">\n```" },
+      "valueSet": "animations"
+    },
+    {
+      "name": "animate-duration",
+      "description": { "kind": "markdown", "value": "No.JS: Animation duration in milliseconds.\n\n```html\n<div if=\"show\" animate=\"fadeIn\" animate-duration=\"500\">\n```" }
+    },
+    {
+      "name": "animate-stagger",
+      "description": { "kind": "markdown", "value": "No.JS: Incremental delay between animated list items in milliseconds.\n\n```html\n<li each=\"item in items\" animate=\"fadeInUp\" animate-stagger=\"50\">\n```" }
+    },
+    {
+      "name": "transition",
+      "description": { "kind": "markdown", "value": "No.JS: CSS transition name. Uses class convention: `{name}-enter`, `{name}-enter-active`, `{name}-enter-to`, `{name}-leave`, `{name}-leave-active`, `{name}-leave-to`.\n\n```html\n<div if=\"show\" transition=\"fade\">\n```" }
+    },
+    {
+      "name": "route-view",
+      "description": { "kind": "markdown", "value": "No.JS: Router outlet container. Renders matched route templates.\n\n```html\n<div route-view src=\"./pages/\" transition=\"fade\">\n```" }
+    },
+    {
+      "name": "route",
+      "description": { "kind": "markdown", "value": "No.JS: Route path declaration on `<template>` or navigation on `<a>`.\n\n```html\n<template route=\"/users/:id\">...</template>\n<a route=\"/home\">Home</a>\n```" }
+    },
+    {
+      "name": "route-active",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied when element's route is active.\n\n```html\n<a route=\"/home\" route-active=\"active\">Home</a>\n```" }
+    },
+    {
+      "name": "route-active-exact",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied only on exact route match.\n\n```html\n<a route=\"/home\" route-active-exact=\"exact-active\">Home</a>\n```" }
+    },
+    {
+      "name": "route-index",
+      "description": { "kind": "markdown", "value": "No.JS: Index page name for `route-view`. Default: `\"index\"`." }
+    },
+    {
+      "name": "outlet",
+      "description": { "kind": "markdown", "value": "No.JS: Named outlet for `<template>`. Default: `\"default\"`.\n\n```html\n<template route=\"/dashboard\" outlet=\"sidebar\">...</template>\n```" }
+    },
+    {
+      "name": "guard",
+      "description": { "kind": "markdown", "value": "No.JS: Route guard expression. Evaluated before entering route.\n\n```html\n<template route=\"/admin\" guard=\"isAuthenticated\">\n```" }
+    },
+    {
+      "name": "src",
+      "description": { "kind": "markdown", "value": "No.JS: Template source URL for `route-view` or `<template>`.\n\n```html\n<div route-view src=\"./pages/\">\n<template src=\"./components/header.tpl\">\n```" }
+    },
+    {
+      "name": "ext",
+      "description": { "kind": "markdown", "value": "No.JS: File extension for `route-view` templates. Default from config." }
+    },
+    {
+      "name": "lazy",
+      "description": { "kind": "markdown", "value": "No.JS: Loading strategy for templates.\n\n```html\n<template src=\"./heavy.tpl\" lazy=\"ondemand\">\n```" },
+      "valueSet": "lazyModes"
+    },
+    {
+      "name": "drag-type",
+      "description": { "kind": "markdown", "value": "No.JS: Type identifier for the dragged item. Used with `drop-accept` for filtering." }
+    },
+    {
+      "name": "drag-effect",
+      "description": { "kind": "markdown", "value": "No.JS: Drag effect cursor indicator." },
+      "valueSet": "dragEffects"
+    },
+    {
+      "name": "drag-handle",
+      "description": { "kind": "markdown", "value": "No.JS: CSS selector for the drag handle element.\n\n```html\n<div drag=\"item\" drag-handle=\".handle\">\n```" }
+    },
+    {
+      "name": "drag-image",
+      "description": { "kind": "markdown", "value": "No.JS: CSS selector for custom drag image element." }
+    },
+    {
+      "name": "drag-image-offset",
+      "description": { "kind": "markdown", "value": "No.JS: Offset for custom drag image as `\"x,y\"`." }
+    },
+    {
+      "name": "drag-disabled",
+      "description": { "kind": "markdown", "value": "No.JS: Expression to disable dragging conditionally." }
+    },
+    {
+      "name": "drag-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to element while being dragged." }
+    },
+    {
+      "name": "drag-ghost-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to the ghost element left behind while dragging." }
+    },
+    {
+      "name": "drag-group",
+      "description": { "kind": "markdown", "value": "No.JS: Group name for `drag-multiple` multi-selection." }
+    },
+    {
+      "name": "drag-multiple-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to multi-selected drag items." }
+    },
+    {
+      "name": "drop-accept",
+      "description": { "kind": "markdown", "value": "No.JS: Comma-separated list of accepted `drag-type` values.\n\n```html\n<div drop=\"handleDrop()\" drop-accept=\"card,task\">\n```" }
+    },
+    {
+      "name": "drop-effect",
+      "description": { "kind": "markdown", "value": "No.JS: Drop effect cursor indicator." },
+      "valueSet": "dropEffects"
+    },
+    {
+      "name": "drop-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied when a valid drag item is over the drop target." }
+    },
+    {
+      "name": "drop-reject-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied when an invalid drag item is over the drop target." }
+    },
+    {
+      "name": "drop-disabled",
+      "description": { "kind": "markdown", "value": "No.JS: Expression to disable dropping conditionally." }
+    },
+    {
+      "name": "drop-max",
+      "description": { "kind": "markdown", "value": "No.JS: Maximum number of items the drop target accepts." }
+    },
+    {
+      "name": "drop-sort",
+      "description": { "kind": "markdown", "value": "No.JS: Sort direction for drop targets. Value: `\"vertical\"` (default), `\"horizontal\"`, or `\"grid\"`." }
+    },
+    {
+      "name": "drop-placeholder",
+      "description": { "kind": "markdown", "value": "No.JS: HTML string or tag name for the placeholder element shown during drag." }
+    },
+    {
+      "name": "drop-placeholder-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class for the drop placeholder element." }
+    },
+    {
+      "name": "drag-list-key",
+      "description": { "kind": "markdown", "value": "No.JS: Unique key property for `drag-list` items." }
+    },
+    {
+      "name": "drag-list-item",
+      "description": { "kind": "markdown", "value": "No.JS: Variable name for current item in `drag-list` template." }
+    },
+    {
+      "name": "drag-list-copy",
+      "description": { "kind": "markdown", "value": "No.JS: Copy items instead of moving when dragging from this `drag-list`." },
+      "valueSet": "v"
+    },
+    {
+      "name": "drag-list-remove",
+      "description": { "kind": "markdown", "value": "No.JS: Remove items from source list after dragging." },
+      "valueSet": "v"
+    },
+    {
+      "name": "drop-settle-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied during the settle animation after a drop in `drag-list`." }
+    },
+    {
+      "name": "drop-empty-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to `drag-list` when it has no items." }
+    },
+    {
+      "name": "value",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `store`. Initial store data as a JS object literal.\n\n```html\n<div store=\"cart\" value=\"{ items: [], total: 0 }\">\n```" }
+    },
+    {
+      "name": "error",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Template ID shown on error, or template ID for `call` error handling." }
+    },
+    {
+      "name": "include",
+      "description": { "kind": "markdown", "value": "No.JS: Synchronously clones an inline template into the current position. Used on `<template>` elements.\n\n```html\n<template id=\"header\"><h1>My App</h1></template>\n<template include=\"header\"></template>\n```" }
+    }
+  ],
+  "valueSets": [
+    {
+      "name": "animations",
+      "values": [
+        { "name": "fadeIn", "description": "No.JS: Fade in from transparent" },
+        { "name": "fadeOut", "description": "No.JS: Fade out to transparent" },
+        { "name": "fadeInUp", "description": "No.JS: Fade in while sliding up" },
+        { "name": "fadeInDown", "description": "No.JS: Fade in while sliding down" },
+        { "name": "fadeOutUp", "description": "No.JS: Fade out while sliding up" },
+        { "name": "fadeOutDown", "description": "No.JS: Fade out while sliding down" },
+        { "name": "slideInLeft", "description": "No.JS: Slide in from the left" },
+        { "name": "slideInRight", "description": "No.JS: Slide in from the right" },
+        { "name": "slideOutLeft", "description": "No.JS: Slide out to the left" },
+        { "name": "slideOutRight", "description": "No.JS: Slide out to the right" },
+        { "name": "zoomIn", "description": "No.JS: Zoom in from small" },
+        { "name": "zoomOut", "description": "No.JS: Zoom out to small" },
+        { "name": "bounceIn", "description": "No.JS: Bounce in with elastic effect" },
+        { "name": "bounceOut", "description": "No.JS: Bounce out with elastic effect" }
+      ]
+    },
+    {
+      "name": "httpMethods",
+      "values": [
+        { "name": "get", "description": "No.JS: HTTP GET" },
+        { "name": "post", "description": "No.JS: HTTP POST" },
+        { "name": "put", "description": "No.JS: HTTP PUT" },
+        { "name": "patch", "description": "No.JS: HTTP PATCH" },
+        { "name": "delete", "description": "No.JS: HTTP DELETE" }
+      ]
+    },
+    {
+      "name": "lazyModes",
+      "values": [
+        { "name": "priority", "description": "No.JS: Load with priority (prefetch)" },
+        { "name": "ondemand", "description": "No.JS: Load only when needed" }
+      ]
+    },
+    {
+      "name": "dragEffects",
+      "values": [
+        { "name": "copy", "description": "No.JS: Copy the dragged item" },
+        { "name": "move", "description": "No.JS: Move the dragged item" },
+        { "name": "link", "description": "No.JS: Link to the dragged item" },
+        { "name": "none", "description": "No.JS: No drag effect" }
+      ]
+    },
+    {
+      "name": "dropEffects",
+      "values": [
+        { "name": "copy", "description": "No.JS: Copy into drop target" },
+        { "name": "move", "description": "No.JS: Move into drop target" },
+        { "name": "link", "description": "No.JS: Link in drop target" },
+        { "name": "none", "description": "No.JS: No drop effect" }
+      ]
+    }
+  ]
+}

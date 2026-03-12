@@ -1,0 +1,17 @@
+.vscode/**
+test/**
+src/**
+server/src/**
+client/src/**
+node_modules/**
+.git/**
+.github/**
+tsconfig.json
+jest.config.js
+esbuild.mjs
+TODO.md
+LSP-PLAN.md
+.gitignore
+**/*.ts
+out/test/**
+out/**/*.map

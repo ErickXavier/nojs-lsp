@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NoJS Test Fixture — All Directives</title>
+  <script src="https://cdn.jsdelivr.net/npm/@erickxavier/no-js@1.5/cdn.min.js"></script>
+</head>
+<body>
+
+  <!-- ===== STATE MANAGEMENT ===== -->
+
+  <!-- state -->
+  <div state="{ count: 0, name: 'World', items: [1,2,3] }">
+    <p bind="'Hello, ' + name">Hello</p>
+  </div>
+
+  <!-- state with persist -->
+  <div state="{ theme: 'dark' }" persist persist-key="app-theme">
+    <span bind="theme"></span>
+  </div>
+
+  <!-- store -->
+  <div store="user" value="{ name: 'Erick', role: 'admin' }">
+    <p bind="$store.user.name"></p>
+  </div>
+
+  <!-- computed -->
+  <div state="{ price: 100, qty: 3 }">
+    <span computed="total" expr="price * qty"></span>
+    <p bind="total"></p>
+  </div>
+
+  <!-- watch -->
+  <div state="{ query: '' }">
+    <input model="query" />
+    <div watch="query" on:change="console.log('Changed:', $new)"></div>
+  </div>
+
+
+  <!-- ===== DATA FETCHING ===== -->
+
+  <!-- get -->
+  <div get="/api/users" as="users" loading="loading-tpl" error="error-tpl" empty="empty-tpl" cached>
+    <ul>
+      <li each="users" bind="name"></li>
+    </ul>
+  </div>
+
+  <!-- post -->
+  <form post="/api/users" body="{ name, email }" then="alert('Created!')" confirm="Are you sure?">
+    <input model="name" />
+    <input model="email" />
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- put -->
+  <form put="/api/users/1" body="{ name }" then="alert('Updated!')">
+    <input model="name" />
+    <button type="submit">Update</button>
+  </form>
+
+  <!-- patch -->
+  <div patch="/api/users/1" body="{ status: 'active' }" then="alert('Patched!')">
+    <button type="submit">Activate</button>
+  </div>
+
+  <!-- delete -->
+  <button delete="/api/users/1" confirm="Delete this user?" then="alert('Deleted!')">
+    Delete User
+  </button>
+
+  <!-- HTTP companions: headers, redirect, refresh, retry, into, params, debounce -->
+  <div get="/api/data" as="data" headers="{ 'Authorization': 'Bearer token' }" retry="3" retry-delay="1000" params="{ page: 1 }" debounce="300" into="myStore" redirect="/success">
+    <p bind="data"></p>
+  </div>
+
+
+  <!-- ===== DATA BINDING ===== -->
+
+  <!-- bind -->
+  <p bind="message">Fallback text</p>
+
+  <!-- bind-html -->
+  <div bind-html="richContent"></div>
+
+  <!-- bind-* (attribute binding) -->
+  <a bind-href="url" bind-title="tooltip">Link</a>
+  <img bind-src="imageUrl" bind-alt="imageAlt" />
+  <input bind-disabled="isDisabled" bind-value="inputVal" />
+
+  <!-- model -->
+  <input model="username" />
+  <textarea model="bio"></textarea>
+  <select model="country">
+    <option value="br">Brazil</option>
+    <option value="us">USA</option>
+  </select>
+
+
+  <!-- ===== CONDITIONALS ===== -->
+
+  <!-- if -->
+  <div if="isLoggedIn">Welcome back!</div>
+
+  <!-- if / else -->
+  <div if="isAdmin">Admin Panel</div>
+  <div else>Access Denied</div>
+
+  <!-- if / else-if / else -->
+  <div if="role === 'admin'">Admin</div>
+  <div else-if="role === 'editor'">Editor</div>
+  <div else>Viewer</div>
+
+  <!-- show -->
+  <div show="isVisible">I toggle display</div>
+
+  <!-- hide -->
+  <div hide="isHidden">I'm hidden when true</div>
+
+  <!-- switch / case / default -->
+  <div switch="status">
+    <p case="active">Active</p>
+    <p case="inactive">Inactive</p>
+    <p default>Unknown</p>
+  </div>
+
+
+  <!-- ===== LOOPS ===== -->
+
+  <!-- each -->
+  <ul>
+    <li each="items" bind="$index + ': ' + $item"></li>
+  </ul>
+
+  <!-- each with as -->
+  <div each="users" as="user">
+    <span bind="user.name"></span>
+    <span bind="$index + ' of ' + $count"></span>
+  </div>
+
+  <!-- each with key -->
+  <div each="items" key="id">
+    <span bind="name"></span>
+  </div>
+
+
+  <!-- ===== EVENTS ===== -->
+
+  <!-- on:click -->
+  <button on:click="count++">Increment</button>
+
+  <!-- on:submit.prevent -->
+  <form on:submit.prevent="handleSubmit()">
+    <button type="submit">Submit</button>
+  </form>
+
+  <!-- on: with modifiers -->
+  <button on:click.stop.once="doSomething()">Click once</button>
+  <input on:keydown.enter="search()" />
+  <input on:input.debounce="handleInput()" />
+  <div on:scroll.throttle="handleScroll()"></div>
+  <div on:click.self="handleSelf()"></div>
+
+  <!-- on: lifecycle events -->
+  <div on:mounted="initComponent()" on:unmounted="cleanup()">
+    <p>Lifecycle demo</p>
+  </div>
+  <div on:init="setup()" on:updated="refresh()" on:error="handleError($event)"></div>
+
+
+  <!-- ===== CLASS & STYLE ===== -->
+
+  <!-- class-* -->
+  <div class-active="isActive" class-disabled="isDisabled">Toggle classes</div>
+
+  <!-- class (with class-map) -->
+  <div class="{ active: isActive, 'text-bold': isBold }">Class map</div>
+
+  <!-- class (with class-list) -->
+  <div class="['base', isActive ? 'active' : '']">Class list</div>
+
+  <!-- style-* -->
+  <div style-color="textColor" style-fontSize="fontSize + 'px'">Styled</div>
+
+  <!-- style (with style-map) -->
+  <div style="{ color: textColor, backgroundColor: bgColor }">Style map</div>
+
+
+  <!-- ===== TEMPLATES ===== -->
+
+  <!-- use with template -->
+  <template id="card">
+    <div class="card">
+      <h3 bind="title"></h3>
+      <p bind="body"></p>
+    </div>
+  </template>
+  <div use="card" var-title="'Hello'" var-body="'World'"></div>
+
+  <!-- scope -->
+  <div scope="{ localVar: 'value' }">
+    <span bind="localVar"></span>
+  </div>
+
+
+  <!-- ===== REFS ===== -->
+  <input ref="myInput" />
+  <button on:click="$refs.myInput.focus()">Focus Input</button>
+
+
+  <!-- ===== ACTIONS ===== -->
+
+  <!-- focus -->
+  <input focus="shouldFocus" />
+
+  <!-- teleport -->
+  <div teleport="#modal-container">
+    <p>Teleported content</p>
+  </div>
+
+  <!-- cloak -->
+  <div cloak>
+    <p bind="message">This won't flash unstyled content</p>
+  </div>
+
+
+  <!-- ===== ANIMATION ===== -->
+
+  <!-- animate-enter / animate-leave -->
+  <div if="show" animate-enter="fadeIn" animate-leave="fadeOut">
+    Animated content
+  </div>
+
+  <!-- animate (alias) -->
+  <div if="show" animate="slideInUp">Animated</div>
+
+  <!-- transition -->
+  <div if="show" transition="fade">Transition</div>
+
+  <!-- animate-duration / animate-stagger -->
+  <ul>
+    <li each="items" animate-enter="fadeIn" animate-duration="300" animate-stagger="50" bind="name"></li>
+  </ul>
+
+
+  <!-- ===== VALIDATION ===== -->
+
+  <!-- validate -->
+  <form>
+    <input model="email" validate="required|email" />
+    <input model="password" validate="required|min:8" />
+    <input model="age" validate="required|between:18:120" />
+    <input model="website" validate="url" />
+    <input model="phone" validate="phone" />
+    <input model="cpf" validate="cpf" />
+    <input model="cnpj" validate="cnpj" />
+    <input model="card" validate="creditcard" />
+    <input model="even" validate="custom:value.length % 2 === 0" />
+    <input model="confirm" validate="match:password" />
+  </form>
+
+  <!-- error-boundary -->
+  <div error-boundary="errorHandler">
+    <p bind="riskyData"></p>
+  </div>
+
+
+  <!-- ===== DRAG & DROP ===== -->
+
+  <!-- drag -->
+  <div drag="item" drag-effect="move">
+    Draggable item
+  </div>
+
+  <!-- drop -->
+  <div drop="handleDrop($data)" drop-effect="move">
+    Drop zone
+  </div>
+
+  <!-- drag-list / drag-multiple -->
+  <ul drag-list="items">
+    <li each="items" drag="$item">Item</li>
+  </ul>
+
+
+  <!-- ===== ROUTING ===== -->
+
+  <!-- route-view -->
+  <div route-view></div>
+
+  <!-- route -->
+  <a route="/about">About</a>
+  <a route="/users/:id" route-active="active" route-active-exact="exact">User</a>
+
+  <!-- guard -->
+  <div route-view guard="isAuthenticated">
+    Protected content
+  </div>
+
+  <!-- outlet / lazy -->
+  <div outlet="sidebar"></div>
+  <div route-view lazy="viewport"></div>
+
+
+  <!-- ===== i18n ===== -->
+
+  <!-- t -->
+  <span t="greeting">Hello</span>
+  <span t-html="richGreeting"></span>
+  <div i18n-ns="dashboard">
+    <span t="title">Dashboard</span>
+  </div>
+
+
+  <!-- ===== FILTERS ===== -->
+
+  <!-- Filters in expressions -->
+  <span bind="name | uppercase"></span>
+  <span bind="name | lowercase"></span>
+  <span bind="name | capitalize"></span>
+  <span bind="name | trim"></span>
+  <span bind="text | truncate:20:'...'"></span>
+  <span bind="price | currency:'USD'"></span>
+  <span bind="count | number:2"></span>
+  <span bind="ratio | percent:1"></span>
+  <span bind="createdAt | date:'YYYY-MM-DD'"></span>
+  <span bind="updatedAt | timeago"></span>
+  <span bind="items | json"></span>
+  <span bind="slug | slugify"></span>
+  <span bind="list | reverse"></span>
+  <span bind="list | sort"></span>
+  <span bind="list | unique"></span>
+  <span bind="list | first"></span>
+  <span bind="list | last"></span>
+  <span bind="list | take:5"></span>
+  <span bind="list | skip:2"></span>
+  <span bind="list | pluck:'name'"></span>
+  <span bind="list | where:'active':true"></span>
+  <span bind="list | groupBy:'category'"></span>
+  <span bind="list | join:', '"></span>
+  <span bind="list | count"></span>
+  <span bind="list | sum:'price'"></span>
+  <span bind="list | avg:'score'"></span>
+  <span bind="list | min:'age'"></span>
+  <span bind="list | max:'age'"></span>
+  <span bind="value | default:'N/A'"></span>
+  <span bind="items | chunk:3"></span>
+  <span bind="items | flatten"></span>
+  <span bind="items | compact"></span>
+
+  <!-- Chained filters -->
+  <span bind="name | trim | capitalize | truncate:30"></span>
+
+
+  <!-- ===== TEMPLATES (loading/error/success/empty) ===== -->
+
+  <template id="loading-tpl">
+    <div class="spinner">Loading...</div>
+  </template>
+
+  <template id="error-tpl">
+    <div class="error">Something went wrong</div>
+  </template>
+
+  <template id="empty-tpl">
+    <div class="empty">No results found</div>
+  </template>
+
+</body>
+</html>

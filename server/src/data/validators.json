@@ -1,0 +1,16 @@
+{
+  "validators": [
+    { "name": "required", "description": "No.JS: Field must not be empty.", "args": [], "example": "validate=\"required\"" },
+    { "name": "email", "description": "No.JS: Field must be a valid email address.", "args": [], "example": "validate=\"email\"" },
+    { "name": "url", "description": "No.JS: Field must be a valid URL.", "args": [], "example": "validate=\"url\"" },
+    { "name": "min", "description": "No.JS: Minimum value or length.", "args": [{ "name": "value", "type": "number", "required": true }], "example": "validate=\"min:5\"" },
+    { "name": "max", "description": "No.JS: Maximum value or length.", "args": [{ "name": "value", "type": "number", "required": true }], "example": "validate=\"max:100\"" },
+    { "name": "between", "description": "No.JS: Value must be between min and max.", "args": [{ "name": "min", "type": "number", "required": true }, { "name": "max", "type": "number", "required": true }], "example": "validate=\"between:1:100\"" },
+    { "name": "match", "description": "No.JS: Value must match a regex pattern.", "args": [{ "name": "pattern", "type": "string", "required": true }], "example": "validate=\"match:^[a-z]+$\"" },
+    { "name": "phone", "description": "No.JS: Field must be a valid phone number.", "args": [], "example": "validate=\"phone\"" },
+    { "name": "cpf", "description": "No.JS: Field must be a valid Brazilian CPF.", "args": [], "example": "validate=\"cpf\"" },
+    { "name": "cnpj", "description": "No.JS: Field must be a valid Brazilian CNPJ.", "args": [], "example": "validate=\"cnpj\"" },
+    { "name": "creditcard", "description": "No.JS: Field must be a valid credit card number.", "args": [], "example": "validate=\"creditcard\"" },
+    { "name": "custom", "description": "No.JS: Custom validation function.", "args": [{ "name": "expression", "type": "expression", "required": true }], "example": "validate=\"custom:value.length % 2 === 0\"" }
+  ]
+}
