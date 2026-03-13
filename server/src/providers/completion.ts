@@ -371,6 +371,20 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
     return items;
   }
 
+  // drop-sort values
+  if (attrName === 'drop-sort') {
+    const directions = ['vertical', 'horizontal', 'grid'];
+    for (const d of directions) {
+      items.push({
+        label: d,
+        kind: CompletionItemKind.EnumMember,
+        detail: 'No.JS: Drop sort direction',
+        sortText: `0-${d}`,
+      });
+    }
+    return items;
+  }
+
   // drag-effect / drop-effect values
   if (attrName === 'drag-effect') {
     const effects = ['copy', 'move', 'link', 'none'];

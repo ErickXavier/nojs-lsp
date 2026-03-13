@@ -1,6 +1,6 @@
 {
   "No.JS Conditional Block": {
-    "prefix": ["nojs-if", "nif"],
+    "prefix": "if",
     "body": [
       "<${1:div} if=\"${2:condition}\">",
       "\t$0",
@@ -9,7 +9,7 @@
     "description": "No.JS conditional block with if directive"
   },
   "No.JS If/Else Block": {
-    "prefix": ["nojs-if-else", "nife"],
+    "prefix": "if-else",
     "body": [
       "<${1:div} if=\"${2:condition}\">",
       "\t${3:<!-- true content -->}",
@@ -21,7 +21,7 @@
     "description": "No.JS conditional block with if and else directives"
   },
   "No.JS Each Loop": {
-    "prefix": ["nojs-each", "neach"],
+    "prefix": "each",
     "body": [
       "<${1:div} each=\"${2:item} in ${3:items}\">",
       "\t<${4:span} bind-text=\"${2:item}.$5\"></${4:span}>",
@@ -30,7 +30,7 @@
     "description": "No.JS each loop directive"
   },
   "No.JS HTTP GET Fetch": {
-    "prefix": ["nojs-get", "nget"],
+    "prefix": "get",
     "body": [
       "<${1:div} get=\"${2:/api/endpoint}\" as=\"${3:data}\">",
       "\t<${4:span} bind-text=\"${3:data}.$5\"></${4:span}>",
@@ -39,7 +39,7 @@
     "description": "No.JS HTTP GET fetch with data binding"
   },
   "No.JS HTTP GET with States": {
-    "prefix": ["nojs-get-full", "ngetf"],
+    "prefix": "get-full",
     "body": [
       "<${1:div} get=\"${2:/api/endpoint}\" as=\"${3:data}\">",
       "\t$0",
@@ -56,7 +56,7 @@
     "description": "No.JS HTTP GET with loading and error templates"
   },
   "No.JS HTTP POST": {
-    "prefix": ["nojs-post", "npost"],
+    "prefix": "post",
     "body": [
       "<form post=\"${1:/api/endpoint}\" as=\"${2:result}\">",
       "\t<input name=\"${3:field}\" />",
@@ -66,7 +66,7 @@
     "description": "No.JS HTTP POST form"
   },
   "No.JS Store Declaration": {
-    "prefix": ["nojs-store", "nstore"],
+    "prefix": "store",
     "body": [
       "<div store=\"${1:myStore}\" state=\"{ ${2:key}: ${3:value} }\">",
       "\t$0",
@@ -75,7 +75,7 @@
     "description": "No.JS store declaration with initial state"
   },
   "No.JS State": {
-    "prefix": ["nojs-state", "nstate"],
+    "prefix": "state",
     "body": [
       "<${1:div} state=\"{ ${2:key}: ${3:value} }\">",
       "\t$0",
@@ -84,7 +84,7 @@
     "description": "No.JS reactive state declaration"
   },
   "No.JS Form Validation": {
-    "prefix": ["nojs-form", "nform"],
+    "prefix": "form",
     "body": [
       "<form state=\"{ ${1:email}: '' }\" on:submit=\"${2:handleSubmit}\">",
       "\t<input model=\"${1:email}\" validate=\"${3:required|email}\" />",
@@ -95,7 +95,7 @@
     "description": "No.JS form with model binding and validation"
   },
   "No.JS Template": {
-    "prefix": ["nojs-template", "ntpl"],
+    "prefix": "template",
     "body": [
       "<template id=\"${1:my-template}\">",
       "\t$0",
@@ -104,35 +104,35 @@
     "description": "No.JS reusable template"
   },
   "No.JS Use Template": {
-    "prefix": ["nojs-use", "nuse"],
+    "prefix": "use",
     "body": [
       "<${1:div} use=\"${2:template-id}\"></${1:div}>"
     ],
     "description": "No.JS use a template by ID"
   },
   "No.JS Event Handler": {
-    "prefix": ["nojs-on", "non"],
+    "prefix": "on",
     "body": [
       "<${1:button} on:${2:click}=\"${3:handler}\">${4:Click me}</${1:button}>"
     ],
     "description": "No.JS event handler"
   },
   "No.JS Bind Attribute": {
-    "prefix": ["nojs-bind", "nbind"],
+    "prefix": "bind",
     "body": [
       "<${1:div} bind-${2:text}=\"${3:expression}\"></${1:div}>"
     ],
     "description": "No.JS bind attribute directive"
   },
   "No.JS Route View": {
-    "prefix": ["nojs-route", "nroute"],
+    "prefix": "route",
     "body": [
       "<route-view src=\"${1:pages/}\"></route-view>"
     ],
     "description": "No.JS route view component"
   },
   "No.JS i18n": {
-    "prefix": ["nojs-t", "nt"],
+    "prefix": "t",
     "body": [
       "<${1:span} t=\"${2:key}\">${3:fallback}</${1:span}>"
     ],

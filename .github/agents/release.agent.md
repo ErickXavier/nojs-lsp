@@ -51,11 +51,11 @@ You MUST follow ALL steps below, in order, without skipping any.
 ### 7. PUSH
 - `git push origin main`
 
-### 8. PACKAGE & PUBLISH to VS Code Marketplace
+<!-- ### 8. PACKAGE & PUBLISH to VS Code Marketplace
 - Run `npx vsce package` to create a `.vsix` file (sanity check)
 - Run `npx vsce publish` to publish to the VS Code Marketplace
 - If not logged in, run `npx vsce login EXS` first (uses a Personal Access Token from Azure DevOps)
-- Verify the extension appears at: `https://marketplace.visualstudio.com/items?itemName=EXS.nojs-lsp`
+- Verify the extension appears at: `https://marketplace.visualstudio.com/items?itemName=EXS.nojs-lsp` -->
 
 ## Constraints
 - DO NOT skip the investigation step — always review changes before committing
@@ -64,4 +64,3 @@ You MUST follow ALL steps below, in order, without skipping any.
 - DO NOT publish without rebuilding (`npm run compile`)
 - DO NOT commit without updating `CHANGELOG.md` with the new version entry
 - DO NOT push without confirming the commit succeeded
-- ALWAYS use `npx vsce` — this project publishes to the VS Code Marketplace, NOT npm

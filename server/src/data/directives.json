@@ -251,12 +251,33 @@
       "valueDescription": "JS expression",
       "requiresValue": true,
       "companions": [],
-      "childAttributes": [
-        { "name": "case", "type": "string", "description": "No.JS: Value to match" },
-        { "name": "default", "type": "boolean", "description": "No.JS: Default fallback" },
+      "documentation": "Switch statement. Children use `case`, `default`, and `then` attributes.\n\n**Example:**\n```html\n<div switch=\"role\">\n  <p case=\"admin\">Admin panel</p>\n  <p case=\"user\">Dashboard</p>\n  <p default>Guest view</p>\n</div>\n```",
+      "category": "conditional"
+    },
+    {
+      "name": "case",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "string",
+      "valueDescription": "Value to match against parent switch expression",
+      "requiresValue": true,
+      "companions": [
         { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
       ],
-      "documentation": "Switch statement. Children use `case`, `default`, and `then` attributes.\n\n**Example:**\n```html\n<div switch=\"role\">\n  <p case=\"admin\">Admin panel</p>\n  <p case=\"user\">Dashboard</p>\n  <p default>Guest view</p>\n</div>\n```",
+      "documentation": "Switch case. Used inside a `switch` container.\n\n**Example:**\n```html\n<p case=\"admin\">Admin panel</p>\n<p case=\"editor\" then=\"editor-tpl\"></p>\n```",
+      "category": "conditional"
+    },
+    {
+      "name": "default",
+      "pattern": false,
+      "priority": 10,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
+      ],
+      "documentation": "Default case in a `switch` block. Renders when no `case` matches.\n\n**Example:**\n```html\n<p default>Guest view</p>\n```",
       "category": "conditional"
     },
     {
@@ -368,8 +389,11 @@
       "valueType": "string",
       "valueDescription": "Validator rule string (pipe-separated)",
       "requiresValue": true,
-      "companions": [],
-      "documentation": "Form validation rule.\n\n**Example:**\n```html\n<input validate=\"required|email\">\n<input validate=\"min:5|max:100\">\n```\n\n**Built-in validators:** `required`, `email`, `url`, `min`, `max`, `between`, `match`, `phone`, `cpf`, `cnpj`, `creditcard`, `custom`",
+      "companions": [
+        { "name": "error", "type": "templateId", "description": "No.JS: Error template for field" },
+        { "name": "success", "type": "templateId", "description": "No.JS: Success template for form" }
+      ],
+      "documentation": "Form validation rule.\n\n**Example:**\n```html\n<input validate=\"required|email\" error=\"#errTpl\">\n<input validate=\"min:5|max:100\">\n```\n\n**Built-in validators:** `required`, `email`, `url`, `min`, `max`, `between`, `match`, `phone`, `cpf`, `cnpj`, `creditcard`, `custom`\n\n**Companions:** `error`, `success`",
       "category": "form"
     },
     {
@@ -513,9 +537,11 @@
       "requiresValue": true,
       "companions": [
         { "name": "route-active", "type": "string", "description": "No.JS: CSS class added when route is active (default: 'active')" },
-        { "name": "route-active-exact", "type": "string", "description": "No.JS: CSS class added only on exact path match" }
+        { "name": "route-active-exact", "type": "string", "description": "No.JS: CSS class added only on exact path match" },
+        { "name": "lazy", "type": "string", "description": "No.JS: Loading strategy for route template (priority or ondemand)" },
+        { "name": "outlet", "type": "string", "description": "No.JS: Named route-view outlet target (default: 'default')" }
       ],
-      "documentation": "Turns an `<a>` element into a route link that navigates without page reload.\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<a route=\"/users/:id\" route-active=\"current\">User</a>\n```\n\n**Companions:** `route-active`, `route-active-exact`",
+      "documentation": "Turns an `<a>` element into a route link that navigates without page reload. Also used on `<template>` elements to define routes.\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<template route=\"/dashboard\" lazy=\"ondemand\" outlet=\"sidebar\">\n```\n\n**Companions:** `route-active`, `route-active-exact`, `lazy`, `outlet`",
       "category": "routing"
     },
     {

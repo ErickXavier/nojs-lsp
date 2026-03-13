@@ -2,7 +2,7 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [0.2.0] — 2025-07-13
+## [0.2.0](https://github.com/ErickXavier/nojs-lsp/compare/v0.1.0...v0.2.0) — 2026-03-13
 
 ### Added
 
@@ -12,7 +12,24 @@ All notable changes to the **No.JS LSP** extension will be documented in this fi
 - Auto-discovery of NoJS pages via CDP target listing and `__NOJS_DEVTOOLS__` detection
 - Runtime API integration: `inspectStore()`, `getStoreNames()`, `getStoreProperty()`, `inspectElement()`, `getStats()`, `evaluateExpression()`
 - Configuration: `nojs.devtools.enabled`, `nojs.devtools.port`, `nojs.devtools.host`
-- 20 new unit tests (DevTools bridge + hover integration)
+
+#### Directive Data Enhancements
+- Promoted `case` and `default` from `switch` child attributes to top-level directives with own documentation
+- Added `error` and `success` companion attributes to `validate` directive
+- Added `lazy` and `outlet` companion attributes to `route` directive
+- Added `drop-sort` value completions (`vertical`, `horizontal`, `grid`)
+
+#### Hover & Semantic Tokens
+- Added hover documentation for `$watch`, `$notify`, `$set` context variables
+- Added `$error` to semantic token context variables
+
+### Changed
+- Simplified all snippet prefixes to bare directive names (e.g. `nojs-if` → `if`)
+- Updated README development section
+
+### Removed
+- Removed old Mocha-based e2e test infrastructure
+- Removed unused devDependencies (`mocha`, `@types/mocha`, `glob`, `@types/glob`)
 
 ## [0.1.0] — 2025-07-10
 
