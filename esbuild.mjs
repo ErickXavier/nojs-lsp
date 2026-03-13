@@ -12,6 +12,7 @@ const serverConfig = {
   target: 'node18',
   sourcemap: true,
   external: ['vscode'],
+  mainFields: ['module', 'main'],
   tsconfig: 'tsconfig.json',
 };
 

@@ -2,6 +2,23 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [0.3.0](https://github.com/ErickXavier/nojs-lsp/compare/v0.2.0...v0.3.0) — 2026-03-13
+
+### Added
+- `validate-on` value completions (`input`, `blur`, `focusout`, `submit`) ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+- `$form.` sub-property completions for all 11 properties (`valid`, `dirty`, `touched`, `pending`, `submitting`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`) ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+- `$rule` context variable hover documentation and semantic token highlighting ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+- `error-class`, `validate-on`, `validate-if` HTML attribute intellisense ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+- Native ValidityState validators: `minlength`, `maxlength`, `pattern`, `step` ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+
+### Changed
+- Updated `validate` directive companions and documentation for pristine-aware errors ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+- Updated `$form` hover docs with all new properties ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+- Updated form snippet with new validation pattern ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+
+### Removed
+- Obsolete built-in validators: `between`, `match`, `phone`, `cpf`, `cnpj`, `creditcard` ([`8c67713`](https://github.com/ErickXavier/nojs-lsp/commit/8c67713))
+
 ## [0.2.0](https://github.com/ErickXavier/nojs-lsp/compare/v0.1.0...v0.2.0) — 2026-03-13
 
 ### Added
