@@ -68,11 +68,24 @@
   "No.JS Store Declaration": {
     "prefix": "store",
     "body": [
-      "<div store=\"${1:myStore}\" state=\"{ ${2:key}: ${3:value} }\">",
+      "<div store=\"${1:myStore}\" value=\"{ ${2:key}: ${3:value} }\">",
       "\t$0",
       "</div>"
     ],
-    "description": "No.JS store declaration with initial state"
+    "description": "No.JS store declaration with initial value"
+  },
+  "No.JS Config Stores": {
+    "prefix": "config-stores",
+    "body": [
+      "<script>",
+      "  NoJS.config({",
+      "    stores: {",
+      "      ${1:storeName}: { ${2:key}: ${3:value} }",
+      "    }",
+      "  });",
+      "</script>"
+    ],
+    "description": "No.JS pre-initialize stores via config()"
   },
   "No.JS State": {
     "prefix": "state",

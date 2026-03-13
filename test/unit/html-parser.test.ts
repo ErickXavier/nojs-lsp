@@ -7,7 +7,7 @@ import {
   hasNoJsDirectives,
   findTemplates,
   findRefs,
-  getPreviousSibling,
+  findStores
 } from '../../server/src/html-parser';
 
 function createDocument(content: string): TextDocument {
@@ -145,6 +145,36 @@ describe('HtmlParser', () => {
       expect(refs.size).toBe(2);
       expect(refs.has('nameInput')).toBe(true);
       expect(refs.has('container')).toBe(true);
+    });
+  });
+
+  describe('findStores', () => {
+    it('finds store attribute declarations', () => {
+      const content = '<div store="cart" value="{ items: [] }"></div>';
+      const doc = createDocument(content);
+      const htmlDoc = parseHtmlDocument(doc);
+      const stores = findStores(htmlDoc, content);
+      expect(stores.size).toBe(1);
+      expect(stores.has('cart')).toBe(true);
+    });
+
+    it('finds stores declared in NoJS.config()', () => {
+      const content = '<script>NoJS.config({ stores: { auth: { user: null }, ui: { theme: "dark" } } });</script>';
+      const doc = createDocument(content);
+      const htmlDoc = parseHtmlDocument(doc);
+      const stores = findStores(htmlDoc, content);
+      expect(stores.has('auth')).toBe(true);
+      expect(stores.has('ui')).toBe(true);
+    });
+
+    it('prefers store attribute over config store', () => {
+      const content = '<div store="auth" value="{ user: null }"></div><script>NoJS.config({ stores: { auth: { token: "" } } });</script>';
+      const doc = createDocument(content);
+      const htmlDoc = parseHtmlDocument(doc);
+      const stores = findStores(htmlDoc, content);
+      expect(stores.size).toBe(1);
+      // Should point to the HTML element, not the config block
+      expect(stores.get('auth')!.start).toBe(0);
     });
   });
 });

@@ -176,6 +176,33 @@ describe('WorkspaceScanner', () => {
       const stores = scanStoreProperties(docs as any);
       expect(stores.length).toBe(1);
     });
+
+    it('extracts stores from NoJS.config({ stores: { ... } })', () => {
+      const docs = createMockDocuments([{
+        uri: 'file:///test.html',
+        content: '<script>NoJS.config({ stores: { auth: { user: null, token: "" }, cart: { items: [], total: 0 } } });</script>',
+      }]);
+
+      const stores = scanStoreProperties(docs as any);
+      expect(stores.length).toBe(2);
+      expect(stores.find(s => s.storeName === 'auth')).toBeDefined();
+      expect(stores.find(s => s.storeName === 'auth')!.properties).toContain('user');
+      expect(stores.find(s => s.storeName === 'auth')!.properties).toContain('token');
+      expect(stores.find(s => s.storeName === 'cart')).toBeDefined();
+      expect(stores.find(s => s.storeName === 'cart')!.properties).toContain('items');
+      expect(stores.find(s => s.storeName === 'cart')!.properties).toContain('total');
+    });
+
+    it('does not duplicate config stores already declared via store attribute', () => {
+      const docs = createMockDocuments([{
+        uri: 'file:///test.html',
+        content: '<div store="auth" value="{ user: null }"></div><script>NoJS.config({ stores: { auth: { token: "" } } });</script>',
+      }]);
+
+      const stores = scanStoreProperties(docs as any);
+      expect(stores.length).toBe(1);
+      expect(stores[0].storeName).toBe('auth');
+    });
   });
 
   describe('scanCustomDirectives', () => {

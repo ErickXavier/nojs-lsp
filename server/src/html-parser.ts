@@ -321,6 +321,35 @@ export function findStores(htmlDoc: HTMLDocument, text: string): Map<string, { s
   for (const root of htmlDoc.roots) {
     walk(root);
   }
+
+  // Also detect stores declared in NoJS.config({ stores: { name: { ... } } })
+  const configIdx = text.indexOf('NoJS.config(');
+  const storesIdx = configIdx !== -1 ? text.indexOf('stores', configIdx) : -1;
+  if (storesIdx !== -1) {
+    const colonIdx = text.indexOf('{', text.indexOf(':', storesIdx));
+    if (colonIdx !== -1) {
+      let depth = 0;
+      let blockEnd = -1;
+      for (let i = colonIdx; i < text.length; i++) {
+        if (text[i] === '{') depth++;
+        else if (text[i] === '}') { depth--; if (depth === 0) { blockEnd = i; break; } }
+      }
+      if (blockEnd !== -1) {
+        const storesBlock = text.substring(colonIdx + 1, blockEnd);
+        const entryRegex = /([a-zA-Z_$][\w$]*)\s*:\s*\{/g;
+        let entryMatch;
+        while ((entryMatch = entryRegex.exec(storesBlock)) !== null) {
+          const storeName = entryMatch[1];
+          if (!stores.has(storeName)) {
+            const nameStart = colonIdx + 1 + entryMatch.index;
+            const nameEnd = nameStart + storeName.length;
+            stores.set(storeName, { start: nameStart, end: nameEnd });
+          }
+        }
+      }
+    }
+  }
+
   return stores;
 }
 

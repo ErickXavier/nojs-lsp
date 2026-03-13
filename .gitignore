@@ -6,3 +6,4 @@ dist/
 *.js.map
 playwright-report/
 test-results/
+.DS_Store

@@ -203,6 +203,32 @@ export function scanStoreProperties(documents: TextDocuments<TextDocument>): Sto
       const props = extractObjectKeys(valueExpr);
       stores.push({ storeName, properties: props });
     }
+
+    // Match NoJS.config({ stores: { name: { ... }, ... } }) in <script> blocks
+    const configStoresIdx = text.indexOf('stores', text.indexOf('NoJS.config('));
+    if (configStoresIdx !== -1 && text.indexOf('NoJS.config(') !== -1) {
+      const colonIdx = text.indexOf('{', text.indexOf(':', configStoresIdx));
+      if (colonIdx !== -1) {
+        let depth = 0;
+        let blockEnd = -1;
+        for (let i = colonIdx; i < text.length; i++) {
+          if (text[i] === '{') depth++;
+          else if (text[i] === '}') { depth--; if (depth === 0) { blockEnd = i; break; } }
+        }
+        if (blockEnd !== -1) {
+          const storesBlock = text.substring(colonIdx + 1, blockEnd);
+          const entryRegex = /([a-zA-Z_$][\w$]*)\s*:\s*(\{[^}]*\})/g;
+          let entryMatch;
+          while ((entryMatch = entryRegex.exec(storesBlock)) !== null) {
+            const storeName = entryMatch[1];
+            if (seen.has(storeName)) continue;
+            seen.add(storeName);
+            const props = extractObjectKeys(entryMatch[2]);
+            stores.push({ storeName, properties: props });
+          }
+        }
+      }
+    }
   }
 
   return stores;

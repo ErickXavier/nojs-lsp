@@ -27,9 +27,9 @@ You MUST follow ALL steps below, in order, without skipping any.
 - Wait for approval before proceeding to commit
 
 ### 3. BUMP the version
-- Check current version in `package.json` → `"version": "x.y.z"`
-- Decide semver increment: patch (x.x.+1), minor (x.+1.0), or major (+1.0.0)
-- Update version in `package.json`
+- Read the NoJS framework version: `node -p "require('/Users/erick/_projects/_personal/NoJS/NoJS/package.json').version"`
+- The NoJS-LSP version MUST always match the NoJS framework version — use the exact same version string
+- Update `"version"` in `package.json` to match the NoJS version
 
 ### 4. UPDATE the CHANGELOG
 - Open `CHANGELOG.md` and add a new section at the top (below the header) for the new version
