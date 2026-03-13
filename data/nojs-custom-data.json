@@ -100,7 +100,19 @@
     },
     {
       "name": "validate",
-      "description": { "kind": "markdown", "value": "No.JS: Form validation rule.\n\n```html\n<input validate=\"required|email\">\n<input validate=\"min:5|max:100\">\n```\n\nBuilt-in validators: `required`, `email`, `url`, `min`, `max`, `between`, `match`, `phone`, `cpf`, `cnpj`, `creditcard`, `custom`" }
+      "description": { "kind": "markdown", "value": "No.JS: Form validation with pristine-aware errors.\\n\\n```html\\n<form validate=\\\"\\\" error-class=\\\"is-invalid\\\" validate-on=\\\"input blur\\\">\\n  <input name=\\\"email\\\" validate=\\\"required|email\\\" error-required=\\\"Email is required\\\" />\\n</form>\\n```\\n\\nBuilt-in validators: `required`, `email`, `url`, `min`, `max`, `custom`\\n\\n**Companions:** `error`, `error-*`, `error-class`, `validate-on`, `validate-if`, `as`, `success`" }
+    },
+    {
+      "name": "error-class",
+      "description": { "kind": "markdown", "value": "No.JS: CSS class(es) applied to invalid fields after interaction.\\n\\n```html\\n<form validate=\\\"\\\" error-class=\\\"is-invalid\\\">\\n  <input name=\\\"email\\\" validate=\\\"required\\\" error-class=\\\"field-error\\\" />\\n</form>\\n```\\n\\nCan be set on the form (applies to all fields) or on individual fields." }
+    },
+    {
+      "name": "validate-on",
+      "description": { "kind": "markdown", "value": "No.JS: Validation trigger events (space-separated).\\n\\n```html\\n<form validate=\\\"\\\" validate-on=\\\"input blur\\\">\\n<input validate=\\\"required\\\" validate-on=\\\"blur\\\" />\\n```\\n\\n**Values:** `input`, `blur`, `focusout`, `submit`\\n\\nDefaults to `input focusout` if not specified." }
+    },
+    {
+      "name": "validate-if",
+      "description": { "kind": "markdown", "value": "No.JS: Conditional validation expression. Field is only validated when expression is truthy.\\n\\n```html\\n<input name=\\\"company\\\" validate=\\\"required\\\" validate-if=\\\"isBusinessAccount\\\" />\\n```" }
     },
     {
       "name": "error-boundary",

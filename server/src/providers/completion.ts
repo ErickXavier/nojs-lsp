@@ -430,6 +430,21 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
     return items;
   }
 
+  // validate-on attribute values
+  if (attrName === 'validate-on') {
+    const triggers = ['input', 'blur', 'focusout', 'submit'];
+    for (const t of triggers) {
+      if (partial && !t.toLowerCase().startsWith(partial.toLowerCase())) continue;
+      items.push({
+        label: t,
+        kind: CompletionItemKind.EnumMember,
+        detail: 'No.JS: Validation trigger',
+        sortText: `0-${t}`,
+      });
+    }
+    return items;
+  }
+
   // i18n key completions for t="..." and t-html="..."
   if (attrName === 't' || attrName === 't-html') {
     for (const keyInfo of wsData.i18nKeys) {
@@ -503,6 +518,33 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
           });
         }
       }
+    }
+  }
+
+  // $form. sub-property completions
+  if (directive && partial.includes('$form.')) {
+    const afterForm = partial.substring(partial.lastIndexOf('$form.') + 6);
+    const formProps: { name: string; detail: string }[] = [
+      { name: 'valid', detail: 'boolean — true when all fields pass validation' },
+      { name: 'dirty', detail: 'boolean — true when any field value has changed' },
+      { name: 'touched', detail: 'boolean — true when any field has been focused' },
+      { name: 'pending', detail: 'boolean — true when async validators are running' },
+      { name: 'submitting', detail: 'boolean — true during form submission' },
+      { name: 'errors', detail: 'object — { fieldName: errorMessage } for interacted fields' },
+      { name: 'values', detail: 'object — { fieldName: currentValue }' },
+      { name: 'fields', detail: 'object — { fieldName: { valid, dirty, touched, error, value } }' },
+      { name: 'firstError', detail: 'string | null — first error message by priority' },
+      { name: 'errorCount', detail: 'number — count of errors on interacted fields' },
+      { name: 'reset()', detail: 'function — reset form state and re-validate' },
+    ];
+    for (const prop of formProps) {
+      if (afterForm && !prop.name.toLowerCase().startsWith(afterForm.toLowerCase())) continue;
+      items.push({
+        label: `$form.${prop.name}`,
+        kind: CompletionItemKind.Property,
+        detail: `No.JS: ${prop.detail}`,
+        sortText: `0-${prop.name}`,
+      });
     }
   }
 

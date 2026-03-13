@@ -44,7 +44,7 @@ export const SEMANTIC_TOKENS_LEGEND: SemanticTokensLegend = {
 const DYNAMIC_PREFIXES = ['bind-', 'class-', 'style-'];
 const CONTEXT_VARS = new Set([
   '$index', '$count', '$first', '$last', '$even', '$odd',
-  '$event', '$el', '$old', '$new', '$error',
+  '$event', '$el', '$old', '$new', '$error', '$rule',
   '$drag', '$dragType', '$dragEffect', '$dropIndex', '$source', '$target',
 ]);
 const CONTEXT_REFS = new Set(['$store', '$refs', '$route', '$router', '$i18n', '$form', '$parent']);

@@ -111,7 +111,7 @@ const CONTEXT_KEY_DOCS: Record<string, string> = {
   '$route': 'No.JS: **`$route`** — Current route information (path, params, query, hash).\n\nUsage: `$route.params.id`',
   '$router': 'No.JS: **`$router`** — Router instance for programmatic navigation.\n\nUsage: `$router.push(\'/about\')`',
   '$i18n': 'No.JS: **`$i18n`** — Internationalization helper for translations.\n\nUsage: `$i18n.t(\'greeting\')`',
-  '$form': 'No.JS: **`$form`** — Form validation state and methods.\n\nUsage: `$form.valid`, `$form.errors`',
+  '$form': 'No.JS: **`$form`** — Form validation state and methods.\n\nProperties: `valid`, `dirty`, `touched`, `pending`, `submitting`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`\n\nUsage: `$form.valid`, `$form.errors.email`, `$form.fields.email.touched`',
   '$el': 'No.JS: **`$el`** — Reference to the current DOM element.',
   '$event': 'No.JS: **`$event`** — The native DOM event object in event handlers.',
   '$parent': 'No.JS: **`$parent`** — Reference to the parent component context.',
@@ -127,6 +127,7 @@ const CONTEXT_KEY_DOCS: Record<string, string> = {
   '$dropIndex': 'No.JS: **`$dropIndex`** — Insertion index in the drop zone.',
   '$source': 'No.JS: **`$source`** — Source info object `{ list, index, el }` in drop handlers.',
   '$target': 'No.JS: **`$target`** — Target info object `{ list, index, el }` in drop handlers.',
+  '$rule': 'No.JS: **`$rule`** — The validation rule name that triggered the error (e.g. `required`, `email`). Available in error templates.',
 };
 
 /** Loop variable descriptions for hover */

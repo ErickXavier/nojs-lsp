@@ -245,19 +245,25 @@
 
   <!-- ===== VALIDATION ===== -->
 
-  <!-- validate -->
-  <form>
-    <input model="email" validate="required|email" />
-    <input model="password" validate="required|min:8" />
-    <input model="age" validate="required|between:18:120" />
-    <input model="website" validate="url" />
-    <input model="phone" validate="phone" />
-    <input model="cpf" validate="cpf" />
-    <input model="cnpj" validate="cnpj" />
-    <input model="card" validate="creditcard" />
-    <input model="even" validate="custom:value.length % 2 === 0" />
-    <input model="confirm" validate="match:password" />
+  <!-- validate (form-level with new companions) -->
+  <form validate="" error-class="is-invalid" validate-on="input blur">
+    <input name="email" model="email" validate="required|email" error-required="Email is required" error-email="Must be a valid email" />
+    <input name="password" model="password" validate="required|min:8" error-class="field-error" />
+    <input name="age" model="age" validate="required|min:18|max:120" as="$ageField" />
+    <input name="website" model="website" validate="url" validate-if="hasWebsite" />
+    <input name="company" model="company" validate="required" validate-on="blur" />
+    <span if="$form.errors.email" bind="$form.errors.email"></span>
+    <span if="$form.firstError" bind="$form.firstError"></span>
+    <button type="submit" disabled="!$form.valid">Submit</button>
   </form>
+
+  <!-- validate (field-level standalone) -->
+  <input model="standalone" validate="required|email" error="#errTpl" />
+
+  <!-- error template with $error and $rule -->
+  <template id="errTpl">
+    <span class="error" bind="$error"></span>
+  </template>
 
   <!-- error-boundary -->
   <div error-boundary="errorHandler">

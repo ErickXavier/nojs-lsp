@@ -99,13 +99,13 @@
   "No.JS Form Validation": {
     "prefix": "form",
     "body": [
-      "<form state=\"{ ${1:email}: '' }\" on:submit=\"${2:handleSubmit}\">",
-      "\t<input model=\"${1:email}\" validate=\"${3:required|email}\" />",
-      "\t<span if=\"\\$error.${1:email}\" bind-text=\"\\$error.${1:email}\"></span>",
-      "\t<button type=\"submit\">Submit</button>",
+      "<form state=\"{ ${1:email}: '' }\" validate=\"\" error-class=\"${2:is-invalid}\" on:submit.prevent=\"${3:handleSubmit}\">",
+      "\t<input name=\"${1:email}\" model=\"${1:email}\" validate=\"${4:required|email}\" />",
+      "\t<span if=\"\\$form.errors.${1:email}\" bind=\"\\$form.errors.${1:email}\"></span>",
+      "\t<button type=\"submit\" disabled=\"!\\$form.valid\">Submit</button>",
       "</form>"
     ],
-    "description": "No.JS form with model binding and validation"
+    "description": "No.JS form with pristine-aware validation, error-class, and $form context"
   },
   "No.JS Template": {
     "prefix": "template",
