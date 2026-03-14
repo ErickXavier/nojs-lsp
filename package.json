@@ -2,7 +2,7 @@
   "name": "nojs-lsp",
   "displayName": "No.JS LSP",
   "description": "Language server for the No.JS framework — completions, hover docs, diagnostics, and more",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "publisher": "EXS",
   "license": "MIT",
   "icon": "logo.png",
