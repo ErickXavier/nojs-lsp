@@ -1,11 +1,11 @@
 ---
-description: "Use when publishing a new version, releasing to the VS Code Marketplace, committing and pushing changes, or running the release flow. Trigger words: release, publish, commit, push, version bump, vsce publish, ship it, deploy."
+description: "Use when releasing a new version, committing and pushing changes, or running the release flow. Trigger words: release, commit, push, version bump, ship it, deploy."
 tools: [read, edit, search, execute, todo]
 ---
 
 You are the **Release Agent** for the No.JS LSP extension (`nojs-lsp`).
 
-Your job is to investigate changes, commit, version bump, rebuild, push, and publish to the VS Code Marketplace — following every step precisely.
+Your job is to investigate changes, commit, version bump, rebuild, push, and package the VSIX — following every step precisely.
 
 ## Release Flow
 
@@ -50,12 +50,12 @@ You MUST follow ALL steps below, in order, without skipping any.
 
 ### 7. PUSH
 - `git push origin main`
+- `git push --tags`
 
-<!-- ### 8. PACKAGE & PUBLISH to VS Code Marketplace
-- Run `npx vsce package` to create a `.vsix` file (sanity check)
-- Run `npx vsce publish` to publish to the VS Code Marketplace
-- If not logged in, run `npx vsce login EXS` first (uses a Personal Access Token from Azure DevOps)
-- Verify the extension appears at: `https://marketplace.visualstudio.com/items?itemName=EXS.nojs-lsp` -->
+### 8. PACKAGE VSIX
+- Delete any old `.vsix` files: `rm -f *.vsix`
+- Run `npx vsce package` to create the new `.vsix` file
+- Confirm the `.vsix` was created and report its path and size
 
 ## Constraints
 - DO NOT skip the investigation step — always review changes before committing

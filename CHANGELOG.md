@@ -2,6 +2,12 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [0.3.1](https://github.com/ErickXavier/nojs-lsp/compare/v0.3.0...v0.3.1) — 2026-03-14
+
+### Fixed
+- Fix server crash caused by `vscode-html-languageservice` UMD bundle using dynamic `require()` calls that fail at runtime (`Cannot find module './parser/htmlScanner'`)
+- Add `mainFields: ['module', 'main']` to esbuild server config to prefer ESM entry points
+
 ## [0.3.0](https://github.com/ErickXavier/nojs-lsp/compare/v0.2.0...v0.3.0) — 2026-03-13
 
 ### Added
