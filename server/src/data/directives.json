@@ -538,7 +538,7 @@
       "pattern": false,
       "priority": 15,
       "valueType": "string",
-      "valueDescription": "Route path pattern",
+      "valueDescription": "Route path pattern or \"*\" for catch-all wildcard",
       "requiresValue": true,
       "companions": [
         { "name": "route-active", "type": "string", "description": "No.JS: CSS class added when route is active (default: 'active')" },
@@ -546,7 +546,7 @@
         { "name": "lazy", "type": "string", "description": "No.JS: Loading strategy for route template (priority or ondemand)" },
         { "name": "outlet", "type": "string", "description": "No.JS: Named route-view outlet target (default: 'default')" }
       ],
-      "documentation": "Turns an `<a>` element into a route link that navigates without page reload. Also used on `<template>` elements to define routes.\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<template route=\"/dashboard\" lazy=\"ondemand\" outlet=\"sidebar\">\n```\n\n**Companions:** `route-active`, `route-active-exact`, `lazy`, `outlet`",
+      "documentation": "Turns an `<a>` element into a route link that navigates without page reload. Also used on `<template>` elements to define routes.\n\nUse `route=\"*\"` on a `<template>` to create a catch-all wildcard route for 404 pages. The wildcard matches when no other route matches the current path. Use `$route.matched` (boolean) to check whether an explicit route matched (`true`) or a wildcard/fallback is rendering (`false`).\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<template route=\"/dashboard\" lazy=\"ondemand\" outlet=\"sidebar\">\n\n<!-- Catch-all 404 -->\n<template route=\"*\">\n  <h1>404</h1>\n  <p>Path <code bind=\"$route.path\"></code> not found.</p>\n</template>\n```\n\n**Companions:** `route-active`, `route-active-exact`, `lazy`, `outlet`",
       "category": "routing"
     },
     {

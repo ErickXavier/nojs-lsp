@@ -56,6 +56,8 @@ export async function validateTextDocument(
   const refDeclarations = new Map<string, { element: ElementInfo; attr: { nameStart: number; nameEnd: number } }[]>();
   // Track referenced template IDs for existence check
   const referencedTemplateIds: { id: string; nameStart: number; nameEnd: number }[] = [];
+  // Track wildcard route declarations per outlet for duplicate detection
+  const wildcardRoutes = new Map<string, { element: ElementInfo; attr: { nameStart: number; nameEnd: number } }[]>();
 
   for (const el of elements) {
     const directivesOnElement = el.attributes.filter(a => isDirective(a.name)).map(a => a.name);
@@ -241,7 +243,17 @@ export async function validateTextDocument(
         }
       }
 
-      // 12. Missing companion `as` for HTTP directives
+      // 12. Track duplicate wildcard routes per outlet
+      if (name === 'route' && value === '*' && el.tag === 'template') {
+        const outletAttr = el.attributes.find(a => a.name === 'outlet');
+        const outletName = outletAttr?.value?.trim() || 'default';
+        if (!wildcardRoutes.has(outletName)) {
+          wildcardRoutes.set(outletName, []);
+        }
+        wildcardRoutes.get(outletName)!.push({ element: el, attr: { nameStart, nameEnd } });
+      }
+
+      // 13. Missing companion `as` for HTTP directives
       if (isHttpDirective(name) && value) {
         const hasAs = el.attributes.some(a => a.name === 'as');
         if (!hasAs) {
@@ -255,14 +267,14 @@ export async function validateTextDocument(
         }
       }
 
-      // 13. Expression syntax validation
+      // 14. Expression syntax validation
       if (value && isDirective(name)) {
         const matched = matchDirective(name);
         if (matched && 'requiresValue' in matched && matched.requiresValue) {
           // Skip certain directives where values are not standard JS expressions
           const skipSyntaxCheck = new Set([
             'validate', 'ref', 'store', 't', 'i18n-ns', 'trigger',
-            'error-boundary', 'use', 'drag-handle',
+            'error-boundary', 'use', 'drag-handle', 'route',
           ]);
           if (!skipSyntaxCheck.has(name) && !name.startsWith('on:') && !isHttpDirective(name)) {
             const syntaxError = validateExpressionSyntax(value);
@@ -277,6 +289,21 @@ export async function validateTextDocument(
             }
           }
         }
+      }
+    }
+  }
+
+  // Post-loop: Report duplicate wildcard routes per outlet
+  for (const [outletName, decls] of wildcardRoutes) {
+    if (decls.length > 1) {
+      for (const decl of decls) {
+        const range = toRange(document, decl.attr.nameStart, decl.attr.nameEnd);
+        diagnostics.push({
+          severity: DiagnosticSeverity.Warning,
+          range,
+          message: `No.JS: Duplicate wildcard route for outlet '${outletName}' \u2014 only the last one will be used.`,
+          source: SOURCE,
+        });
       }
     }
   }

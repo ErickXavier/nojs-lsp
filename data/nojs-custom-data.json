@@ -317,7 +317,7 @@
     },
     {
       "name": "route",
-      "description": { "kind": "markdown", "value": "No.JS: Route path declaration on `<template>` or navigation on `<a>`.\n\n```html\n<template route=\"/users/:id\">...</template>\n<a route=\"/home\">Home</a>\n```" }
+      "description": { "kind": "markdown", "value": "No.JS: Route path declaration on `<template>` or navigation on `<a>`. Use `\"*\"` as a catch-all wildcard for 404 pages.\n\n```html\n<template route=\"/users/:id\">...</template>\n<a route=\"/home\">Home</a>\n<template route=\"*\">404 — Not Found</template>\n```" }
     },
     {
       "name": "route-active",

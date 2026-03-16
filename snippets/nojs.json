@@ -150,5 +150,16 @@
       "<${1:span} t=\"${2:key}\">${3:fallback}</${1:span}>"
     ],
     "description": "No.JS internationalization text directive"
+  },
+  "NoJS: 404 Catch-All Route": {
+    "prefix": "nojs-route-404",
+    "body": [
+      "<template route=\"*\">",
+      "\t<h1>404 — Page Not Found</h1>",
+      "\t<p>The page <code bind=\"\\$route.path\"></code> does not exist.</p>",
+      "\t<a route=\"/\">Go Home</a>",
+      "</template>"
+    ],
+    "description": "Catch-all wildcard route template for 404 pages"
   }
 }

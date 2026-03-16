@@ -467,6 +467,21 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
 
   // Route path completions for route="..." and redirect="..."
   if (attrName === 'route' || attrName === 'redirect') {
+    // Wildcard catch-all completion for <template route="*">
+    if (attrName === 'route' && context.element.tag === 'template') {
+      if (!partial || '*'.startsWith(partial)) {
+        items.push({
+          label: '*',
+          kind: CompletionItemKind.EnumMember,
+          detail: 'No.JS: Catch-all wildcard route',
+          documentation: {
+            kind: MarkupKind.Markdown,
+            value: '**Wildcard 404 route**\n\nMatches when no other route matches the current path. Use to create custom 404 pages.\n\n```html\n<template route="*">\n  <h1>404</h1>\n  <p>Path <code bind="$route.path"></code> not found.</p>\n</template>\n```\n\n`$route.matched` will be `false` when the wildcard renders.',
+          },
+          sortText: '0-*',
+        });
+      }
+    }
     for (const route of wsData.routes) {
       if (partial && !route.path.toLowerCase().startsWith(partial.toLowerCase())) continue;
       items.push({

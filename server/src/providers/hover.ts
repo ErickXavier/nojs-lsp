@@ -49,6 +49,24 @@ export function onHover(documents: TextDocuments<TextDocument>, getBridge?: () =
     );
 
     if (valueAttr) {
+      // Wildcard route hover: route="*" on <template>
+      if (valueAttr.name === 'route' && valueAttr.value === '*' && element.tag === 'template') {
+        return {
+          contents: {
+            kind: MarkupKind.Markdown,
+            value: '### `route="*"` — Catch-all wildcard route\n\n'
+              + 'Matches when **no other route** matches the current path. '
+              + 'Used to create custom 404 pages.\n\n'
+              + '**Fallback chain** (per outlet):\n'
+              + '1. Local wildcard \u2014 `<template route="*" outlet="name">`\n'
+              + '2. Global wildcard \u2014 `<template route="*">` (default outlet)\n'
+              + '3. Built-in generic 404\n\n'
+              + '**`$route.matched`**: `false` when the wildcard renders, '
+              + '`true` for explicit route matches.\n\n'
+              + '```html\n<template route="*">\n  <h1>404</h1>\n  <p>Path <code bind="$route.path"></code> not found.</p>\n</template>\n```',
+          },
+        };
+      }
       return getValueHover(valueAttr.name, valueAttr.value ?? '', offset - valueAttr.valueStart, element, getBridge);
     }
 
@@ -108,7 +126,7 @@ function getAttributeHover(attrName: string, element: ElementInfo): Hover | null
 const CONTEXT_KEY_DOCS: Record<string, string> = {
   '$refs': 'No.JS: **`$refs`** — Access to DOM elements marked with `ref` attribute.\n\nUsage: `$refs.myInput.focus()`',
   '$store': 'No.JS: **`$store`** — Access to the global reactive store.\n\nUsage: `$store.user.name`',
-  '$route': 'No.JS: **`$route`** — Current route information (path, params, query, hash).\n\nUsage: `$route.params.id`',
+  '$route': 'No.JS: **`$route`** — Current route information (path, params, query, hash, matched).\n\nUsage: `$route.params.id`, `$route.matched`',
   '$router': 'No.JS: **`$router`** — Router instance for programmatic navigation.\n\nUsage: `$router.push(\'/about\')`',
   '$i18n': 'No.JS: **`$i18n`** — Internationalization helper for translations.\n\nUsage: `$i18n.t(\'greeting\')`',
   '$form': 'No.JS: **`$form`** — Form validation state and methods.\n\nProperties: `valid`, `dirty`, `touched`, `pending`, `submitting`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`\n\nUsage: `$form.valid`, `$form.errors.email`, `$form.fields.email.touched`',
