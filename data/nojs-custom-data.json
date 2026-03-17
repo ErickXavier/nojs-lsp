@@ -96,7 +96,7 @@
     },
     {
       "name": "call",
-      "description": { "kind": "markdown", "value": "No.JS: HTTP call triggered by user action (e.g., button click).\n\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\">\n```\n\n**Companions:** `method`, `as`, `into`, `success`, `error`, `then`, `confirm`, `body`" }
+      "description": { "kind": "markdown", "value": "No.JS: HTTP call triggered by user action (e.g., button click).\n\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\" loading=\"spinner-tpl\">\n```\n\n**Companions:** `method`, `as`, `loading`, `into`, `success`, `error`, `then`, `redirect`, `confirm`, `body`, `headers`" }
     },
     {
       "name": "validate",
@@ -162,11 +162,11 @@
     },
     {
       "name": "as",
-      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives (`get`, `post`, etc.) and `call`. Names the response data variable.\n\n```html\n<div get=\"/api/users\" as=\"users\">\n```" }
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives (`get`, `post`, etc.) and `call`. Names the response data variable. Defaults to `\"data\"` for `call`.\n\n```html\n<div get=\"/api/users\" as=\"users\">\n```" }
     },
     {
       "name": "loading",
-      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Template ID to show while loading.\n\n```html\n<div get=\"/api/data\" as=\"data\" loading=\"spinner-tpl\">\n```" }
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Template ID to show while loading.\n\n```html\n<div get=\"/api/data\" as=\"data\" loading=\"spinner-tpl\">\n```" }
     },
     {
       "name": "empty",
@@ -182,7 +182,7 @@
     },
     {
       "name": "redirect",
-      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and router. Path to redirect to." }
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives, `call`, and router. Path to redirect to after success." }
     },
     {
       "name": "confirm",
@@ -203,7 +203,9 @@
     },
     {
       "name": "headers",
-      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives. Custom request headers object.\n\n```html\n<div get=\"/api/data\" headers=\"{ 'X-Custom': 'value' }\">\n```" }
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Custom request headers object.\n\n```html\n<div get=\"/api/data\" headers=\"{ 'X-Custom': 'value' }\">
+<button call=\"/api/action\" headers=\"{ 'Authorization': token }\">
+```" }
     },
     {
       "name": "var",

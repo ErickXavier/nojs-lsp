@@ -371,15 +371,18 @@
       "requiresValue": true,
       "companions": [
         { "name": "method", "type": "string", "description": "No.JS: HTTP method (default: get)" },
-        { "name": "as", "type": "identifier", "description": "No.JS: Variable name for response data" },
+        { "name": "as", "type": "identifier", "description": "No.JS: Variable name for response data (default: \"data\")" },
+        { "name": "loading", "type": "templateId", "description": "No.JS: Template ID shown while loading" },
         { "name": "into", "type": "string", "description": "No.JS: Store name for response" },
         { "name": "success", "type": "templateId", "description": "No.JS: Template ID on success" },
         { "name": "error", "type": "templateId", "description": "No.JS: Template ID on error" },
         { "name": "then", "type": "expression", "description": "No.JS: Expression on success" },
+        { "name": "redirect", "type": "string", "description": "No.JS: Path to redirect after success" },
         { "name": "confirm", "type": "string", "description": "No.JS: Confirmation message" },
-        { "name": "body", "type": "expression", "description": "No.JS: Request body expression" }
+        { "name": "body", "type": "expression", "description": "No.JS: Request body expression" },
+        { "name": "headers", "type": "expression", "description": "No.JS: Custom request headers object" }
       ],
-      "documentation": "HTTP call triggered by user action.\n\n**Example:**\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\">\n```\n\n**Companions:** `method`, `as`, `into`, `success`, `error`, `then`, `confirm`, `body`",
+      "documentation": "HTTP call triggered by user action.\n\n**Example:**\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\" loading=\"spinner-tpl\">\n```\n\n**Companions:** `method`, `as`, `loading`, `into`, `success`, `error`, `then`, `redirect`, `confirm`, `body`, `headers`",
       "category": "http"
     },
     {

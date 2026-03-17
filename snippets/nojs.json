@@ -151,6 +151,20 @@
     ],
     "description": "No.JS internationalization text directive"
   },
+  "No.JS HTTP Call": {
+    "prefix": "call",
+    "body": [
+      "<${1:button} call=\"${2:/api/endpoint}\" method=\"${3:post}\" as=\"${4:data}\" loading=\"${5:loading-tpl}\">${6:Submit}</${1:button}>"
+    ],
+    "description": "No.JS HTTP call triggered by user action"
+  },
+  "No.JS HTTP Call with Confirm": {
+    "prefix": "call-confirm",
+    "body": [
+      "<${1:button} call=\"${2:/api/endpoint}\" method=\"${3:delete}\" confirm=\"${4:Are you sure?}\" loading=\"${5:loading-tpl}\">${6:Delete}</${1:button}>"
+    ],
+    "description": "No.JS HTTP call with confirmation dialog"
+  },
   "NoJS: 404 Catch-All Route": {
     "prefix": "nojs-route-404",
     "body": [
