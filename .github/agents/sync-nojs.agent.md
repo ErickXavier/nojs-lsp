@@ -32,6 +32,10 @@ The LSP provides IDE support (completions, hover, diagnostics, go-to-definition,
 
 Follow ALL steps below in order.
 
+### 0. STUDY the codebase
+
+Read the `#codebase` to fully understand the project structure, architecture, conventions, and existing code before proceeding.
+
 ### 1. ANALYZE the NoJS commits
 
 The user will specify commits (hashes, ranges, or descriptions). For each:

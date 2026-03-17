@@ -2,6 +2,16 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.8.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.8.0...v1.8.1) — 2026-03-17
+
+### Changed
+- `i18n-ns` no longer requires a value — supports auto-detection from route template when used on `route-view`
+- Updated `i18n-ns` documentation in `directives.json` and `nojs-custom-data.json`
+- Updated README to reflect 39+ directives, 20 snippets, and wildcard route support
+- Added diagnostic test for valueless `i18n-ns` attribute
+- Added "study codebase" step to release and sync agent instructions
+- Added git tagging step to release agent flow
+
 ## [1.8.0](https://github.com/ErickXavier/nojs-lsp/compare/v0.3.1...v1.8.0) — 2026-03-16
 
 ### Added
