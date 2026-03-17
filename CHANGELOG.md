@@ -2,6 +2,11 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.8.2](https://github.com/ErickXavier/nojs-lsp/compare/v1.8.1...v1.8.2) — 2026-03-17
+
+### Changed
+- Version bump to match No.JS framework v1.8.2 (memory leak fixes, no LSP changes required)
+
 ## [1.8.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.8.0...v1.8.1) — 2026-03-17
 
 ### Changed
