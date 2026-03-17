@@ -195,8 +195,8 @@ function splitFilterArgs(argsStr: string): string[] {
 }
 
 /**
- * Validate basic JS expression syntax using `new Function()`.
- * Returns null if valid, or an error message if invalid.
+ * Validate basic JS expression syntax using bracket/paren/brace matching
+ * and structural checks. Returns null if valid, or an error message if invalid.
  */
 export function validateExpressionSyntax(expr: string): string | null {
   if (!expr || !expr.trim()) return null;
@@ -221,21 +221,57 @@ export function validateExpressionSyntax(expr: string): string | null {
   // Validator rules like "required|email|min:5"
   if (/^[a-zA-Z]+(\|[a-zA-Z]+(:\d+)?)*$/.test(trimmed)) return null;
 
-  try {
-    // Use Function constructor to check syntax without executing
-    // The expression is wrapped in a return to handle expression statements
-    new Function(`"use strict"; return (${trimmed});`);
-    return null;
-  } catch (e: unknown) {
-    // Try as a statement (e.g., assignments, multiple statements)
-    try {
-      new Function(`"use strict"; ${trimmed};`);
-      return null;
-    } catch (e2: unknown) {
-      const msg = e instanceof SyntaxError ? e.message : String(e);
-      return msg;
+  // Validate bracket/paren/brace balance and string literal matching
+  const stack: string[] = [];
+  let inStr = false;
+  let strChar = '';
+
+  for (let i = 0; i < trimmed.length; i++) {
+    const ch = trimmed[i];
+
+    if (inStr) {
+      if (ch === '\\' && i + 1 < trimmed.length) {
+        i++; // skip escaped character
+        continue;
+      }
+      if (ch === strChar) {
+        if (strChar === '`') {
+          inStr = false;
+        } else {
+          inStr = false;
+        }
+      }
+      continue;
+    }
+
+    if (ch === "'" || ch === '"' || ch === '`') {
+      inStr = true;
+      strChar = ch;
+      continue;
+    }
+
+    if (ch === '(' || ch === '[' || ch === '{') {
+      stack.push(ch);
+    } else if (ch === ')' || ch === ']' || ch === '}') {
+      const open = stack.pop();
+      const expected = ch === ')' ? '(' : ch === ']' ? '[' : '{';
+      if (open !== expected) {
+        return `Unexpected '${ch}'`;
+      }
     }
   }
+
+  if (inStr) {
+    return `Unterminated string literal`;
+  }
+
+  if (stack.length > 0) {
+    const unclosed = stack[stack.length - 1];
+    const close = unclosed === '(' ? ')' : unclosed === '[' ? ']' : '}';
+    return `Expected '${close}'`;
+  }
+
+  return null;
 }
 
 /**

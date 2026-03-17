@@ -80,7 +80,16 @@ export class DevToolsBridge {
 
   // ─── Connection ────────────────────────────────────────────────────────
 
+  /**
+   * Returns true if the given hostname resolves to a loopback address.
+   * Used to restrict CDP connections to the local machine only.
+   */
+  private _isLoopback(host: string): boolean {
+    return /^(localhost|127\.0\.0\.1|::1|\[::1\])$/i.test(host);
+  }
+
   async connect(): Promise<boolean> {
+    if (!this._isLoopback(this._options.host)) return false;
     try {
       const targets = await this._listTargets();
       // Find a page target with __NOJS_DEVTOOLS__ (or just the first page)
@@ -90,6 +99,7 @@ export class DevToolsBridge {
       // Try each page to find one with NoJS devtools
       for (const target of pageTargets) {
         if (!target.webSocketDebuggerUrl) continue;
+        if (!this._isLoopbackUrl(target.webSocketDebuggerUrl)) continue;
         const connected = await this._connectToTarget(target);
         if (connected) {
           const hasDevtools = await this._checkNoJSDevtools();
@@ -102,7 +112,9 @@ export class DevToolsBridge {
       }
 
       // Fallback: connect to first page even without devtools
-      const firstTarget = pageTargets.find(t => t.webSocketDebuggerUrl);
+      const firstTarget = pageTargets.find(t =>
+        t.webSocketDebuggerUrl && this._isLoopbackUrl(t.webSocketDebuggerUrl)
+      );
       if (firstTarget) {
         await this._connectToTarget(firstTarget);
         this._targetUrl = firstTarget.url;
@@ -202,29 +214,47 @@ export class DevToolsBridge {
     }
   }
 
+  // SECURITY: This method intentionally passes the expression verbatim to
+  // CDP Runtime.evaluate. This is the standard DevTools workflow — the user
+  // is executing their own code in their own browser page. No sanitization
+  // is needed or appropriate. The user already has full console access.
   async evaluateExpression(expr: string): Promise<unknown> {
-    // Evaluate an arbitrary expression in the page context
-    // Wrap in try-catch for safety
-    const safeExpr = JSON.stringify(expr);
-    const result = await this._evalInPage(
-      `(function() {
-        try {
-          var __r = eval(${safeExpr});
-          return JSON.stringify(__r);
-        } catch(e) {
-          return JSON.stringify({ __error: e.message });
-        }
-      })()`
-    );
-    if (result == null) return undefined;
+    if (!this._connected) return undefined;
     try {
-      return JSON.parse(result as string);
+      const response = await this._sendCDP('Runtime.evaluate', {
+        expression: expr,
+        returnByValue: true,
+      }) as {
+        result?: { type?: string; value?: unknown; description?: string };
+        exceptionDetails?: { exception?: { description?: string }; text?: string };
+      };
+
+      if (response?.exceptionDetails) {
+        const desc = response.exceptionDetails.exception?.description
+          ?? response.exceptionDetails.text
+          ?? 'Unknown error';
+        return { __error: desc };
+      }
+
+      return response?.result?.value ?? undefined;
     } catch {
-      return result;
+      return undefined;
     }
   }
 
   // ─── Internals ─────────────────────────────────────────────────────────
+
+  /**
+   * Returns true if the given URL's hostname is a loopback address.
+   */
+  private _isLoopbackUrl(url: string): boolean {
+    try {
+      const hostname = new URL(url).hostname;
+      return this._isLoopback(hostname);
+    } catch {
+      return false;
+    }
+  }
 
   private _listTargets(): Promise<CDPTarget[]> {
     return new Promise((resolve, reject) => {
@@ -320,6 +350,11 @@ export class DevToolsBridge {
     });
   }
 
+  // SECURITY: All string interpolation into the `expression` parameter MUST
+  // use JSON.stringify() to prevent injection. Static strings with no
+  // interpolation are safe. Callers: inspectStore, getStoreProperty,
+  // inspectElement use JSON.stringify. getStoreNames, getStats,
+  // _checkNoJSDevtools use static strings.
   private async _evalInPage(expression: string): Promise<unknown> {
     if (!this._connected) return null;
     try {

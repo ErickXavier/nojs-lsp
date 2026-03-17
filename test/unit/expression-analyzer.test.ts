@@ -109,8 +109,13 @@ describe('ExpressionAnalyzer', () => {
       expect(validateExpressionSyntax('   ')).toBeNull();
     });
 
-    it('returns error for invalid syntax', () => {
-      const result = validateExpressionSyntax('count +* 1');
+    it('returns error for unbalanced brackets', () => {
+      const result = validateExpressionSyntax('items.filter(x => x');
+      expect(result).not.toBeNull();
+    });
+
+    it('returns error for unterminated strings', () => {
+      const result = validateExpressionSyntax('"hello');
       expect(result).not.toBeNull();
     });
 

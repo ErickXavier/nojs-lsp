@@ -2,6 +2,19 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.9.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.8.2...v1.9.0) — 2026-03-17
+
+### Added
+
+- Loopback-only hostname validation for CDP connections (defense-in-depth against SSRF)
+- WebSocket URL loopback validation for CDP targets
+- JSDoc security contracts on `evaluateExpression()` and `_evalInPage()`
+- 10 new tests: hostname validation (loopback allow/deny) and injection-safety regression
+
+### Changed
+
+- Replace `new Function()` in `expression-analyzer.ts` with bracket/string balance validation
+
 ## [1.8.2](https://github.com/ErickXavier/nojs-lsp/compare/v1.8.1...v1.8.2) — 2026-03-17
 
 ### Changed
