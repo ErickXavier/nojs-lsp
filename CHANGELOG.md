@@ -2,10 +2,25 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased]
+## [1.8.0](https://github.com/ErickXavier/nojs-lsp/compare/v0.3.1...v1.8.0) — 2026-03-16
 
 ### Added
-- `NoJS.notify()` snippet (prefix: `notify`) for external store mutation pattern
+- LSP support for `route="*"` wildcard catch-all — completions, diagnostics, hover ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- Duplicate wildcard route detection per outlet (diagnostics warning) ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- Rich hover for `route="*"` explaining fallback chain and `$route.matched` ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- `nojs-route-404` snippet for 404 catch-all template ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- `call` and `call-confirm` snippets ([`8df9c61`](https://github.com/ErickXavier/nojs-lsp/commit/8df9c61))
+- `NoJS.notify()` snippet (prefix: `notify`) for external store mutation pattern ([`a79b209`](https://github.com/ErickXavier/nojs-lsp/commit/a79b209))
+- Copilot project guidelines (`.github/copilot-instructions.md`) ([`d70f90c`](https://github.com/ErickXavier/nojs-lsp/commit/d70f90c))
+
+### Changed
+- Updated `call` directive companions in `directives.json` — added `loading`, `redirect`, `headers` ([`8df9c61`](https://github.com/ErickXavier/nojs-lsp/commit/8df9c61))
+- Updated `as` default description to note default `"data"` for `call` ([`8df9c61`](https://github.com/ErickXavier/nojs-lsp/commit/8df9c61))
+- Updated `nojs-custom-data.json` descriptions for `call`, `as`, `loading`, `redirect`, `headers` ([`8df9c61`](https://github.com/ErickXavier/nojs-lsp/commit/8df9c61))
+- Updated `$route` context key docs to include `matched` property ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- Updated `directives.json` route documentation with wildcard usage ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- Updated `nojs-custom-data.json` route description with catch-all example ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
+- Skip expression syntax validation for `route` attribute values ([`73629f2`](https://github.com/ErickXavier/nojs-lsp/commit/73629f2))
 
 ## [0.3.1](https://github.com/ErickXavier/nojs-lsp/compare/v0.3.0...v0.3.1) — 2026-03-14
 
