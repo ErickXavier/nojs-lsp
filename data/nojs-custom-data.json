@@ -124,7 +124,7 @@
     },
     {
       "name": "i18n-ns",
-      "description": { "kind": "markdown", "value": "No.JS: Sets i18n namespace for child elements.\n\n```html\n<div i18n-ns=\"dashboard\">\n  <span t=\"title\"><!-- dashboard.title --></span>\n</div>\n```" }
+      "description": { "kind": "markdown", "value": "No.JS: Sets i18n namespace for child elements. When used without a value on `route-view`, the namespace is auto-detected from the template name.\n\n```html\n<div i18n-ns=\"dashboard\">\n  <span t=\"title\"><!-- dashboard.title --></span>\n</div>\n\n<!-- Auto-detect from route -->\n<main route-view src=\"templates/\" i18n-ns></main>\n```" }
     },
     {
       "name": "drag",

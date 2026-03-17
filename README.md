@@ -5,7 +5,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 ## Features
 
 ### Completions
-- **Directive completions** — All 36+ No.JS directives (`state`, `if`, `get`, `each`, `model`, etc.)
+- **Directive completions** — All 39+ No.JS directives (`state`, `if`, `get`, `each`, `model`, etc.)
 - **Dynamic directives** — `bind-*`, `on:*`, `class-*`, `style-*` with common targets/events
 - **Companion attributes** — Context-aware: shows `as`, `loading`, `error` only when `get` is present
 - **Event modifiers** — `.prevent`, `.stop`, `.once`, `.debounce`, `.throttle`, key modifiers
@@ -16,6 +16,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - **Context keys** — `$store`, `$refs`, `$route`, `$router`, `$i18n`, `$form`
 - **i18n key completions** — Scans `locales/` for translation keys and suggests them in `t="..."` attributes
 - **Route completions** — Scans `pages/` directory for file-based routes
+- **Wildcard route** (`route="*"`) completions, hover, and diagnostics
 - **Store property completions** — Parses `store` declarations to suggest `$store.name.prop`
 - **Template var completions** — Suggests `var-*` attributes matching template slot declarations
 - **Custom directive completions** — Detects `NoJS.directive()` calls in workspace JS files
@@ -34,6 +35,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - Invalid event modifiers
 - Duplicate state declarations
 - Duplicate `ref` names
+- Duplicate wildcard route detection per outlet
 - Template ID referenced but not defined
 - Missing `as` for HTTP directives
 - Expression syntax validation
@@ -75,7 +77,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - HTTP method badge for `get`/`post`/`put`/`patch`/`delete` with `as`
 
 ### Snippets
-- 15 built-in snippets for common patterns (`if`, `each`, `get`, `store`, `form`, etc.)
+- 20 built-in snippets for common patterns (`if`, `each`, `get`, `store`, `form`, `call`, `notify`, etc.)
 
 ## Configuration
 

@@ -1,0 +1,137 @@
+name: Bug Report
+description: Report a bug in the No.JS LSP extension
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill out the sections below so we can reproduce and fix it.
+
+  - type: input
+    id: vscode-version
+    attributes:
+      label: VS Code Version
+      description: "Run `code --version` or check Help > About."
+      placeholder: "e.g., 1.96.0"
+    validations:
+      required: true
+
+  - type: input
+    id: lsp-version
+    attributes:
+      label: No.JS LSP Extension Version
+      description: "Check the Extensions panel or run `code --list-extensions --show-versions | grep nojs`."
+      placeholder: "e.g., 1.8.1"
+    validations:
+      required: true
+
+  - type: input
+    id: framework-version
+    attributes:
+      label: No.JS Framework Version
+      description: "If relevant, check `NoJS.version` in the browser console or your CDN script tag."
+      placeholder: "e.g., 1.8.1"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Bug Category
+      description: Which LSP feature is affected?
+      options:
+        - Completions
+        - Hover documentation
+        - Diagnostics / validation errors
+        - Go-to-definition
+        - Find references
+        - Code actions / quick fixes
+        - Inlay hints
+        - Semantic highlighting
+        - Snippets
+        - Document links
+        - Document symbols
+        - Workspace scanning
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of what the bug is.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: HTML to Reproduce
+      description: |
+        Paste the minimal HTML that triggers the LSP issue.
+      render: html
+      placeholder: |
+        <div state="{ count: 0 }">
+          <button on:click="count++">Click</button>
+          <span bind="count"></span>
+        </div>
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: "What should the LSP do? (e.g., 'Should show completions for...', 'Should not show a diagnostic for...')"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: "What actually happened? (e.g., 'No completions shown', 'Wrong diagnostic message')"
+    validations:
+      required: true
+
+  - type: textarea
+    id: output-errors
+    attributes:
+      label: Output / Console Errors
+      description: |
+        Check the Output panel (No.JS LSP channel).
+        Tip: set `nojs.trace.server` to `verbose` in VS Code settings for detailed logs.
+      render: text
+    validations:
+      required: false
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: If applicable, add a screenshot or GIF showing the issue.
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: Suggested Fix
+      description: "If you have an idea of what might be causing this or how to fix it."
+      placeholder: |
+        I think the issue is in `server/src/providers/completion.ts` because...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: I have searched existing issues and this hasn't been reported yet
+          required: true
+        - label: I can reproduce this with the latest version of the No.JS LSP extension
+          required: true

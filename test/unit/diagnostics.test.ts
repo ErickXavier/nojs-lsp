@@ -39,6 +39,16 @@ describe('DiagnosticsProvider', () => {
       const getError = diagnostics.find(d => d.message.includes('"get" requires'));
       expect(getError).toBeUndefined();
     });
+
+    it('does not report error for i18n-ns without value', async () => {
+      const content = '<main route-view src="templates/" i18n-ns></main>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const nsError = diagnostics.find(d => d.message.includes('"i18n-ns" requires'));
+      expect(nsError).toBeUndefined();
+    });
   });
 
   describe('Orphaned else/else-if', () => {
