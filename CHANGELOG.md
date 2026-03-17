@@ -2,6 +2,11 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [Unreleased]
+
+### Added
+- `NoJS.notify()` snippet (prefix: `notify`) for external store mutation pattern
+
 ## [0.3.1](https://github.com/ErickXavier/nojs-lsp/compare/v0.3.0...v0.3.1) — 2026-03-14
 
 ### Fixed

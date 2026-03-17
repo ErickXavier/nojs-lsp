@@ -175,5 +175,12 @@
       "</template>"
     ],
     "description": "Catch-all wildcard route template for 404 pages"
+  },
+  "No.JS Store Notify": {
+    "prefix": "notify",
+    "body": [
+      "NoJS.notify(); // flush DOM bindings after store mutation"
+    ],
+    "description": "Call NoJS.notify() to trigger DOM updates after mutating NoJS.store from external JavaScript"
   }
 }
