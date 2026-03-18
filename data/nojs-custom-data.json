@@ -80,7 +80,7 @@
     },
     {
       "name": "foreach",
-      "description": { "kind": "markdown", "value": "No.JS: Alternative loop directive with more options.\n\n```html\n<li foreach=\"user\" from=\"users\" bind=\"user.name\">\n```\n\n**Companions:** `from`, `index`, `else`, `filter`, `sort`, `limit`, `offset`, `template`, animation attrs" }
+      "description": { "kind": "markdown", "value": "No.JS: Alternative loop directive with more options. Supports inline templates (element's content) or external templates via `template` (optional).\n\n**Inline template:**\n```html\n<li foreach=\"user\" from=\"users\" bind=\"user.name\">\n```\n\n**External template:**\n```html\n<li foreach=\"item\" from=\"products\" template=\"item-tpl\">\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `from`, `index`, `else`, `filter`, `sort`, `limit`, `offset`, `template` (optional), animation attrs" }
     },
     {
       "name": "trigger",

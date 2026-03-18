@@ -84,6 +84,18 @@ describe('CompletionProvider', () => {
       const labels = items.map(i => i.label);
       expect(labels).toContain('as');
     });
+
+    it('suggests foreach companion attributes', async () => {
+      const content = '<li foreach="item" ></li>';
+      const items = await getCompletions(content, 19); // after space
+      const labels = items.map(i => i.label);
+      expect(labels).toContain('from');
+      expect(labels).toContain('filter');
+      expect(labels).toContain('sort');
+      expect(labels).toContain('limit');
+      expect(labels).toContain('offset');
+      expect(labels).toContain('template');
+    });
   });
 
   describe('Filter completions', () => {

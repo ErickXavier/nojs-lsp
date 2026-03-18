@@ -51,7 +51,7 @@ export function onInlayHints(documents: TextDocuments<TextDocument>) {
           const hintPos = document.positionAt(attr.valueEnd);
           hints.push({
             position: Position.create(hintPos.line, hintPos.character + 1),
-            label: ' → $index, $count',
+            label: ' → $index, $count, $first, $last',
             kind: InlayHintKind.Parameter,
             paddingLeft: true,
           });

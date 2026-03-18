@@ -71,7 +71,7 @@ describe('HoverProvider', () => {
   it('shows loop variable hover for $index in value', async () => {
     const content = '<li each="items" bind="$index"></li>';
     // offset on "$index" in the value
-    const hover = await getHover(content, 24); // on "$" of $index 
+    const hover = await getHover(content, 24); // on "$" of $index
     if (hover) {
       const value = typeof hover.contents === 'string' ? hover.contents : (hover.contents as any).value;
       expect(value).toContain('$index');
@@ -82,6 +82,17 @@ describe('HoverProvider', () => {
     const content = '<div>some text</div>';
     const hover = await getHover(content, 8); // on text content
     expect(hover).toBeNull();
+  });
+
+  it('shows hover for foreach directive', async () => {
+    const content = '<li foreach="user" from="users" bind="user.name"></li>';
+    const hover = await getHover(content, 5); // on "foreach"
+    expect(hover).not.toBeNull();
+    if (hover) {
+      const value = typeof hover.contents === 'string' ? hover.contents : (hover.contents as any).value;
+      expect(value).toContain('foreach');
+      expect(value).toContain('inline');
+    }
   });
 
   it('shows filter hover in attribute value', async () => {
