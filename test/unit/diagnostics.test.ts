@@ -127,4 +127,26 @@ describe('DiagnosticsProvider', () => {
       expect(diagnostics.length).toBe(0);
     });
   });
+
+  describe('foreach directive', () => {
+    it('does not flag foreach without template as an error', async () => {
+      const content = '<li foreach="item" from="items" bind="item.name"></li>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const templateError = diagnostics.find(d => d.message.includes('template'));
+      expect(templateError).toBeUndefined();
+    });
+
+    it('reports error for foreach without a value', async () => {
+      const content = '<li foreach from="items"></li>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const reqError = diagnostics.find(d => d.message.includes('"foreach" requires a value'));
+      expect(reqError).toBeDefined();
+    });
+  });
 });

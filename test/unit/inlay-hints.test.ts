@@ -32,14 +32,23 @@ describe('InlayHintsProvider', () => {
       expect(hints[0].kind).toBe(InlayHintKind.Parameter);
     });
 
-    it('shows $index, $count for foreach directive', () => {
+    it('shows $index, $count, $first, $last for foreach directive', () => {
       const content = '<div foreach="item"></div>';
       const hints = getInlayHints(content);
       expect(hints.length).toBe(1);
       expect(hints[0].label).toContain('$index');
       expect(hints[0].label).toContain('$count');
-      expect(hints[0].label).not.toContain('$first');
+      expect(hints[0].label).toContain('$first');
+      expect(hints[0].label).toContain('$last');
       expect(hints[0].kind).toBe(InlayHintKind.Parameter);
+    });
+
+    it('shows hints for foreach with from companion', () => {
+      const content = '<li foreach="user" from="users"></li>';
+      const hints = getInlayHints(content);
+      expect(hints.length).toBe(1);
+      expect(hints[0].label).toContain('$index');
+      expect(hints[0].label).toContain('$first');
     });
 
     it('does not show hints for elements without loop directives', () => {

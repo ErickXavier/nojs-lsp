@@ -143,6 +143,24 @@
     <span bind="name"></span>
   </div>
 
+  <!-- foreach (inline template) -->
+  <ul>
+    <li foreach="user" from="users" bind="user.name"></li>
+  </ul>
+
+  <!-- foreach with filter/sort/limit -->
+  <ul>
+    <li foreach="item" from="products" filter="item.active" sort="name" limit="5" bind="item.name"></li>
+  </ul>
+
+  <!-- foreach with external template -->
+  <div foreach="item" from="products" template="product-tpl"></div>
+
+  <!-- foreach with offset, index, and else -->
+  <ul>
+    <li foreach="item" from="items" offset="2" limit="5" index="i" else="empty-tpl" bind="i + ': ' + item.name"></li>
+  </ul>
+
 
   <!-- ===== EVENTS ===== -->
 

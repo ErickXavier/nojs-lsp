@@ -29,6 +29,35 @@
     ],
     "description": "No.JS each loop directive"
   },
+  "No.JS Foreach Loop": {
+    "prefix": "foreach",
+    "body": [
+      "<${1:li} foreach=\"${2:item}\" from=\"${3:items}\">",
+      "\t<${4:span} bind=\"${2:item}.$5\"></${4:span}>",
+      "</${1:li}>"
+    ],
+    "description": "No.JS foreach loop with inline template"
+  },
+  "No.JS Foreach with Template": {
+    "prefix": "foreach-template",
+    "body": [
+      "<${1:div} foreach=\"${2:item}\" from=\"${3:items}\" template=\"${4:item-tpl}\"></${1:div}>",
+      "",
+      "<template id=\"${4:item-tpl}\">",
+      "\t<${5:span} bind=\"${2:item}.$6\"></${5:span}>",
+      "</template>"
+    ],
+    "description": "No.JS foreach loop with external template"
+  },
+  "No.JS Foreach with Filter/Sort": {
+    "prefix": "foreach-filter",
+    "body": [
+      "<${1:li} foreach=\"${2:item}\" from=\"${3:items}\" filter=\"${4:item.active}\" sort=\"${5:name}\" limit=\"${6:10}\">",
+      "\t<${7:span} bind=\"${2:item}.$8\"></${7:span}>",
+      "</${1:li}>"
+    ],
+    "description": "No.JS foreach loop with filter, sort, and limit"
+  },
   "No.JS HTTP GET Fetch": {
     "prefix": "get",
     "body": [

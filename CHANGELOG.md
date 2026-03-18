@@ -2,6 +2,16 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.9.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.9.0...v1.9.1) — 2026-03-18
+
+### Added
+
+- Updated `foreach` documentation in `directives.json` and `nojs-custom-data.json` to document inline templates
+- 3 new `foreach` snippets: inline, external template, filter/sort
+- Fixed `foreach` inlay hint to show `$first`, `$last` alongside `$index`, `$count`
+- 4 `foreach` examples in test fixtures
+- 6 new tests across completion, hover, diagnostics, and inlay-hints
+
 ## [1.9.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.8.2...v1.9.0) — 2026-03-17
 
 ### Added
