@@ -104,6 +104,7 @@
     }
   },
   "scripts": {
+    "start": "node docs/dev-server.js",
     "compile": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
     "lint": "eslint client/src server/src --ext .ts",

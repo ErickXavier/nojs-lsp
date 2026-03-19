@@ -203,9 +203,7 @@
     },
     {
       "name": "headers",
-      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Custom request headers object.\n\n```html\n<div get=\"/api/data\" headers=\"{ 'X-Custom': 'value' }\">
-<button call=\"/api/action\" headers=\"{ 'Authorization': token }\">
-```" }
+      "description": { "kind": "markdown", "value": "No.JS: Companion for HTTP directives and `call`. Custom request headers object.\n\n```html\n<div get=\"/api/data\" headers=\"{ 'X-Custom': 'value' }\">\n<button call=\"/api/action\" headers=\"{ 'Authorization': token }\">\n```" }
     },
     {
       "name": "var",

@@ -40,12 +40,14 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - Missing `as` for HTTP directives
 - Expression syntax validation
 - `model` on non-form elements
+- Invalid animation name
+- Unknown validator name
 
 ### Go-to-Definition
 - `use="id"` → jump to `<template id="id">`
 - `$refs.name` → jump to `ref="name"` element
 - `$store.name` → jump to `store` declaration
-- Template-referencing attributes (`then`, `else`, `loading`, `error`, `empty`, `success`)
+- Template-referencing attributes (`then`, `else`, `loading`, `error`, `empty`, `success`, `error-boundary`)
 
 ### Find References
 - Find all usages of a template ID across the document
@@ -60,6 +62,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 ### Document Links
 - HTTP directive URLs as clickable links
 - Template `src` and `route-view src` as file/directory links
+- `call` URLs and `redirect` paths as clickable links
 
 ### Semantic Highlighting
 - Directive names → keyword
@@ -73,11 +76,11 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - Quick fix: "did you mean?" for typos in directive names
 
 ### Inlay Hints
-- Loop variable names for `each` (`→ $index, $count, $first, $last`)
+- Loop variable names for `each` and `foreach` (`→ $index, $count, $first, $last`)
 - HTTP method badge for `get`/`post`/`put`/`patch`/`delete` with `as`
 
 ### Snippets
-- 20 built-in snippets for common patterns (`if`, `each`, `get`, `store`, `form`, `call`, `notify`, etc.)
+- 23 built-in snippets for common patterns (`if`, `each`, `foreach`, `get`, `store`, `form`, `call`, `notify`, etc.)
 
 ## Configuration
 
@@ -88,6 +91,9 @@ VS Code extension providing full language server support for the [No.JS](https:/
 | `nojs.customFilters` | `[]` | Additional custom filter names for completions |
 | `nojs.customValidators` | `[]` | Additional custom validator names for completions |
 | `nojs.trace.server` | `"off"` | Trace communication between client and server |
+| `nojs.devtools.enabled` | `false` | Enable live DevTools Protocol connection |
+| `nojs.devtools.port` | `9222` | Chrome DevTools Protocol port |
+| `nojs.devtools.host` | `"localhost"` | Chrome DevTools Protocol host |
 
 ## Development
 

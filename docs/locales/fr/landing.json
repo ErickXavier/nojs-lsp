@@ -1,0 +1,150 @@
+{
+  "landing": {
+    "flag": "🇫🇷",
+    "nav": {
+      "features": "Fonctionnalités",
+      "config": "Configuration",
+      "ecosystem": "Écosystème",
+      "docs": "Docs",
+      "github": "GitHub",
+      "install": "Installer"
+    },
+    "hero": {
+      "badge": "Extension VS Code",
+      "headline": "Boostez Votre Développement No.JS",
+      "subtitle": "Complétion intelligente, diagnostics en temps réel, documentation au survol, aller à la définition et plus — directement dans VS Code.",
+      "cta": "Installer depuis le Marketplace",
+      "github": "Voir sur GitHub",
+      "copy": "Copier",
+      "copied": "Copié !"
+    },
+    "features": {
+      "kicker": "FONCTIONNALITÉS",
+      "title": "Tout ce dont vous avez besoin,\ndirectement dans votre éditeur",
+      "subtitle": "De la complétion intelligente aux diagnostics en temps réel, le LSP No.JS apporte toute la connaissance du framework dans VS Code.",
+      "completions": {
+        "title": "Complétion Intelligente",
+        "desc": "Plus de 39 directives, attributs dynamiques, suggestions de compagnons, modificateurs d'événements, arguments de filtres, clés i18n, routes et propriétés de stores — contextuel et instantané."
+      },
+      "hover": {
+        "title": "Documentation au Survol",
+        "desc": "Survolez n'importe quelle directive, filtre ou clé de contexte pour voir la documentation complète avec syntaxe, exemples et descriptions des attributs compagnons."
+      },
+      "diagnostics": {
+        "title": "Diagnostics en Temps Réel",
+        "desc": "Détectez les erreurs en tapant — directives inconnues avec suggestions \"vouliez-vous dire ?\", blocs else orphelins, refs dupliqués, modificateurs invalides et validation de syntaxe."
+      },
+      "gotoDef": {
+        "title": "Aller à la Définition",
+        "desc": "Sautez directement de use=\"id\" à son <template>, de $refs.name à l'élément, ou de $store.name à sa déclaration. Un clic."
+      },
+      "references": {
+        "title": "Trouver les Références",
+        "desc": "Trouvez chaque utilisation d'un ID de template, nom de ref ou store dans votre document — navigation de références croisées instantanée."
+      },
+      "semantic": {
+        "title": "Coloration Sémantique",
+        "desc": "Directives, préfixes dynamiques, noms de filtres, pipes, références aux stores et variables de boucle — chacun avec des couleurs de syntaxe distinctes pour une lisibilité maximale."
+      },
+      "actions": {
+        "title": "Actions de Code",
+        "desc": "Corrections rapides : ajouter le as manquant pour les directives HTTP, appliquer les corrections \"vouliez-vous dire ?\" pour les fautes — corrections en un clic."
+      },
+      "inlayHints": {
+        "title": "Indices en Ligne",
+        "desc": "Voyez les noms de variables de boucle ($index, $count, $first, $last) et les badges de méthodes HTTP en ligne, sans lire la documentation."
+      },
+      "snippets": {
+        "title": "23 Snippets",
+        "desc": "Tapez nojs-if, nojs-each, nojs-get, nojs-store, nojs-form et développez en modèles complets prêts à l'emploi."
+      }
+    },
+    "showcase": {
+      "completions": {
+        "title": "Intelligence Contextuelle",
+        "desc": "Le LSP comprend la relation entre les directives. Ajoutez une directive get et il suggère instantanément les attributs compagnons comme as, error, empty, success et cached.",
+        "items": [
+          "Plus de 39 complétions de directives",
+          "Reconnaissance des attributs compagnons",
+          "Arguments de filtres avec types et valeurs par défaut",
+          "Suggestions de clés i18n et chemins de routes"
+        ]
+      },
+      "highlighting": {
+        "title": "Voyez Votre Code en Couleurs",
+        "desc": "Chaque construction No.JS reçoit son propre type de jeton sémantique. Directives, filtres, préfixes dynamiques, pipes et variables sont colorés distinctement.",
+        "items": [
+          "Noms de directives → keyword",
+          "Préfixes dynamiques → decorator",
+          "Noms de filtres → function",
+          "Variables de store/boucle → variable"
+        ]
+      },
+      "navigation": {
+        "title": "Naviguez Vos Templates Instantanément",
+        "desc": "Cmd+Click sur n'importe quelle référence de template, nom de ref ou accès store pour sauter à sa définition. Plus besoin de chercher — le LSP sait exactement où tout est défini.",
+        "items": [
+          "use=\"id\" → <template id=\"id\">",
+          "$refs.name → ref=\"name\" élément",
+          "$store.cart → store=\"cart\" déclaration",
+          "Trouver toutes les utilisations dans votre document"
+        ]
+      }
+    },
+    "config": {
+      "kicker": "CONFIGURATION",
+      "title": "Personnalisez Votre Expérience",
+      "subtitle": "Tous les paramètres sont optionnels — l'extension fonctionne immédiatement.",
+      "headers": {
+        "setting": "Paramètre",
+        "default": "Par Défaut",
+        "description": "Description"
+      },
+      "rows": {
+        "validation": { "desc": "Activer les diagnostics en temps réel" },
+        "filters": { "desc": "Afficher la complétion des filtres dans les expressions pipe" },
+        "customFilters": { "desc": "Noms de filtres personnalisés supplémentaires" },
+        "customValidators": { "desc": "Noms de validateurs personnalisés supplémentaires" },
+        "trace": { "desc": "Niveau de trace du LSP pour le débogage" },
+        "devtools": { "desc": "Activer la connexion DevTools Protocol" },
+        "devtoolsPort": { "desc": "Port Chrome DevTools Protocol" },
+        "devtoolsHost": { "desc": "Hôte Chrome DevTools Protocol" }
+      }
+    },
+    "ecosystem": {
+      "kicker": "ÉCOSYSTÈME",
+      "title": "Partie de la Famille No.JS",
+      "website": {
+        "title": "Site Web No.JS",
+        "desc": "Documentation, exemples et playground",
+        "link": "no-js.dev →"
+      },
+      "frameworkGithub": {
+        "title": "Code du Framework",
+        "desc": "Framework réactif HTML-first open source",
+        "link": "GitHub →"
+      },
+      "lspGithub": {
+        "title": "Extension LSP",
+        "desc": "Implémentation du protocole de serveur de langage",
+        "link": "GitHub →"
+      },
+      "marketplace": {
+        "title": "VS Code Marketplace",
+        "desc": "Installez directement depuis le marketplace",
+        "link": "Marketplace →"
+      }
+    },
+    "footer": {
+      "desc": "Extension VS Code intelligente pour le framework No.JS. Complétion, diagnostics, documentation au survol et plus.",
+      "links": "Liens",
+      "website": "Site Web No.JS",
+      "frameworkGithub": "Framework GitHub",
+      "lspGithub": "LSP GitHub",
+      "marketplace": "VS Code Marketplace",
+      "discord": "Discord",
+      "license": "Licence MIT",
+      "powered": "Propulsé par"
+    }
+  }
+}

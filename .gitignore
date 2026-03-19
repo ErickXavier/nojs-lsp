@@ -1,11 +1,45 @@
+# Dependencies
 node_modules/
+
+# Build output
 out/
 dist/
-*.vsix
-.vscode-test/
 *.js.map
+
+# Packaging
+*.vsix
+
+# Testing
+.vscode-test/
 playwright-report/
 test-results/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.*
+
+# Temporary files
+*.tmp
+*.bak
+
+# Project-specific
 .github/agents
 .github/specs
+.github/reviews
+
+# Lock files (optional — uncomment if not committing)
+# package-lock.json

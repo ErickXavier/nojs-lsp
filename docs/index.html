@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>No.JS LSP — VS Code Extension</title>
+  <meta name="description" content="Intelligent VS Code extension for the No.JS framework. Smart completions, diagnostics, hover docs, go-to-definition, semantic highlighting, and more.">
+  <link rel="icon" href="logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+
+  <!-- ═══ Scripts ═══ -->
+  <script src="https://cdn.no-js.dev/"></script>
+  <script>
+    NoJS.config({
+        debug: true
+    });
+    NoJS.i18n({
+      loadPath: 'locales/{locale}/{ns}.json',
+      ns: ['landing'],
+      persist: true,
+      detectBrowser: true,
+      defaultLocale: 'en'
+    });
+  </script>
+</head>
+<body state="{ copied: false, version: NoJS.version }">
+
+  <!-- ═══ Section 0 — Nav Bar ═══ -->
+  <header class="header">
+    <a href="#" class="header-logo">
+      <img src="logo.svg" alt="No.JS" class="logo-img">
+      <span class="logo-title">No<span class="logo-dot">.</span>JS</span>
+      <span class="logo-label">v<span bind="version"></span></span>
+    </a>
+    <button class="mobile-menu-btn" popovertarget="mobile-nav" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <nav class="header-nav">
+      <a href="#features" t="landing.nav.features"></a>
+      <a href="#config" t="landing.nav.config"></a>
+      <a href="#ecosystem" t="landing.nav.ecosystem"></a>
+      <a href="https://github.com/ErickXavier/nojs-lsp/tree/main/docs" target="_blank" t="landing.nav.docs"></a>
+      <a href="https://github.com/ErickXavier/nojs-lsp" target="_blank" class="github-link" aria-label="GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <div class="lang-dropdown">
+        <button class="lang-dropdown-btn" if="NoJS.locale" popovertarget="lang-menu">
+          <span t="landing.flag"></span>
+          <svg class="lang-chevron" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+        </button>
+        <div id="lang-menu" class="lang-dropdown-menu" popover>
+          <button class="lang-option" on:click="NoJS.locale = 'en'" class-active="NoJS.locale === 'en'" popovertarget="lang-menu">🇺🇸 English</button>
+          <button class="lang-option" on:click="NoJS.locale = 'es'" class-active="NoJS.locale === 'es'" popovertarget="lang-menu">🇪🇸 Español</button>
+          <button class="lang-option" on:click="NoJS.locale = 'pt'" class-active="NoJS.locale === 'pt'" popovertarget="lang-menu">🇧🇷 Português</button>
+          <button class="lang-option" on:click="NoJS.locale = 'it'" class-active="NoJS.locale === 'it'" popovertarget="lang-menu">🇮🇹 Italiano</button>
+          <button class="lang-option" on:click="NoJS.locale = 'fr'" class-active="NoJS.locale === 'fr'" popovertarget="lang-menu">🇫🇷 Français</button>
+        </div>
+      </div>
+      <a href="https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp" target="_blank" class="nav-cta" t="landing.nav.install"></a>
+    </nav>
+  </header>
+
+  <!-- ═══ Mobile Navigation (Popover) ═══ -->
+  <nav id="mobile-nav" class="mobile-nav" popover>
+    <a href="#features" t="landing.nav.features" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
+    <a href="#config" t="landing.nav.config" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
+    <a href="#ecosystem" t="landing.nav.ecosystem" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
+    <a href="https://github.com/ErickXavier/nojs-lsp/tree/main/docs" target="_blank" t="landing.nav.docs" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
+    <div class="mobile-nav-divider"></div>
+    <div class="mobile-nav-lang">
+      <button class="lang-option" on:click="NoJS.locale = 'en'" class-active="NoJS.locale === 'en'" popovertarget="mobile-nav">🇺🇸 English</button>
+      <button class="lang-option" on:click="NoJS.locale = 'es'" class-active="NoJS.locale === 'es'" popovertarget="mobile-nav">🇪🇸 Español</button>
+      <button class="lang-option" on:click="NoJS.locale = 'pt'" class-active="NoJS.locale === 'pt'" popovertarget="mobile-nav">🇧🇷 Português</button>
+      <button class="lang-option" on:click="NoJS.locale = 'it'" class-active="NoJS.locale === 'it'" popovertarget="mobile-nav">🇮🇹 Italiano</button>
+      <button class="lang-option" on:click="NoJS.locale = 'fr'" class-active="NoJS.locale === 'fr'" popovertarget="mobile-nav">🇫🇷 Français</button>
+    </div>
+    <div class="mobile-nav-divider"></div>
+    <a href="https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp" target="_blank" class="mobile-nav-cta" t="landing.nav.install"></a>
+  </nav>
+
+  <!-- ═══ Section 1 — Hero ═══ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <span class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span t="landing.hero.badge"></span>
+      </span>
+      <h1 t="landing.hero.headline"></h1>
+      <p class="hero-subtitle" t="landing.hero.subtitle"></p>
+      <div class="hero-ctas">
+        <a href="https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp" target="_blank" class="btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span t="landing.hero.cta"></span>
+        </a>
+        <a href="https://github.com/ErickXavier/nojs-lsp" target="_blank" class="btn-outline">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span t="landing.hero.github"></span>
+        </a>
+      </div>
+      <div class="terminal-box">
+        <div class="terminal-titlebar">
+          <div class="terminal-dots">
+            <span class="terminal-dot terminal-dot--red"></span>
+            <span class="terminal-dot terminal-dot--yellow"></span>
+            <span class="terminal-dot terminal-dot--green"></span>
+          </div>
+          <span class="terminal-title">Terminal</span>
+        </div>
+        <div class="terminal-body">
+          <span class="terminal-prompt">$</span>
+          <span class="terminal-cmd">code --install-extension exs.nojs-lsp</span>
+          <button class="terminal-copy"
+                  on:click="navigator.clipboard.writeText('code --install-extension exs.nojs-lsp'); copied = true; setTimeout(() => { copied = false }, 2000)"
+                  bind-aria-label="copied ? $i18n.t('landing.hero.copied') : $i18n.t('landing.hero.copy')">
+            <svg show="!copied" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+            <svg show="copied" class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 2 — Features Grid ═══ -->
+  <section id="features" class="features">
+    <div class="features-inner">
+      <p class="section-kicker" t="landing.features.kicker"></p>
+      <h2 class="section-title" t="landing.features.title"></h2>
+      <p class="section-subtitle" t="landing.features.subtitle"></p>
+      <div class="features-grid">
+
+        <!-- 1. Smart Completions -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h3 t="landing.features.completions.title"></h3>
+          <p t="landing.features.completions.desc"></p>
+        </div>
+
+        <!-- 2. Hover Documentation -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
+          <h3 t="landing.features.hover.title"></h3>
+          <p t="landing.features.hover.desc"></p>
+        </div>
+
+        <!-- 3. Real-Time Diagnostics -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 t="landing.features.diagnostics.title"></h3>
+          <p t="landing.features.diagnostics.desc"></p>
+        </div>
+
+        <!-- 4. Go-to-Definition -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+          </div>
+          <h3 t="landing.features.gotoDef.title"></h3>
+          <p t="landing.features.gotoDef.desc"></p>
+        </div>
+
+        <!-- 5. Find References -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h3 t="landing.features.references.title"></h3>
+          <p t="landing.features.references.desc"></p>
+        </div>
+
+        <!-- 6. Semantic Highlighting -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 t="landing.features.semantic.title"></h3>
+          <p t="landing.features.semantic.desc"></p>
+        </div>
+
+        <!-- 7. Code Actions -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+          </div>
+          <h3 t="landing.features.actions.title"></h3>
+          <p t="landing.features.actions.desc"></p>
+        </div>
+
+        <!-- 8. Inlay Hints -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </div>
+          <h3 t="landing.features.inlayHints.title"></h3>
+          <p t="landing.features.inlayHints.desc"></p>
+        </div>
+
+        <!-- 9. Snippets -->
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3 t="landing.features.snippets.title"></h3>
+          <p t="landing.features.snippets.desc"></p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 3a — Showcase: Smart Completions ═══ -->
+  <section class="showcase showcase--white">
+    <div class="showcase-inner">
+      <div class="showcase-text">
+        <h2 t="landing.showcase.completions.title"></h2>
+        <p t="landing.showcase.completions.desc"></p>
+        <ul class="showcase-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.completions.items.0"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.completions.items.1"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.completions.items.2"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.completions.items.3"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="showcase-visual">
+        <div class="editor-mock">
+          <div class="editor-titlebar">
+            <div class="editor-dots">
+              <span class="editor-dot editor-dot--red"></span>
+              <span class="editor-dot editor-dot--yellow"></span>
+              <span class="editor-dot editor-dot--green"></span>
+            </div>
+            <span class="editor-filename">index.html</span>
+          </div>
+          <div class="editor-body">
+            <div class="editor-line"><span class="line-number">1</span><span class="line-content"><span class="tok-bracket">&lt;</span><span class="tok-tag">div</span> <span class="tok-directive">get</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">/api/users</span><span class="tok-quote">"</span></span></div>
+            <div class="editor-line"><span class="line-number">2</span><span class="line-content">     <span class="tok-companion">as</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">users</span><span class="tok-quote">"</span></span></div>
+            <div class="editor-line"><span class="line-number">3</span><span class="line-content">     <span class="tok-attr-name"></span></span></div>
+            <div class="editor-line"><span class="line-number">4</span><span class="line-content"></span></div>
+            <div class="editor-line"><span class="line-number">5</span><span class="line-content"><span class="tok-bracket">&lt;/</span><span class="tok-tag">div</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="autocomplete" style="top: 52px">
+              <div class="autocomplete-item autocomplete-item--active">
+                <span class="autocomplete-icon">N</span>
+                <span class="autocomplete-label">error</span>
+                <span class="autocomplete-type">companion</span>
+              </div>
+              <div class="autocomplete-item">
+                <span class="autocomplete-icon">N</span>
+                <span class="autocomplete-label">empty</span>
+                <span class="autocomplete-type">companion</span>
+              </div>
+              <div class="autocomplete-item">
+                <span class="autocomplete-icon">N</span>
+                <span class="autocomplete-label">success</span>
+                <span class="autocomplete-type">companion</span>
+              </div>
+              <div class="autocomplete-item">
+                <span class="autocomplete-icon">N</span>
+                <span class="autocomplete-label">then</span>
+                <span class="autocomplete-type">companion</span>
+              </div>
+              <div class="autocomplete-item">
+                <span class="autocomplete-icon">N</span>
+                <span class="autocomplete-label">cached</span>
+                <span class="autocomplete-type">companion</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 3b — Showcase: Semantic Highlighting ═══ -->
+  <section class="showcase showcase--surface">
+    <div class="showcase-inner showcase-inner--reversed">
+      <div class="showcase-text">
+        <h2 t="landing.showcase.highlighting.title"></h2>
+        <p t="landing.showcase.highlighting.desc"></p>
+        <ul class="showcase-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.highlighting.items.0"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.highlighting.items.1"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.highlighting.items.2"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.highlighting.items.3"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="showcase-visual">
+        <div class="highlight-compare">
+          <!-- Without LSP -->
+          <div class="highlight-panel">
+            <div class="highlight-panel-header highlight-panel-header--off">Without LSP</div>
+            <pre class="highlight-panel-body"><span class="tok-gray">&lt;ul get="/api/users"
+    as="users"&gt;
+  &lt;li each="user of users"
+      if="user.active"
+      class-highlight="user.vip"
+      bind="user.name | upper"&gt;</span></pre>
+          </div>
+          <!-- With LSP -->
+          <div class="highlight-panel">
+            <div class="highlight-panel-header highlight-panel-header--on">With LSP</div>
+            <pre class="highlight-panel-body"><span class="tok-bracket">&lt;</span><span class="tok-tag">ul</span> <span class="tok-directive">get</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">/api/users</span><span class="tok-quote">"</span>
+<span class="tok-bracket">    </span><span class="tok-companion">as</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">users</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span>
+<span class="tok-bracket">  &lt;</span><span class="tok-tag">li</span> <span class="tok-directive">each</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user of users</span><span class="tok-quote">"</span>
+<span class="tok-bracket">      </span><span class="tok-directive">if</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.active</span><span class="tok-quote">"</span>
+<span class="tok-bracket">      </span><span class="tok-dynamic-prefix">class-</span><span class="tok-attr-name">highlight</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.vip</span><span class="tok-quote">"</span>
+<span class="tok-bracket">      </span><span class="tok-directive">bind</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.name</span> <span class="tok-pipe">|</span> <span class="tok-filter">upper</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 3c — Showcase: Navigation ═══ -->
+  <section class="showcase showcase--white">
+    <div class="showcase-inner">
+      <div class="showcase-text">
+        <h2 t="landing.showcase.navigation.title"></h2>
+        <p t="landing.showcase.navigation.desc"></p>
+        <ul class="showcase-list">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.navigation.items.0"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.navigation.items.1"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.navigation.items.2"></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <span t="landing.showcase.navigation.items.3"></span>
+          </li>
+        </ul>
+      </div>
+      <div class="showcase-visual">
+        <div class="editor-mock gotodef-mock">
+          <div class="editor-titlebar">
+            <div class="editor-dots">
+              <span class="editor-dot editor-dot--red"></span>
+              <span class="editor-dot editor-dot--yellow"></span>
+              <span class="editor-dot editor-dot--green"></span>
+            </div>
+            <span class="editor-filename">page.html</span>
+          </div>
+          <div class="editor-body">
+            <div class="editor-line"><span class="line-number">8</span><span class="line-content"><span class="tok-bracket">&lt;</span><span class="tok-tag">section</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">9</span><span class="line-content">  <span class="tok-bracket">&lt;</span><span class="tok-tag">div</span> <span class="tok-directive">each</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user of users</span><span class="tok-quote">"</span></span></div>
+            <div class="editor-line" style="background:rgba(14,165,233,0.08)"><span class="line-number">10</span><span class="line-content">       <span class="tok-directive">use</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="gotodef-link tok-value">user-card</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">11</span><span class="line-content">  <span class="tok-bracket">&lt;/</span><span class="tok-tag">div</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">12</span><span class="line-content"><span class="tok-bracket">&lt;/</span><span class="tok-tag">section</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">13</span><span class="line-content"></span></div>
+            <div class="editor-line"><span class="line-number">14</span><span class="line-content"><span class="tok-bracket">&lt;</span><span class="tok-tag">template</span> <span class="tok-attr-name">id</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user-card</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">15</span><span class="line-content">  <span class="tok-bracket">&lt;</span><span class="tok-tag">div</span> <span class="tok-attr-name">class</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-string">card</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">16</span><span class="line-content">    <span class="tok-bracket">&lt;</span><span class="tok-tag">h3</span> <span class="tok-directive">bind</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.name</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;&lt;/</span><span class="tok-tag">h3</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="gotodef-tooltip" style="top: 40px; right: 16px;">
+              <svg style="width:14px;height:14px;margin-right:4px;vertical-align:middle;color:#0EA5E9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              Go to Definition → line 14
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 4 — Configuration ═══ -->
+  <section id="config" class="config">
+    <div class="config-inner">
+      <p class="section-kicker" t="landing.config.kicker"></p>
+      <h2 class="section-title" t="landing.config.title"></h2>
+      <p class="section-subtitle" t="landing.config.subtitle"></p>
+      <div class="config-table-card">
+        <table class="config-table">
+          <thead>
+            <tr>
+              <th t="landing.config.headers.setting"></th>
+              <th t="landing.config.headers.default"></th>
+              <th t="landing.config.headers.description"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="config-setting">nojs.validation.enabled</span></td>
+              <td><span class="config-default config-val-true">true</span></td>
+              <td t="landing.config.rows.validation.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.completion.filters</span></td>
+              <td><span class="config-default config-val-true">true</span></td>
+              <td t="landing.config.rows.filters.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.customFilters</span></td>
+              <td><span class="config-default config-val-muted">[]</span></td>
+              <td t="landing.config.rows.customFilters.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.customValidators</span></td>
+              <td><span class="config-default config-val-muted">[]</span></td>
+              <td t="landing.config.rows.customValidators.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.trace.server</span></td>
+              <td><span class="config-default config-val-warn">"off"</span></td>
+              <td t="landing.config.rows.trace.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.devtools.enabled</span></td>
+              <td><span class="config-default config-val-false">false</span></td>
+              <td t="landing.config.rows.devtools.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.devtools.port</span></td>
+              <td><span class="config-default config-val-muted">9222</span></td>
+              <td t="landing.config.rows.devtoolsPort.desc"></td>
+            </tr>
+            <tr>
+              <td><span class="config-setting">nojs.devtools.host</span></td>
+              <td><span class="config-default config-val-muted">"localhost"</span></td>
+              <td t="landing.config.rows.devtoolsHost.desc"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 5 — Ecosystem ═══ -->
+  <section id="ecosystem" class="ecosystem">
+    <div class="ecosystem-inner">
+      <p class="section-kicker" t="landing.ecosystem.kicker"></p>
+      <h2 class="section-title" t="landing.ecosystem.title"></h2>
+      <div class="ecosystem-grid">
+
+        <!-- No.JS Website -->
+        <a href="https://no-js.dev" target="_blank" class="ecosystem-card">
+          <h3 t="landing.ecosystem.website.title"></h3>
+          <p t="landing.ecosystem.website.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.website.link"></span>
+        </a>
+
+        <!-- Framework Source -->
+        <a href="https://github.com/ErickXavier/no-js" target="_blank" class="ecosystem-card">
+          <h3 t="landing.ecosystem.frameworkGithub.title"></h3>
+          <p t="landing.ecosystem.frameworkGithub.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.frameworkGithub.link"></span>
+        </a>
+
+        <!-- LSP Extension -->
+        <a href="https://github.com/ErickXavier/nojs-lsp" target="_blank" class="ecosystem-card">
+          <h3 t="landing.ecosystem.lspGithub.title"></h3>
+          <p t="landing.ecosystem.lspGithub.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.lspGithub.link"></span>
+        </a>
+
+        <!-- VS Code Marketplace -->
+        <a href="https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp" target="_blank" class="ecosystem-card">
+          <h3 t="landing.ecosystem.marketplace.title"></h3>
+          <p t="landing.ecosystem.marketplace.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.marketplace.link"></span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Section 6 — Footer ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-row">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <svg version="1.2" class="logo-img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150">
+              <defs>
+                <mask id="bolt-border-footer">
+                  <rect x="0" y="0" width="150" height="150" fill="white"/>
+                  <path d="m119.5 16h-54l-26 51h18l-27 67 73-67h-18z" fill="black" stroke="black" stroke-width="15" stroke-linejoin="miter"/>
+                </mask>
+              </defs>
+              <style>.fa{fill:none;stroke:#FFF;stroke-width:14}.fb{fill:#0ea5e9}</style>
+              <g mask="url(#bolt-border-footer)">
+                <path fill-rule="evenodd" class="fa" d="m45 40l-35 35 35 35"/>
+                <path fill-rule="evenodd" class="fa" d="m105 40l35 35-35 35"/>
+              </g>
+              <path class="fb" d="m119.5 16h-54l-26 51h18l-27 67 73-67h-18z"/>
+            </svg>
+            <span class="logo-title">No<span class="logo-dot">.</span>JS <span class="logo-label">LSP</span></span>
+          </div>
+          <p class="footer-desc" t="landing.footer.desc"></p>
+        </div>
+        <div class="footer-links">
+          <span class="footer-links-heading" t="landing.footer.links"></span>
+          <a href="https://no-js.dev" target="_blank" t="landing.footer.website"></a>
+          <a href="https://github.com/ErickXavier/no-js" target="_blank" t="landing.footer.frameworkGithub"></a>
+          <a href="https://github.com/ErickXavier/nojs-lsp" target="_blank" t="landing.footer.lspGithub"></a>
+          <a href="https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp" target="_blank" t="landing.footer.marketplace"></a>
+          <a href="https://discord.gg/CaSbGYg3xY" target="_blank" t="landing.footer.discord"></a>
+        </div>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-bottom">
+        <span t="landing.footer.license"></span>
+        <span class="footer-version">No.JS LSP v<span bind="version"></span></span>
+        <a href="https://no-js.dev" target="_blank" class="powered-badge">
+          <span t="landing.footer.powered"></span>
+          <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150" width="150" height="150">
+            <style>.pa{fill:none;stroke:currentColor;stroke-width:14}.pb{fill:#0ea5e9}</style>
+            <g>
+              <path fill-rule="evenodd" class="pa" d="m45 40l-35 35 35 35"/>
+              <path fill-rule="evenodd" class="pa" d="m105 40l35 35-35 35"/>
+            </g>
+            <path class="pb" d="m119.5 16h-54l-26 51h18l-27 67 73-67h-18z"/>
+          </svg>
+          No.JS
+        </a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
