@@ -1,0 +1,53 @@
+# NoJS LSP
+
+> VS Code language server extension for the No.JS HTML-first reactive framework. Provides completions, diagnostics, hover documentation, go-to-definition, semantic highlighting, code actions, inlay hints, and 23 built-in snippets for 39+ directives and 32 filters.
+
+NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands directive companions (contextual attributes like `as`, `loading`, `error` for `get`), dynamic patterns (`bind-*`, `on:*`, `class-*`, `style-*`), expression syntax with pipe filters, and workspace-level awareness of stores, routes, i18n keys, and custom directives. Includes a DevTools bridge for live expression evaluation in running pages.
+
+## Getting Started
+
+- [Installation & Quick Start](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/getting-started.md): Install from VS Code Marketplace, first steps, trigger characters, configuration overview
+
+## Features
+
+- [Smart Completions](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/completions.md): 39+ directive completions with companion attributes, dynamic patterns, filters, validators, animations, context keys, i18n keys, routes, store properties
+- [Hover Documentation](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/hover.md): Inline syntax docs, filter argument hints, context key descriptions, loop variable info
+- [Real-Time Diagnostics](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/diagnostics.md): Unknown directive detection with "did you mean?" suggestions, orphaned else/else-if, duplicate state/ref, invalid filters, expression syntax errors
+- [Go-to-Definition](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/go-to-definition.md): Jump to template IDs, ref declarations, store definitions, companion attribute targets
+- [Find References](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/references.md): Find all usages of templates, refs, and stores across the document
+- [Document Symbols](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/symbols.md): Outline view with state, stores, templates, route-views, computed, watch, HTTP methods
+- [Semantic Highlighting](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/semantic-highlighting.md): Distinct colors for directives, filters, variables, and keywords
+- [Code Actions](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/code-actions.md): Quick fixes for missing `as` attributes and directive typos
+- [Inlay Hints](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/inlay-hints.md): Loop variable labels and HTTP method badges
+- [Document Links](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/links.md): Clickable HTTP URLs and file references in directives
+- [Snippets](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/snippets.md): 23 ready-to-use code snippets for common No.JS patterns
+
+## Reference
+
+- [Directives](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/directives.md): All 39 exact directives + 4 dynamic patterns supported by the LSP
+- [Filters](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/filters.md): All 32 built-in filters with argument signatures
+- [Validators](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/validators.md): Form validation rules reference
+- [Context Keys](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/context-keys.md): `$store`, `$refs`, `$route`, `$router`, `$i18n`, `$form`
+- [Animations](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/animations.md): Built-in animation name completions
+- [Configuration](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/configuration.md): All `nojs.*` VS Code settings
+
+## Advanced
+
+- [Workspace Scanner](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/advanced/workspace-scanner.md): How the LSP scans for routes, stores, custom directives, and i18n keys
+- [DevTools Bridge](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/advanced/devtools-bridge.md): Live Chrome DevTools Protocol integration for expression evaluation
+- [Expression Analyzer](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/advanced/expression-analyzer.md): Pipe expression parsing and syntax validation internals
+
+## Development
+
+- [Architecture](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/development/architecture.md): Client/server split, provider pattern, metadata-driven design
+- [Adding a Directive](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/development/adding-a-directive.md): How to register new directives in the LSP
+- [Adding a Filter](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/development/adding-a-filter.md): How to add new filter definitions
+- [Adding a Provider](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/development/adding-a-provider.md): How to implement new LSP features
+- [Testing](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/development/testing.md): Running and writing unit tests
+
+## Ecosystem
+
+- [No.JS Framework](https://no-js.dev): The HTML-first reactive framework this LSP supports
+- [No.JS Full Docs](https://no-js.dev/llms-full.txt): Complete framework documentation in a single file
+- [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp): Install the extension
+- [GitHub](https://github.com/ErickXavier/nojs-lsp): Source code, issues, and contributions
