@@ -40,7 +40,7 @@ export function onInlayHints(documents: TextDocuments<TextDocument>) {
           const hintPos = document.positionAt(attr.valueEnd);
           hints.push({
             position: Position.create(hintPos.line, hintPos.character + 1), // after closing quote
-            label: ' → $index, $count, $first, $last',
+            label: ' → $index, $count, $first, $last, $even, $odd',
             kind: InlayHintKind.Parameter,
             paddingLeft: true,
           });
@@ -51,7 +51,7 @@ export function onInlayHints(documents: TextDocuments<TextDocument>) {
           const hintPos = document.positionAt(attr.valueEnd);
           hints.push({
             position: Position.create(hintPos.line, hintPos.character + 1),
-            label: ' → $index, $count, $first, $last',
+            label: ' → $index, $count, $first, $last, $even, $odd',
             kind: InlayHintKind.Parameter,
             paddingLeft: true,
           });

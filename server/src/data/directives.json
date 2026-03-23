@@ -9,9 +9,10 @@
       "requiresValue": true,
       "companions": [
         { "name": "persist", "type": "boolean", "description": "No.JS: Persist state to localStorage" },
-        { "name": "persist-key", "type": "string", "description": "No.JS: Custom localStorage key" }
+        { "name": "persist-key", "type": "string", "description": "No.JS: Custom localStorage key" },
+        { "name": "persist-fields", "type": "string", "description": "No.JS: Comma-separated list of state fields to persist selectively" }
       ],
-      "documentation": "Declares reactive state on the element. The value is evaluated as a JavaScript object literal.\n\n**Example:**\n```html\n<div state=\"{ count: 0, name: 'World' }\">\n```\n\n**Companions:** `persist`, `persist-key`",
+      "documentation": "Declares reactive state on the element. The value is evaluated as a JavaScript object literal.\n\n**Example:**\n```html\n<div state=\"{ count: 0, name: 'World' }\">\n```\n\n**Companions:** `persist`, `persist-key`, `persist-fields`",
       "category": "state"
     },
     {
