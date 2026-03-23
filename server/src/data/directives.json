@@ -424,7 +424,7 @@
       "valueDescription": "Translation key",
       "requiresValue": true,
       "companions": [
-        { "name": "t-html", "type": "boolean", "description": "No.JS: Render translation as HTML" }
+        { "name": "t-html", "type": "boolean", "description": "No.JS: Render translation as sanitized HTML (via _sanitizeHtml()) instead of plain text" }
       ],
       "documentation": "i18n translation. Value is the translation key.\n\n**Example:**\n```html\n<span t=\"greeting\" t-name=\"World\">\n```\n\n**Companions:** `t-*` (interpolation parameters), `t-html`\n\nInterpolation params are passed as `t-{param}` attributes.",
       "category": "i18n"

@@ -695,7 +695,7 @@ i18n translation. Value is the translation key. Interpolation parameters are pas
 
 | Name | Type | Description |
 |------|------|-------------|
-| `t-html` | boolean | Render translation as HTML |
+| `t-html` | boolean | Render translation as sanitized HTML (via `_sanitizeHtml()`) instead of plain text |
 
 ```html
 <span t="greeting">
