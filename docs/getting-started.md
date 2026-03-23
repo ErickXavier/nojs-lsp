@@ -24,7 +24,7 @@ code --install-extension EXS.nojs-lsp
 If you have a `.vsix` file (e.g., from a pre-release build):
 
 ```sh
-code --install-extension nojs-lsp-1.9.1.vsix
+code --install-extension nojs-lsp-1.10.0.vsix
 ```
 
 Or in VS Code: **Extensions** → **⋯** menu → **Install from VSIX…**
