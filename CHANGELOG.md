@@ -2,6 +2,19 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.10.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.9.1...v1.10.0) — 2026-03-23
+
+### Fixed
+
+- Sync LSP directive data with framework source code (persist-fields, $even/$odd inlay hints)
+
+### Added
+
+- `llms.txt`, `sitemap.xml`, and inline LLM metadata for AI discoverability
+- Documentation site with getting-started guide, roadmap, and OG metadata
+- Custom domain (CNAME) for `lsp.no-js.dev`
+- `foreach` directive support improvements in completions and diagnostics
+
 ## [1.9.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.9.0...v1.9.1) — 2026-03-18
 
 ### Added
