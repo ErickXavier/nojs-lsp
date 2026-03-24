@@ -2,6 +2,12 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.10.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.10.0...v1.10.1) — 2026-03-23
+
+### Fixed
+
+- Sync LSP directive data and documentation with NoJS v1.10.1 security hardening changes ([`4f7b29a`](https://github.com/ErickXavier/nojs-lsp/commit/4f7b29a))
+
 ## [1.10.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.9.1...v1.10.0) — 2026-03-23
 
 ### Fixed
