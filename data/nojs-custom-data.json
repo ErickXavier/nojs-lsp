@@ -281,7 +281,7 @@
     },
     {
       "name": "t-html",
-      "description": { "kind": "markdown", "value": "No.JS: Companion for `t`. Render translation as HTML instead of text." },
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `t`. Renders the translation value as sanitized HTML (via `_sanitizeHtml()`) instead of plain text.\n\n```html\n<div t=\"legal.notice\" t-html></div>\n```" },
       "valueSet": "v"
     },
     {
