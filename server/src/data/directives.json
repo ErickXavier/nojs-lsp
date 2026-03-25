@@ -79,9 +79,10 @@
         { "name": "retry", "type": "number", "description": "No.JS: Number of retry attempts" },
         { "name": "retry-delay", "type": "number", "description": "No.JS: Delay between retries in ms" },
         { "name": "params", "type": "expression", "description": "No.JS: Query parameters object" },
-        { "name": "debounce", "type": "number", "description": "No.JS: Debounce delay in ms" }
+        { "name": "debounce", "type": "number", "description": "No.JS: Debounce delay in ms" },
+        { "name": "skeleton", "type": "string", "description": "No.JS: ID (without #) of a DOM element to hide while loading and restore on response. Prevents CLS — element must start visible in HTML." }
       ],
-      "documentation": "Performs an HTTP GET request and makes response data available.\n\n**Example:**\n```html\n<div get=\"/api/users\" as=\"users\" loading=\"spinner-tpl\">\n  <li each=\"user in users\" bind=\"user.name\">\n</div>\n```\n\n**Companions:** `as`, `loading`, `error`, `empty`, `success`, `then`, `redirect`, `confirm`, `refresh`, `cached`, `body`, `headers`, `var`, `into`, `retry`, `retry-delay`, `params`, `debounce`",
+      "documentation": "Performs an HTTP GET request and makes response data available.\n\n**Example:**\n```html\n<div get=\"/api/users\" as=\"users\" loading=\"spinner-tpl\">\n  <li each=\"user in users\" bind=\"user.name\">\n</div>\n```\n\n**Companions:** `as`, `loading`, `error`, `empty`, `success`, `then`, `redirect`, `confirm`, `refresh`, `cached`, `body`, `headers`, `var`, `into`, `retry`, `retry-delay`, `params`, `debounce`, `skeleton`",
       "category": "http"
     },
     {
@@ -548,9 +549,13 @@
         { "name": "route-active", "type": "string", "description": "No.JS: CSS class added when route is active (default: 'active')" },
         { "name": "route-active-exact", "type": "string", "description": "No.JS: CSS class added only on exact path match" },
         { "name": "lazy", "type": "string", "description": "No.JS: Loading strategy for route template (priority or ondemand)" },
-        { "name": "outlet", "type": "string", "description": "No.JS: Named route-view outlet target (default: 'default')" }
+        { "name": "outlet", "type": "string", "description": "No.JS: Named route-view outlet target (default: 'default')" },
+        { "name": "page-title", "type": "expression", "description": "No.JS: Sets document.title on each navigation. Value is a JS expression; use single-quoted strings: page-title=\"'About | Site'\". Can access $route and $store." },
+        { "name": "page-description", "type": "expression", "description": "No.JS: Creates/updates <meta name=\"description\"> on each navigation. Value is a JS expression." },
+        { "name": "page-canonical", "type": "expression", "description": "No.JS: Creates/updates <link rel=\"canonical\"> on each navigation. Value is a JS expression." },
+        { "name": "page-jsonld", "type": "string", "description": "No.JS: Creates/updates <script type=\"application/ld+json\" data-nojs> on each navigation. Value is a JSON string with {placeholder} interpolation." }
       ],
-      "documentation": "Turns an `<a>` element into a route link that navigates without page reload. Also used on `<template>` elements to define routes.\n\nUse `route=\"*\"` on a `<template>` to create a catch-all wildcard route for 404 pages. The wildcard matches when no other route matches the current path. Use `$route.matched` (boolean) to check whether an explicit route matched (`true`) or a wildcard/fallback is rendering (`false`).\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<template route=\"/dashboard\" lazy=\"ondemand\" outlet=\"sidebar\">\n\n<!-- Catch-all 404 -->\n<template route=\"*\">\n  <h1>404</h1>\n  <p>Path <code bind=\"$route.path\"></code> not found.</p>\n</template>\n```\n\n**Companions:** `route-active`, `route-active-exact`, `lazy`, `outlet`",
+      "documentation": "Turns an `<a>` element into a route link that navigates without page reload. Also used on `<template>` elements to define routes.\n\nUse `route=\"*\"` on a `<template>` to create a catch-all wildcard route for 404 pages. The wildcard matches when no other route matches the current path. Use `$route.matched` (boolean) to check whether an explicit route matched (`true`) or a wildcard/fallback is rendering (`false`).\n\n**Route head attributes** — update `<head>` on every navigation:\n- `page-title=\"'Title | Site'\"` — sets `document.title`\n- `page-description=\"product.description\"` — updates `<meta name=\"description\">`\n- `page-canonical=\"'/products/' + $route.params.id\"` — updates `<link rel=\"canonical\">`\n- `page-jsonld='{\"@type\":\"Product\"}` — updates JSON-LD structured data\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<template route=\"/dashboard\" lazy=\"ondemand\" outlet=\"sidebar\">\n<template route=\"/products/:id\"\n          page-title=\"'Product ' + $route.params.id + ' | Store'\"\n          page-description=\"'View product detail'\"\n          page-canonical=\"'/products/' + $route.params.id\">\n\n<!-- Catch-all 404 -->\n<template route=\"*\">\n  <h1>404</h1>\n  <p>Path <code bind=\"$route.path\"></code> not found.</p>\n</template>\n```\n\n**Companions:** `route-active`, `route-active-exact`, `lazy`, `outlet`, `page-title`, `page-description`, `page-canonical`, `page-jsonld`",
       "category": "routing"
     },
     {
@@ -628,6 +633,50 @@
       "documentation": "Dynamically sets a CSS style property. Attribute name is kebab-case, converted to camelCase.\n\n**Example:**\n```html\n<div style-color=\"textColor\">\n<div style-font-size=\"fontSize + 'px'\">\n<div style-map=\"{ color: textColor, fontSize: size + 'px' }\">\n```\n\n**Sub-behavior:** `style-map` (object → styles)",
       "subBehaviors": ["style-map"],
       "category": "styling"
+    },
+    {
+      "name": "page-title",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression evaluating to a string",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Updates `document.title` reactively. Place on a `<div hidden>` element for non-routing pages. For SPA routes prefer the `page-title` attribute on `<template route>` instead.\n\n**Example:**\n```html\n<div hidden page-title=\"product.name + ' | My Store'\"></div>\n<!-- Static -->\n<div hidden page-title=\"'About Us | My Store'\"></div>\n```\n\nValue is a No.JS expression — use single-quoted strings inside the double-quoted HTML attribute.",
+      "category": "head"
+    },
+    {
+      "name": "page-description",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression evaluating to a string",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Creates or updates `<meta name=\"description\" content=\"...\">` in `<head>`. Place on a `<div hidden>` element. Reactive — re-applies on state changes.\n\n**Example:**\n```html\n<div hidden page-description=\"product.description\"></div>\n```",
+      "category": "head"
+    },
+    {
+      "name": "page-canonical",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression evaluating to a URL string",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Creates or updates `<link rel=\"canonical\" href=\"...\">` in `<head>`. Place on a `<div hidden>` element. Reactive — re-applies on state changes.\n\n**Example:**\n```html\n<div hidden page-canonical=\"'/products/' + product.slug\"></div>\n```",
+      "category": "head"
+    },
+    {
+      "name": "page-jsonld",
+      "pattern": false,
+      "priority": 20,
+      "valueType": "template",
+      "valueDescription": "JSON-LD template in element body with {placeholder} expressions",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Creates or updates `<script type=\"application/ld+json\" data-nojs>` in `<head>`. Unlike other head directives, the JSON-LD template is written as the **element body** (not the attribute value). Use `{expression}` placeholders for dynamic values. Place on a `<div hidden>` element.\n\n**Example:**\n```html\n<div hidden page-jsonld>\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Product\",\n    \"name\": \"{product.name}\",\n    \"offers\": { \"@type\": \"Offer\", \"price\": \"{product.price}\" }\n  }\n</div>\n```\n\nThe `data-nojs` marker distinguishes this tag from hand-written JSON-LD. Structural JSON braces are not interpreted as placeholders — only `{variable}` patterns matching an identifier are.",
+      "category": "head"
     },
     {
       "name": "on:*",
