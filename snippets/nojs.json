@@ -211,5 +211,71 @@
       "NoJS.notify(); // flush DOM bindings after store mutation"
     ],
     "description": "Call NoJS.notify() to trigger DOM updates after mutating NoJS.store from external JavaScript"
+  },
+  "No.JS Plugin (Object)": {
+    "prefix": "plugin",
+    "body": [
+      "<script>",
+      "  const ${1:myPlugin} = {",
+      "    name: '${2:my-plugin}',",
+      "    version: '1.0.0',",
+      "    capabilities: ['${3:interceptors}'],",
+      "",
+      "    install(app, options) {",
+      "      $0",
+      "    },",
+      "",
+      "    init(app) {",
+      "      // DOM is ready, router/stores available",
+      "    },",
+      "",
+      "    dispose(app) {",
+      "      // Cleanup: clear intervals, close connections",
+      "    }",
+      "  };",
+      "",
+      "  NoJS.use(${1:myPlugin});",
+      "</script>"
+    ],
+    "description": "No.JS plugin with install, init, and dispose hooks. TypeScript definitions: types/nojs-plugin.d.ts"
+  },
+  "No.JS Plugin (Function Shorthand)": {
+    "prefix": "plugin-fn",
+    "body": [
+      "<script>",
+      "  function ${1:myPlugin}(app, options) {",
+      "    $0",
+      "  }",
+      "",
+      "  NoJS.use(${1:myPlugin});",
+      "</script>"
+    ],
+    "description": "No.JS plugin using named function shorthand"
+  },
+  "No.JS Global Variable": {
+    "prefix": "global",
+    "body": [
+      "<script>",
+      "  NoJS.global('${1:name}', ${2:{ key: 'value' }});",
+      "</script>"
+    ],
+    "description": "No.JS reactive global variable accessible as $name in expressions"
+  },
+  "No.JS Plugin with Interceptor": {
+    "prefix": "plugin-interceptor",
+    "body": [
+      "<script>",
+      "  NoJS.use({",
+      "    name: '${1:my-interceptor}',",
+      "    install(app) {",
+      "      app.interceptor('${2|request,response|}', (${3:url}, ${4:opts}) => {",
+      "        $0",
+      "        return ${4:opts};",
+      "      });",
+      "    }",
+      "  });",
+      "</script>"
+    ],
+    "description": "No.JS plugin that registers a request or response interceptor"
   }
 }
