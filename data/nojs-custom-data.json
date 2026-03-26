@@ -467,6 +467,26 @@
     {
       "name": "include",
       "description": { "kind": "markdown", "value": "No.JS: Synchronously clones an inline template into the current position. Used on `<template>` elements.\n\n```html\n<template id=\"header\"><h1>My App</h1></template>\n<template include=\"header\"></template>\n```" }
+    },
+    {
+      "name": "persist-fields",
+      "description": { "kind": "markdown", "value": "No.JS: Companion for `state` + `persist`. Comma-separated list of fields to persist selectively. Unlisted fields use their initial values on page load.\n\n```html\n<div state=\"{ theme: 'dark', sidebar: true, tempData: null }\"\n     persist=\"localStorage\"\n     persist-key=\"prefs\"\n     persist-fields=\"theme,sidebar\">\n```" }
+    },
+    {
+      "name": "page-title",
+      "description": { "kind": "markdown", "value": "No.JS: Reactively sets the document `<title>`. Place on a `<div hidden>` element.\n\n```html\n<div hidden page-title=\"product.name + ' | My Store'\"></div>\n<div hidden page-title=\"'About Us | My Store'\"></div>\n```\n\nWatches the expression and updates `<title>` whenever the reactive context changes." }
+    },
+    {
+      "name": "page-description",
+      "description": { "kind": "markdown", "value": "No.JS: Reactively sets `<meta name=\"description\">` in `<head>`. Creates the tag if it doesn't exist.\n\n```html\n<div hidden page-description=\"product.description\"></div>\n```\n\nWatches the expression and updates the meta content whenever the reactive context changes." }
+    },
+    {
+      "name": "page-canonical",
+      "description": { "kind": "markdown", "value": "No.JS: Reactively sets `<link rel=\"canonical\">` in `<head>`. Creates the tag if it doesn't exist.\n\n```html\n<div hidden page-canonical=\"'/products/' + product.slug\"></div>\n```\n\nWatches the expression and updates the canonical URL whenever the reactive context changes." }
+    },
+    {
+      "name": "page-jsonld",
+      "description": { "kind": "markdown", "value": "No.JS: Reactively sets `<script type=\"application/ld+json\" data-nojs>` in `<head>`. Value is either a No.JS expression evaluating to an object, or a JSON string with `{interpolation}` placeholders.\n\n```html\n<div hidden page-jsonld>\n  { \"@type\": \"Product\", \"name\": \"{product.name}\" }\n</div>\n```\n\nThe `data-nojs` marker distinguishes it from hand-written JSON-LD so they can coexist." }
     }
   ],
   "valueSets": [
@@ -486,7 +506,12 @@
         { "name": "zoomIn", "description": "No.JS: Zoom in from small" },
         { "name": "zoomOut", "description": "No.JS: Zoom out to small" },
         { "name": "bounceIn", "description": "No.JS: Bounce in with elastic effect" },
-        { "name": "bounceOut", "description": "No.JS: Bounce out with elastic effect" }
+        { "name": "bounceOut", "description": "No.JS: Bounce out with elastic effect" },
+        { "name": "slideInUp", "description": "No.JS: Slide in from below" },
+        { "name": "slideInDown", "description": "No.JS: Slide in from above" },
+        { "name": "slideOutUp", "description": "No.JS: Slide out upward" },
+        { "name": "slideOutDown", "description": "No.JS: Slide out downward" },
+        { "name": "flipIn", "description": "No.JS: Flip in with 3D rotation" }
       ]
     },
     {
