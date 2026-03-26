@@ -2,6 +2,19 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.11.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.10.1...v1.11.0) — 2026-03-26
+
+### Added
+
+- Plugin snippets and TypeScript type reference for the plugin system ([`d469a76`](https://github.com/ErickXavier/nojs-lsp/commit/d469a76))
+- Head management directives (`page-title`, `page-description`, `page-canonical`, `page-jsonld`) completions, hover, and diagnostics ([`27ccc63`](https://github.com/ErickXavier/nojs-lsp/commit/27ccc63))
+- `focusBehavior` config option support ([`27ccc63`](https://github.com/ErickXavier/nojs-lsp/commit/27ccc63))
+- GitHub Actions CI workflow and VS Code Marketplace publishing automation ([`2fa1bcd`](https://github.com/ErickXavier/nojs-lsp/commit/2fa1bcd))
+
+### Fixed
+
+- Add `persist-fields` and `persist-schema` to state companions ([`ee45e6f`](https://github.com/ErickXavier/nojs-lsp/commit/ee45e6f))
+
 ## [1.10.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.10.0...v1.10.1) — 2026-03-23
 
 ### Fixed
