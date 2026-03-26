@@ -598,41 +598,6 @@
       "companions": [],
       "documentation": "Synchronously clones an inline template into the current position. Used on `<template>` elements.\n\n**Example:**\n```html\n<template id=\"header\">\n  <h1>My App</h1>\n</template>\n\n<template include=\"header\"></template>\n```",
       "category": "template"
-    }
-  ],
-  "patterns": [
-    {
-      "name": "bind-*",
-      "prefix": "bind-",
-      "priority": 20,
-      "valueType": "expression",
-      "valueDescription": "JS expression",
-      "requiresValue": true,
-      "documentation": "Dynamically binds an HTML attribute to a JS expression.\n\n**Example:**\n```html\n<a bind-href=\"url\">Link</a>\n<img bind-src=\"imageUrl\">\n```\n\n**Boolean attributes:** `disabled`, `readonly`, `checked`, `selected`, `hidden`, `required`\n\n**Common targets:** `href`, `src`, `class`, `title`, `alt`, `placeholder`, `action`, `value`",
-      "commonTargets": ["href", "src", "class", "title", "alt", "placeholder", "action", "value", "disabled", "readonly", "checked", "selected", "hidden", "required"],
-      "category": "binding"
-    },
-    {
-      "name": "class-*",
-      "prefix": "class-",
-      "priority": 20,
-      "valueType": "expression",
-      "valueDescription": "JS boolean expression (or object/array for map/list)",
-      "requiresValue": true,
-      "documentation": "Conditionally applies CSS class(es).\n\n**Example:**\n```html\n<div class-active=\"isActive\">\n<div class-map=\"{ active: isActive, hidden: !show }\">\n<div class-list=\"['base', isActive ? 'active' : '']\">\n```\n\n**Sub-behaviors:** `class-map` (object → classes), `class-list` (array → classes)",
-      "subBehaviors": ["class-map", "class-list"],
-      "category": "styling"
-    },
-    {
-      "name": "style-*",
-      "prefix": "style-",
-      "priority": 20,
-      "valueType": "expression",
-      "valueDescription": "JS expression (CSS value)",
-      "requiresValue": true,
-      "documentation": "Dynamically sets a CSS style property. Attribute name is kebab-case, converted to camelCase.\n\n**Example:**\n```html\n<div style-color=\"textColor\">\n<div style-font-size=\"fontSize + 'px'\">\n<div style-map=\"{ color: textColor, fontSize: size + 'px' }\">\n```\n\n**Sub-behavior:** `style-map` (object → styles)",
-      "subBehaviors": ["style-map"],
-      "category": "styling"
     },
     {
       "name": "page-title",
@@ -677,6 +642,41 @@
       "companions": [],
       "documentation": "Creates or updates `<script type=\"application/ld+json\" data-nojs>` in `<head>`. Unlike other head directives, the JSON-LD template is written as the **element body** (not the attribute value). Use `{expression}` placeholders for dynamic values. Place on a `<div hidden>` element.\n\n**Example:**\n```html\n<div hidden page-jsonld>\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Product\",\n    \"name\": \"{product.name}\",\n    \"offers\": { \"@type\": \"Offer\", \"price\": \"{product.price}\" }\n  }\n</div>\n```\n\nThe `data-nojs` marker distinguishes this tag from hand-written JSON-LD. Structural JSON braces are not interpreted as placeholders — only `{variable}` patterns matching an identifier are.",
       "category": "head"
+    }
+  ],
+  "patterns": [
+    {
+      "name": "bind-*",
+      "prefix": "bind-",
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression",
+      "requiresValue": true,
+      "documentation": "Dynamically binds an HTML attribute to a JS expression.\n\n**Example:**\n```html\n<a bind-href=\"url\">Link</a>\n<img bind-src=\"imageUrl\">\n```\n\n**Boolean attributes:** `disabled`, `readonly`, `checked`, `selected`, `hidden`, `required`\n\n**Common targets:** `href`, `src`, `class`, `title`, `alt`, `placeholder`, `action`, `value`",
+      "commonTargets": ["href", "src", "class", "title", "alt", "placeholder", "action", "value", "disabled", "readonly", "checked", "selected", "hidden", "required"],
+      "category": "binding"
+    },
+    {
+      "name": "class-*",
+      "prefix": "class-",
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS boolean expression (or object/array for map/list)",
+      "requiresValue": true,
+      "documentation": "Conditionally applies CSS class(es).\n\n**Example:**\n```html\n<div class-active=\"isActive\">\n<div class-map=\"{ active: isActive, hidden: !show }\">\n<div class-list=\"['base', isActive ? 'active' : '']\">\n```\n\n**Sub-behaviors:** `class-map` (object → classes), `class-list` (array → classes)",
+      "subBehaviors": ["class-map", "class-list"],
+      "category": "styling"
+    },
+    {
+      "name": "style-*",
+      "prefix": "style-",
+      "priority": 20,
+      "valueType": "expression",
+      "valueDescription": "JS expression (CSS value)",
+      "requiresValue": true,
+      "documentation": "Dynamically sets a CSS style property. Attribute name is kebab-case, converted to camelCase.\n\n**Example:**\n```html\n<div style-color=\"textColor\">\n<div style-font-size=\"fontSize + 'px'\">\n<div style-map=\"{ color: textColor, fontSize: size + 'px' }\">\n```\n\n**Sub-behavior:** `style-map` (object → styles)",
+      "subBehaviors": ["style-map"],
+      "category": "styling"
     },
     {
       "name": "on:*",
