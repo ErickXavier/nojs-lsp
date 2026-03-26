@@ -1,11 +1,13 @@
-# No.JS LSP
+# No.JS LSP — v1.11.0
 
 VS Code extension providing full language server support for the [No.JS](https://github.com/ErickXavier/no-js) HTML-first reactive framework.
+
+Also works as a standalone language server (`--stdio`) for **Neovim**, **Sublime Text**, **Emacs**, and any LSP-compatible editor.
 
 ## Features
 
 ### Completions
-- **Directive completions** — All 39+ No.JS directives (`state`, `if`, `get`, `each`, `model`, etc.)
+- **Directive completions** — All 40+ No.JS directives (`state`, `if`, `get`, `each`, `model`, etc.)
 - **Dynamic directives** — `bind-*`, `on:*`, `class-*`, `style-*` with common targets/events
 - **Companion attributes** — Context-aware: shows `as`, `loading`, `error` only when `get` is present
 - **Event modifiers** — `.prevent`, `.stop`, `.once`, `.debounce`, `.throttle`, key modifiers
@@ -20,6 +22,8 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - **Store property completions** — Parses `store` declarations to suggest `$store.name.prop`
 - **Template var completions** — Suggests `var-*` attributes matching template slot declarations
 - **Custom directive completions** — Detects `NoJS.directive()` calls in workspace JS files
+- **Head management directives** — `page-title`, `page-description`, `page-canonical`, `page-jsonld` completions and hover
+- **Plugin system support** — Plugin snippets, interceptor patterns, and TypeScript type references
 
 ### Hover Documentation
 - Directive purpose, syntax, and examples
@@ -42,6 +46,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - `model` on non-form elements
 - Invalid animation name
 - Unknown validator name
+- Head management directive validation
 
 ### Go-to-Definition
 - `use="id"` → jump to `<template id="id">`
@@ -80,7 +85,7 @@ VS Code extension providing full language server support for the [No.JS](https:/
 - HTTP method badge for `get`/`post`/`put`/`patch`/`delete` with `as`
 
 ### Snippets
-- 23 built-in snippets for common patterns (`if`, `each`, `foreach`, `get`, `store`, `form`, `call`, `notify`, etc.)
+- 31 built-in snippets for common patterns (`if`, `each`, `foreach`, `get`, `store`, `form`, `call`, `notify`, `page-title`, `plugin`, etc.)
 
 ## Configuration
 
@@ -110,6 +115,16 @@ npm test
 # Package extension
 npm run package
 ```
+
+## Ecosystem
+
+| Package | Description |
+|---------|-------------|
+| [No.JS](https://github.com/ErickXavier/no-js) | Core framework — 40+ directives, 32 filters, routing, forms, i18n, animations |
+| [No.JS LSP](https://github.com/ErickXavier/nojs-lsp) | This extension — language server for VS Code and other editors |
+| [No.JS MCP](https://github.com/ErickXavier/nojs-mcp) | MCP server for AI assistants — validate, explain, scaffold |
+| [No.JS CLI](https://github.com/ErickXavier/nojs-cli) | CLI tooling — `init`, `dev`, `prebuild`, `validate`, `plugin` |
+| [No.JS Skill](https://github.com/ErickXavier/nojs-skill) | Claude Code AI skill for No.JS development |
 
 ## License
 
