@@ -261,6 +261,45 @@
     ],
     "description": "No.JS reactive global variable accessible as $name in expressions"
   },
+  "No.JS Page Title": {
+    "prefix": "page-title",
+    "body": [
+      "<div hidden page-title=\"${1:expression}\"></div>"
+    ],
+    "description": "No.JS head management: reactively set the document title"
+  },
+  "No.JS Page Description": {
+    "prefix": "page-description",
+    "body": [
+      "<div hidden page-description=\"${1:expression}\"></div>"
+    ],
+    "description": "No.JS head management: reactively set meta description"
+  },
+  "No.JS Page Canonical": {
+    "prefix": "page-canonical",
+    "body": [
+      "<div hidden page-canonical=\"${1:expression}\"></div>"
+    ],
+    "description": "No.JS head management: reactively set canonical URL"
+  },
+  "No.JS Page JSON-LD": {
+    "prefix": "page-jsonld",
+    "body": [
+      "<div hidden page-jsonld>",
+      "\t{ \"@type\": \"${1:Product}\", \"name\": \"{${2:product.name}}\" }",
+      "</div>"
+    ],
+    "description": "No.JS head management: reactively set JSON-LD structured data"
+  },
+  "No.JS Head Management (All)": {
+    "prefix": "page-head",
+    "body": [
+      "<div hidden page-title=\"${1:title}\"></div>",
+      "<div hidden page-description=\"${2:description}\"></div>",
+      "<div hidden page-canonical=\"${3:'/path/' + slug}\"></div>"
+    ],
+    "description": "No.JS head management: set title, description, and canonical URL"
+  },
   "No.JS Plugin with Interceptor": {
     "prefix": "plugin-interceptor",
     "body": [
