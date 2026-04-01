@@ -701,5 +701,11 @@
   "eventHandlerVars": ["$event", "$el"],
   "watchHandlerVars": ["$old", "$new"],
   "dropHandlerVars": ["$drag", "$dragType", "$dragEffect", "$dropIndex", "$source", "$target", "$el"],
-  "animations": ["fadeIn", "fadeOut", "fadeInUp", "fadeInDown", "fadeOutUp", "fadeOutDown", "slideInLeft", "slideInRight", "slideOutLeft", "slideOutRight", "zoomIn", "zoomOut", "bounceIn", "bounceOut"]
+  "animations": ["fadeIn", "fadeOut", "fadeInUp", "fadeInDown", "fadeOutUp", "fadeOutDown", "slideInLeft", "slideInRight", "slideOutLeft", "slideOutRight", "zoomIn", "zoomOut", "bounceIn", "bounceOut"],
+  "compilerOutputAttributes": {
+    "_note": "These attributes are injected by the CLI compiler (nojs build). They are NOT user-authored directives and should not appear in completions. They are listed here so tooling can recognize them.",
+    "data-nojs-e": "Maps directive names to pre-compiled function indices in NoJS._compiled. Injected by the integrated compiler.",
+    "data-nojs-desc": "Marks a <template> as having a pre-compiled descriptor. Injected by the integrated compiler.",
+    "data-nojs-compiler": "Marker attribute on injected <script> blocks (__nojs_ast_cache, __nojs_compiled, __nojs_descriptors, __nojs_factories)."
+  }
 }
