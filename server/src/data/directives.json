@@ -706,6 +706,8 @@
     "_note": "These attributes are injected by the CLI compiler (nojs build). They are NOT user-authored directives and should not appear in completions. They are listed here so tooling can recognize them.",
     "data-nojs-e": "Maps directive names to pre-compiled function indices in NoJS._compiled. Injected by the integrated compiler.",
     "data-nojs-desc": "Marks a <template> as having a pre-compiled descriptor. Injected by the integrated compiler.",
-    "data-nojs-compiler": "Marker attribute on injected <script> blocks (__nojs_ast_cache, __nojs_compiled, __nojs_descriptors, __nojs_factories)."
+    "data-nojs-compiler": "Marker attribute on injected <script> blocks (__nojs_ast_cache, __nojs_compiled, __nojs_descriptors, __nojs_factories).",
+    "data-nojs-ssr": "SSG hydration marker. Indicates this element was pre-rendered at build time. Values: bind, class, style, show, loop, if. The NoJS runtime skips initial render for these elements and removes the attribute after hydrating reactivity.",
+    "data-nojs-ref": "Internal compiler element reference. Maps elements to JS variables (_e0, _e1, etc.) in the compiled script block. Automatically removed after hydration."
   }
 }
