@@ -139,12 +139,12 @@ const CONTEXT_KEY_DOCS: Record<string, string> = {
   '$watch': 'No.JS: **`$watch`** — Programmatically watch an expression for changes.\n\nUsage: `$watch("expr", callback)`',
   '$notify': 'No.JS: **`$notify`** — Manually trigger re-evaluation of watchers and bindings.',
   '$set': 'No.JS: **`$set`** — Imperatively set a reactive state property.\n\nUsage: `$set("key", value)`',
-  '$drag': 'No.JS: **`$drag`** — The dragged item value in `drop` handlers (array if multi-select).',
-  '$dragType': 'No.JS: **`$dragType`** — The `drag-type` of the dragged item.',
-  '$dragEffect': 'No.JS: **`$dragEffect`** — The `drag-effect` of the drag operation.',
-  '$dropIndex': 'No.JS: **`$dropIndex`** — Insertion index in the drop zone.',
-  '$source': 'No.JS: **`$source`** — Source info object `{ list, index, el }` in drop handlers.',
-  '$target': 'No.JS: **`$target`** — Target info object `{ list, index, el }` in drop handlers.',
+  '$drag': 'No.JS _(nojs-elements plugin)_: **`$drag`** — The dragged item value in `drop` handlers (array if multi-select).',
+  '$dragType': 'No.JS _(nojs-elements plugin)_: **`$dragType`** — The `drag-type` of the dragged item.',
+  '$dragEffect': 'No.JS _(nojs-elements plugin)_: **`$dragEffect`** — The `drag-effect` of the drag operation.',
+  '$dropIndex': 'No.JS _(nojs-elements plugin)_: **`$dropIndex`** — Insertion index in the drop zone.',
+  '$source': 'No.JS _(nojs-elements plugin)_: **`$source`** — Source info object `{ list, index, el }` in drop handlers.',
+  '$target': 'No.JS _(nojs-elements plugin)_: **`$target`** — Target info object `{ list, index, el }` in drop handlers.',
   '$rule': 'No.JS: **`$rule`** — The validation rule name that triggered the error (e.g. `required`, `email`). Available in error templates.',
 };
 
