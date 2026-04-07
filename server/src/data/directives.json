@@ -459,7 +459,7 @@
         { "name": "drag-ghost-class", "type": "string", "description": "No.JS: CSS class for ghost element" },
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name for multi-select" }
       ],
-      "documentation": "Makes element draggable.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
+      "documentation": "Makes element draggable.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
       "category": "dnd"
     },
     {
@@ -480,7 +480,7 @@
         { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
         { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: CSS class for placeholder" }
       ],
-      "documentation": "Makes element a drop target.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
+      "documentation": "Makes element a drop target.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
       "category": "dnd"
     },
     {
@@ -510,7 +510,7 @@
         { "name": "drop-settle-class", "type": "string", "description": "No.JS: CSS class during settle animation" },
         { "name": "drop-empty-class", "type": "string", "description": "No.JS: CSS class when list is empty" }
       ],
-      "documentation": "Sortable list with drag and drop support.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
+      "documentation": "Sortable list with drag and drop support.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
       "category": "dnd"
     },
     {
@@ -524,7 +524,7 @@
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name (required)" },
         { "name": "drag-multiple-class", "type": "string", "description": "No.JS: CSS class for selected items" }
       ],
-      "documentation": "Enables multi-select drag on `drag` elements.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
+      "documentation": "Enables multi-select drag on `drag` elements.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
       "category": "dnd"
     },
     {
@@ -642,6 +642,358 @@
       "companions": [],
       "documentation": "Creates or updates `<script type=\"application/ld+json\" data-nojs>` in `<head>`. Unlike other head directives, the JSON-LD template is written as the **element body** (not the attribute value). Use `{expression}` placeholders for dynamic values. Place on a `<div hidden>` element.\n\n**Example:**\n```html\n<div hidden page-jsonld>\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Product\",\n    \"name\": \"{product.name}\",\n    \"offers\": { \"@type\": \"Offer\", \"price\": \"{product.price}\" }\n  }\n</div>\n```\n\nThe `data-nojs` marker distinguishes this tag from hand-written JSON-LD. Structural JSON braces are not interpreted as placeholders — only `{variable}` patterns matching an identifier are.",
       "category": "head"
+    },
+    {
+      "name": "modal",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Unique modal ID",
+      "requiresValue": false,
+      "companions": [
+        { "name": "modal-class", "type": "string", "description": "No.JS: Additional CSS class(es) applied while the modal is open" },
+        { "name": "modal-escape", "type": "string", "description": "No.JS: Set to \"false\" to disable Escape key and backdrop click closing" },
+        { "name": "modal-backdrop", "type": "string", "description": "No.JS: Set to \"false\" to remove the dark backdrop overlay" }
+      ],
+      "documentation": "Declares a modal dialog using the native Popover API with focus trapping, stacking z-index, and ARIA attributes.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button modal-open=\"confirm\">Delete</button>\n\n<div modal=\"confirm\">\n  <h2>Are you sure?</h2>\n  <button modal-close>Cancel</button>\n  <button modal-close on:click=\"deleteItem()\">Confirm</button>\n</div>\n```\n\n**Companions:** `modal-class`, `modal-escape`, `modal-backdrop`",
+      "category": "modal"
+    },
+    {
+      "name": "modal-open",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Modal ID to open",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Opens a modal dialog by ID on click. Without a value, finds the nearest modal in the same scope.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button modal-open=\"my-dialog\">Open Dialog</button>\n```",
+      "category": "modal"
+    },
+    {
+      "name": "modal-close",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Modal ID to close (optional)",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Closes a modal dialog. Without a value, closes the closest ancestor modal. With a value, closes the modal with that ID.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button modal-close>Cancel</button>\n<button modal-close=\"specific-modal\">Close Other</button>\n```",
+      "category": "modal"
+    },
+    {
+      "name": "dropdown",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "dropdown-position", "type": "string", "description": "No.JS: Primary axis for menu placement (top, bottom, left, right)" },
+        { "name": "dropdown-align", "type": "string", "description": "No.JS: Cross-axis alignment (start, end)" }
+      ],
+      "documentation": "Wraps a toggle, menu, and items into a dropdown unit. Uses the native Popover API for light-dismiss.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div dropdown dropdown-position=\"bottom\" dropdown-align=\"start\">\n  <button dropdown-toggle>Options</button>\n  <ul dropdown-menu>\n    <li dropdown-item>Edit</li>\n    <li dropdown-item>Delete</li>\n  </ul>\n</div>\n```\n\n**Companions:** `dropdown-position`, `dropdown-align`",
+      "category": "dropdown"
+    },
+    {
+      "name": "dropdown-toggle",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "The element that opens/closes the dropdown menu on click. Must be inside a `[dropdown]` container. Automatically receives `aria-haspopup=\"menu\"` and `aria-expanded`.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button dropdown-toggle>Click me</button>\n```",
+      "category": "dropdown"
+    },
+    {
+      "name": "dropdown-menu",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "The menu panel that appears when the toggle is activated. Uses `popover=\"auto\"` for native light-dismiss. Automatically receives `role=\"menu\"`.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<ul dropdown-menu>\n  <li dropdown-item>Option A</li>\n  <li dropdown-item>Option B</li>\n</ul>\n```",
+      "category": "dropdown"
+    },
+    {
+      "name": "dropdown-item",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "An actionable item inside the dropdown menu. Supports keyboard navigation and disabled state. Automatically receives `role=\"menuitem\"`.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<li dropdown-item>Edit</li>\n<li dropdown-item disabled>Save (read-only)</li>\n<a dropdown-item href=\"/settings\">Settings</a>\n```",
+      "category": "dropdown"
+    },
+    {
+      "name": "tooltip",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Tooltip text content",
+      "requiresValue": true,
+      "companions": [
+        { "name": "tooltip-position", "type": "string", "description": "No.JS: Placement relative to the trigger (top, bottom, left, right)" },
+        { "name": "tooltip-delay", "type": "number", "description": "No.JS: Delay in ms before showing (default: 300)" },
+        { "name": "tooltip-disabled", "type": "expression", "description": "No.JS: Reactive expression; when truthy, prevents tooltip from showing" }
+      ],
+      "documentation": "Shows a tooltip on hover/focus with viewport-aware positioning.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button tooltip=\"Save your changes\">Save</button>\n<button tooltip=\"More options\" tooltip-position=\"bottom\">Menu</button>\n<button tooltip=\"Delete\" tooltip-delay=\"500\">Delete</button>\n```\n\n**Companions:** `tooltip-position`, `tooltip-delay`, `tooltip-disabled`",
+      "category": "tooltip"
+    },
+    {
+      "name": "popover",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Unique popover ID",
+      "requiresValue": false,
+      "companions": [
+        { "name": "popover-position", "type": "string", "description": "No.JS: Placement relative to the trigger (top, bottom, left, right)" }
+      ],
+      "documentation": "Declares popover content linked to a trigger. Uses viewport-aware positioning with flip logic.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button popover-trigger=\"user-menu\">Account</button>\n\n<div popover=\"user-menu\" popover-position=\"bottom\">\n  <a href=\"/profile\">Profile</a>\n  <button popover-dismiss>Close</button>\n</div>\n```\n\n**Companion:** `popover-position`",
+      "category": "popover"
+    },
+    {
+      "name": "popover-trigger",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Popover ID to open",
+      "requiresValue": true,
+      "companions": [],
+      "documentation": "Opens the linked popover on click.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button popover-trigger=\"help-tip\">?</button>\n```",
+      "category": "popover"
+    },
+    {
+      "name": "popover-dismiss",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Closes the closest ancestor popover on click. Place inside a `[popover]` element.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div popover=\"info\">\n  <p>Some content</p>\n  <button popover-dismiss>Got it</button>\n</div>\n```",
+      "category": "popover"
+    },
+    {
+      "name": "toast-container",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Screen position for the toast stack",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Defines where toast notifications appear on screen. If no container is declared, a default `top-right` container is auto-created on `<body>`.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div toast-container=\"top-right\"></div>\n<div toast-container=\"bottom-center\"></div>\n```\n\n**Values:** `top-right`, `top-left`, `bottom-right`, `bottom-left`, `top-center`, `bottom-center`",
+      "category": "toast"
+    },
+    {
+      "name": "toast",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "expression",
+      "valueDescription": "Watched expression; toast shown when truthy",
+      "requiresValue": true,
+      "companions": [
+        { "name": "toast-type", "type": "string", "description": "No.JS: Visual type (info, success, warning, error)" },
+        { "name": "toast-duration", "type": "number", "description": "No.JS: Auto-dismiss delay in ms (default: 3000, 0 for permanent)" },
+        { "name": "toast-dismiss", "type": "string", "description": "No.JS: Show dismiss button (default: \"true\")" }
+      ],
+      "documentation": "Watches an expression and shows a toast notification when the value changes to truthy. The expression's string value becomes the toast message.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div state=\"{ message: '' }\">\n  <button on:click=\"message = 'Saved!'\" toast=\"message\"\n          toast-type=\"success\" toast-duration=\"5000\">\n    Save\n  </button>\n</div>\n```\n\n**Companions:** `toast-type`, `toast-duration`, `toast-dismiss`",
+      "category": "toast"
+    },
+    {
+      "name": "tabs",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "number",
+      "valueDescription": "Initial active tab index (0-based)",
+      "requiresValue": false,
+      "companions": [
+        { "name": "tab-position", "type": "string", "description": "No.JS: Placement of the tab list (top, bottom, left, right)" }
+      ],
+      "documentation": "Tab container that coordinates `tab` buttons and `panel` content areas.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div tabs tab-position=\"top\">\n  <button tab>Tab 1</button>\n  <button tab>Tab 2</button>\n  <div panel>Panel 1 content</div>\n  <div panel>Panel 2 content</div>\n</div>\n```\n\n**Companion:** `tab-position`",
+      "category": "tabs"
+    },
+    {
+      "name": "tab",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "tab-disabled", "type": "expression", "description": "No.JS: When truthy, the tab cannot be activated" }
+      ],
+      "documentation": "Marks an element as a tab trigger inside a `[tabs]` container. Automatically receives `role=\"tab\"` and ARIA attributes.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<button tab>General</button>\n<button tab tab-disabled=\"locked\">Locked</button>\n```\n\n**Companion:** `tab-disabled`",
+      "category": "tabs"
+    },
+    {
+      "name": "panel",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Marks an element as a tab panel inside a `[tabs]` container. Automatically receives `role=\"tabpanel\"` and is shown/hidden based on the active tab.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div panel>Panel content here</div>\n```",
+      "category": "tabs"
+    },
+    {
+      "name": "tree",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "tree-icon", "type": "string", "description": "No.JS: Set to \"false\" to hide expand/collapse triangle icons" }
+      ],
+      "documentation": "Marks an element as a tree root with keyboard navigation, ARIA tree roles, and expand/collapse behavior.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<ul tree>\n  <li branch>Projects\n    <ul subtree>\n      <li>NoJS</li>\n      <li>LSP</li>\n    </ul>\n  </li>\n</ul>\n```\n\n**Companion:** `tree-icon`",
+      "category": "tree"
+    },
+    {
+      "name": "branch",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "\"expanded\" to start open, or empty for collapsed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Marks an element as an expandable tree item. Each `[branch]` should contain a `[subtree]` child. Use `branch=\"expanded\"` to start open.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<li branch>Collapsed by default\n  <ul subtree><li>Child</li></ul>\n</li>\n<li branch=\"expanded\">Starts open\n  <ul subtree><li>Visible</li></ul>\n</li>\n```",
+      "category": "tree"
+    },
+    {
+      "name": "subtree",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Marks an element as a collapsible subtree group inside a `[branch]`. Automatically receives `role=\"group\"` and `aria-hidden`.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<li branch>Parent\n  <ul subtree>\n    <li>Child item</li>\n  </ul>\n</li>\n```",
+      "category": "tree"
+    },
+    {
+      "name": "stepper",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "number",
+      "valueDescription": "Initial step index (0-based)",
+      "requiresValue": false,
+      "companions": [
+        { "name": "stepper-mode", "type": "string", "description": "No.JS: Navigation mode (linear or free)" },
+        { "name": "stepper-indicator", "type": "string", "description": "No.JS: Show/hide progress indicator (default: \"true\")" },
+        { "name": "stepper-nav", "type": "string", "description": "No.JS: Show/hide Previous/Next buttons (default: \"true\")" }
+      ],
+      "documentation": "Multi-step container with progress indicator, validation, and keyboard navigation. Exposes `$stepper` context API.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div stepper stepper-mode=\"linear\">\n  <div step step-label=\"Account\">\n    <input model=\"name\" required />\n  </div>\n  <div step step-label=\"Confirm\">\n    <p>Welcome, <span bind=\"name\"></span>!</p>\n  </div>\n</div>\n```\n\n**Context API:** `$stepper.current`, `$stepper.total`, `$stepper.isFirst`, `$stepper.isLast`, `$stepper.next()`, `$stepper.prev()`, `$stepper.goTo(n)`\n\n**Companions:** `stepper-mode`, `stepper-indicator`, `stepper-nav`",
+      "category": "stepper"
+    },
+    {
+      "name": "step",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [
+        { "name": "step-label", "type": "string", "description": "No.JS: Custom label shown in the progress indicator (default: \"Step N\")" },
+        { "name": "step-validate", "type": "expression", "description": "No.JS: Expression that must be truthy for the step to pass validation (linear mode)" }
+      ],
+      "documentation": "Marks an element as a step panel inside a `[stepper]` container. In linear mode, validates `[required]` inputs and `step-validate` before advancing.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div step step-label=\"Terms\" step-validate=\"acceptedTerms\">\n  <label>\n    <input type=\"checkbox\" model=\"acceptedTerms\" />\n    I accept the terms\n  </label>\n</div>\n```\n\n**Companions:** `step-label`, `step-validate`",
+      "category": "stepper"
+    },
+    {
+      "name": "skeleton",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "expression",
+      "valueDescription": "Reactive expression; shows skeleton while truthy",
+      "requiresValue": true,
+      "companions": [
+        { "name": "skeleton-type", "type": "string", "description": "No.JS: Shape of the placeholder (text, circle, rect)" },
+        { "name": "skeleton-lines", "type": "number", "description": "No.JS: Number of simulated text lines to generate" },
+        { "name": "skeleton-size", "type": "string", "description": "No.JS: Explicit dimension (width/height) for circle or rect types" }
+      ],
+      "documentation": "Displays a shimmer animation over any element while a reactive expression is truthy. When falsy, the skeleton fades out and reveals the real content.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<h2 skeleton=\"loading\">Article Title</h2>\n<div skeleton=\"loading\" skeleton-type=\"circle\" skeleton-size=\"64\"></div>\n<div skeleton=\"loading\" skeleton-lines=\"3\"></div>\n<div skeleton=\"loading\" skeleton-type=\"rect\" skeleton-size=\"200\"></div>\n```\n\n**Companions:** `skeleton-type`, `skeleton-lines`, `skeleton-size`",
+      "category": "skeleton"
+    },
+    {
+      "name": "split",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Split direction (horizontal or vertical)",
+      "requiresValue": false,
+      "companions": [
+        { "name": "split-gutter", "type": "number", "description": "No.JS: Gutter width/height in pixels (default: 6)" },
+        { "name": "split-persist", "type": "string", "description": "No.JS: localStorage key for saving/restoring pane sizes" }
+      ],
+      "documentation": "Resizable split container. Children use `pane` to define resizable panels separated by draggable gutters.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div split=\"horizontal\" split-persist=\"my-layout\">\n  <div pane=\"250px\" pane-min=\"100\">Sidebar</div>\n  <div pane>Main content</div>\n</div>\n```\n\n**Companions:** `split-gutter`, `split-persist`",
+      "category": "split"
+    },
+    {
+      "name": "pane",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Initial size (CSS value, e.g. \"250px\", \"30%\")",
+      "requiresValue": false,
+      "companions": [
+        { "name": "pane-min", "type": "number", "description": "No.JS: Minimum pane size in pixels (default: 0)" },
+        { "name": "pane-max", "type": "number", "description": "No.JS: Maximum pane size in pixels (default: Infinity)" },
+        { "name": "pane-collapsible", "type": "string", "description": "No.JS: Enable collapse/expand via double-click on adjacent gutter" }
+      ],
+      "documentation": "Defines a pane inside a `[split]` container. Omit the value for a flexible fill pane.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div pane=\"200px\" pane-min=\"100\" pane-max=\"400\" pane-collapsible=\"true\">\n  Navigation\n</div>\n<div pane>Main content (fills remaining space)</div>\n```\n\n**Companions:** `pane-min`, `pane-max`, `pane-collapsible`",
+      "category": "split"
+    },
+    {
+      "name": "sortable",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Enables sort coordination on a `<table>`. Child `<th>` elements use `sort` to define sortable columns.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<table sortable>\n  <thead>\n    <tr>\n      <th sort=\"name\">Name</th>\n      <th sort=\"age\" sort-type=\"number\">Age</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr each=\"user in users\">\n      <td bind=\"user.name\"></td>\n      <td bind=\"user.age\"></td>\n    </tr>\n  </tbody>\n</table>\n```",
+      "category": "table"
+    },
+    {
+      "name": "sort",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "string",
+      "valueDescription": "Property key to sort by",
+      "requiresValue": true,
+      "companions": [
+        { "name": "sort-type", "type": "string", "description": "No.JS: Comparator type (string, number, date)" },
+        { "name": "sort-default", "type": "string", "description": "No.JS: Initial sort direction on page load (asc, desc)" }
+      ],
+      "documentation": "Marks a `<th>` as a sortable column inside a `sortable` table. Click cycles through asc, desc, and unsorted states.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<th sort=\"name\">Name</th>\n<th sort=\"age\" sort-type=\"number\">Age</th>\n<th sort=\"createdAt\" sort-type=\"date\" sort-default=\"desc\">Created</th>\n```\n\n**Companions:** `sort-type`, `sort-default`",
+      "category": "table"
+    },
+    {
+      "name": "fixed-header",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Makes a `<thead>` sticky at the top of its scroll container.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<div style=\"height: 400px; overflow: auto\">\n  <table sortable>\n    <thead fixed-header>\n      <tr>\n        <th sort=\"name\">Name</th>\n        <th sort=\"age\" sort-type=\"number\">Age</th>\n      </tr>\n    </thead>\n    <tbody>...</tbody>\n  </table>\n</div>\n```",
+      "category": "table"
+    },
+    {
+      "name": "fixed-col",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "none",
+      "valueDescription": "No value needed",
+      "requiresValue": false,
+      "companions": [],
+      "documentation": "Pins a `<th>` or `<td>` to the left edge during horizontal scrolling. When combined with `fixed-header`, z-index stacking is handled automatically.\n\n> **Plugin required:** Part of `@erickxavier/nojs-elements`. Include via CDN (auto-installs) or ESM with `NoJS.use(NoJSElements)`.\n\n**Example:**\n```html\n<th sort=\"name\" fixed-col>Name</th>\n<td fixed-col bind=\"user.name\"></td>\n```",
+      "category": "table"
     }
   ],
   "patterns": [
