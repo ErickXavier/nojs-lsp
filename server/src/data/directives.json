@@ -459,7 +459,7 @@
         { "name": "drag-ghost-class", "type": "string", "description": "No.JS: CSS class for ghost element" },
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name for multi-select" }
       ],
-      "documentation": "Makes element draggable.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
+      "documentation": "Makes element draggable.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
       "category": "dnd"
     },
     {
@@ -480,7 +480,7 @@
         { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
         { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: CSS class for placeholder" }
       ],
-      "documentation": "Makes element a drop target.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
+      "documentation": "Makes element a drop target.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
       "category": "dnd"
     },
     {
@@ -510,7 +510,7 @@
         { "name": "drop-settle-class", "type": "string", "description": "No.JS: CSS class during settle animation" },
         { "name": "drop-empty-class", "type": "string", "description": "No.JS: CSS class when list is empty" }
       ],
-      "documentation": "Sortable list with drag and drop support.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
+      "documentation": "Sortable list with drag and drop support.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
       "category": "dnd"
     },
     {
@@ -524,7 +524,7 @@
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name (required)" },
         { "name": "drag-multiple-class", "type": "string", "description": "No.JS: CSS class for selected items" }
       ],
-      "documentation": "Enables multi-select drag on `drag` elements.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
+      "documentation": "Enables multi-select drag on `drag` elements.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)` to use this directive.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
       "category": "dnd"
     },
     {

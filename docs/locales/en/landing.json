@@ -149,6 +149,11 @@
         "title": "VS Code Marketplace",
         "desc": "Install directly from the marketplace",
         "link": "Marketplace →"
+      },
+      "elements": {
+        "title": "NoJS Elements",
+        "desc": "Declarative UI components for No.JS",
+        "link": "elements.no-js.dev →"
       }
     },
     "footer": {

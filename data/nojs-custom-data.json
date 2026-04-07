@@ -128,19 +128,19 @@
     },
     {
       "name": "drag",
-      "description": { "kind": "markdown", "value": "No.JS: Makes element draggable.\n\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`" }
+      "description": { "kind": "markdown", "value": "No.JS: Makes element draggable.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)`.\n\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`" }
     },
     {
       "name": "drop",
-      "description": { "kind": "markdown", "value": "No.JS: Makes element a drop target.\n\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Companions:** `drop-accept`, `drop-effect`, `drop-class`, `drop-reject-class`, `drop-disabled`, `drop-max`, `drop-sort`, `drop-placeholder`, `drop-placeholder-class`\n\n**Handler vars:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`" }
+      "description": { "kind": "markdown", "value": "No.JS: Makes element a drop target.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)`.\n\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Companions:** `drop-accept`, `drop-effect`, `drop-class`, `drop-reject-class`, `drop-disabled`, `drop-max`, `drop-sort`, `drop-placeholder`, `drop-placeholder-class`\n\n**Handler vars:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`" }
     },
     {
       "name": "drag-list",
-      "description": { "kind": "markdown", "value": "No.JS: Sortable list with drag and drop.\n\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```\n\n**Companions:** `template`, `drag-list-key`, `drag-list-item`, `drop-sort`, `drag-type`, `drop-accept`, `drag-list-copy`, `drag-list-remove`, and more" }
+      "description": { "kind": "markdown", "value": "No.JS: Sortable list with drag and drop.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)`.\n\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```\n\n**Companions:** `template`, `drag-list-key`, `drag-list-item`, `drop-sort`, `drag-type`, `drop-accept`, `drag-list-copy`, `drag-list-remove`, and more" }
     },
     {
       "name": "drag-multiple",
-      "description": { "kind": "markdown", "value": "No.JS: Enables multi-select drag on `drag` elements.\n\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`" },
+      "description": { "kind": "markdown", "value": "No.JS: Enables multi-select drag on `drag` elements.\n\n> **Plugin required:** Moved to `@erickxavier/nojs-elements`. Install and register with `NoJS.use(NojsElements)`.\n\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`" },
       "valueSet": "v"
     },
     {
@@ -354,107 +354,107 @@
     },
     {
       "name": "drag-type",
-      "description": { "kind": "markdown", "value": "No.JS: Type identifier for the dragged item. Used with `drop-accept` for filtering." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Type identifier for the dragged item. Used with `drop-accept` for filtering." }
     },
     {
       "name": "drag-effect",
-      "description": { "kind": "markdown", "value": "No.JS: Drag effect cursor indicator." },
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Drag effect cursor indicator." },
       "valueSet": "dragEffects"
     },
     {
       "name": "drag-handle",
-      "description": { "kind": "markdown", "value": "No.JS: CSS selector for the drag handle element.\n\n```html\n<div drag=\"item\" drag-handle=\".handle\">\n```" }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS selector for the drag handle element.\n\n```html\n<div drag=\"item\" drag-handle=\".handle\">\n```" }
     },
     {
       "name": "drag-image",
-      "description": { "kind": "markdown", "value": "No.JS: CSS selector for custom drag image element." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS selector for custom drag image element." }
     },
     {
       "name": "drag-image-offset",
-      "description": { "kind": "markdown", "value": "No.JS: Offset for custom drag image as `\"x,y\"`." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Offset for custom drag image as `\"x,y\"`." }
     },
     {
       "name": "drag-disabled",
-      "description": { "kind": "markdown", "value": "No.JS: Expression to disable dragging conditionally." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Expression to disable dragging conditionally." }
     },
     {
       "name": "drag-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to element while being dragged." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied to element while being dragged." }
     },
     {
       "name": "drag-ghost-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to the ghost element left behind while dragging." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied to the ghost element left behind while dragging." }
     },
     {
       "name": "drag-group",
-      "description": { "kind": "markdown", "value": "No.JS: Group name for `drag-multiple` multi-selection." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Group name for `drag-multiple` multi-selection." }
     },
     {
       "name": "drag-multiple-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to multi-selected drag items." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied to multi-selected drag items." }
     },
     {
       "name": "drop-accept",
-      "description": { "kind": "markdown", "value": "No.JS: Comma-separated list of accepted `drag-type` values.\n\n```html\n<div drop=\"handleDrop()\" drop-accept=\"card,task\">\n```" }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Comma-separated list of accepted `drag-type` values.\n\n```html\n<div drop=\"handleDrop()\" drop-accept=\"card,task\">\n```" }
     },
     {
       "name": "drop-effect",
-      "description": { "kind": "markdown", "value": "No.JS: Drop effect cursor indicator." },
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Drop effect cursor indicator." },
       "valueSet": "dropEffects"
     },
     {
       "name": "drop-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied when a valid drag item is over the drop target." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied when a valid drag item is over the drop target." }
     },
     {
       "name": "drop-reject-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied when an invalid drag item is over the drop target." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied when an invalid drag item is over the drop target." }
     },
     {
       "name": "drop-disabled",
-      "description": { "kind": "markdown", "value": "No.JS: Expression to disable dropping conditionally." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Expression to disable dropping conditionally." }
     },
     {
       "name": "drop-max",
-      "description": { "kind": "markdown", "value": "No.JS: Maximum number of items the drop target accepts." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Maximum number of items the drop target accepts." }
     },
     {
       "name": "drop-sort",
-      "description": { "kind": "markdown", "value": "No.JS: Sort direction for drop targets. Value: `\"vertical\"` (default), `\"horizontal\"`, or `\"grid\"`." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Sort direction for drop targets. Value: `\"vertical\"` (default), `\"horizontal\"`, or `\"grid\"`." }
     },
     {
       "name": "drop-placeholder",
-      "description": { "kind": "markdown", "value": "No.JS: HTML string or tag name for the placeholder element shown during drag." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: HTML string or tag name for the placeholder element shown during drag." }
     },
     {
       "name": "drop-placeholder-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class for the drop placeholder element." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class for the drop placeholder element." }
     },
     {
       "name": "drag-list-key",
-      "description": { "kind": "markdown", "value": "No.JS: Unique key property for `drag-list` items." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Unique key property for `drag-list` items." }
     },
     {
       "name": "drag-list-item",
-      "description": { "kind": "markdown", "value": "No.JS: Variable name for current item in `drag-list` template." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Variable name for current item in `drag-list` template." }
     },
     {
       "name": "drag-list-copy",
-      "description": { "kind": "markdown", "value": "No.JS: Copy items instead of moving when dragging from this `drag-list`." },
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Copy items instead of moving when dragging from this `drag-list`." },
       "valueSet": "v"
     },
     {
       "name": "drag-list-remove",
-      "description": { "kind": "markdown", "value": "No.JS: Remove items from source list after dragging." },
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: Remove items from source list after dragging." },
       "valueSet": "v"
     },
     {
       "name": "drop-settle-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied during the settle animation after a drop in `drag-list`." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied during the settle animation after a drop in `drag-list`." }
     },
     {
       "name": "drop-empty-class",
-      "description": { "kind": "markdown", "value": "No.JS: CSS class applied to `drag-list` when it has no items." }
+      "description": { "kind": "markdown", "value": "No.JS _(nojs-elements plugin)_: CSS class applied to `drag-list` when it has no items." }
     },
     {
       "name": "value",

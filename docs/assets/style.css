@@ -83,12 +83,19 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .logo-dot {
   color: var(--primary);
 }
+.logo-sub {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  letter-spacing: -0.3px;
+}
 .logo-label {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
-  color: var(--vscode);
-  background: #EFF6FF;
+  color: var(--primary);
+  background: var(--primary-surface);
   padding: 2px 8px;
   border-radius: 100px;
   letter-spacing: 0.3px;

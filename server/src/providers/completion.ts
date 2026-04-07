@@ -378,7 +378,7 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
       items.push({
         label: d,
         kind: CompletionItemKind.EnumMember,
-        detail: 'No.JS: Drop sort direction',
+        detail: 'No.JS (nojs-elements plugin): Drop sort direction',
         sortText: `0-${d}`,
       });
     }
@@ -389,14 +389,14 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
   if (attrName === 'drag-effect') {
     const effects = ['copy', 'move', 'link', 'none'];
     for (const e of effects) {
-      items.push({ label: e, kind: CompletionItemKind.EnumMember, detail: 'No.JS: Drag effect' });
+      items.push({ label: e, kind: CompletionItemKind.EnumMember, detail: 'No.JS (nojs-elements plugin): Drag effect' });
     }
     return items;
   }
   if (attrName === 'drop-effect') {
     const effects = ['copy', 'move', 'link', 'none'];
     for (const e of effects) {
-      items.push({ label: e, kind: CompletionItemKind.EnumMember, detail: 'No.JS: Drop effect' });
+      items.push({ label: e, kind: CompletionItemKind.EnumMember, detail: 'No.JS (nojs-elements plugin): Drop effect' });
     }
     return items;
   }
