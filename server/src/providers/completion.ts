@@ -371,6 +371,34 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
     return items;
   }
 
+  // View Transition API presets for transition attribute on route-view elements
+  if (attrName === 'transition') {
+    const isRouteView = context.element.tag === 'route-view'
+      || context.element.attributes.some(a => a.name === 'route-view');
+    if (isRouteView) {
+      const presets: { name: string; detail: string }[] = [
+        { name: 'slide', detail: 'Horizontal slide between old and new content' },
+        { name: 'fade', detail: 'Crossfade between old and new content' },
+        { name: 'scale', detail: 'Scale down old content, scale up new content' },
+        { name: 'none', detail: 'Disable transition animation' },
+      ];
+      for (const preset of presets) {
+        if (partial && !preset.name.toLowerCase().startsWith(partial.toLowerCase())) continue;
+        items.push({
+          label: preset.name,
+          kind: CompletionItemKind.EnumMember,
+          detail: `No.JS: View Transition — ${preset.detail}`,
+          documentation: {
+            kind: MarkupKind.Markdown,
+            value: `**\`${preset.name}\`** — View Transition API preset\n\n${preset.detail}.\n\nUses \`::view-transition-old(route-content)\` / \`::view-transition-new(route-content)\` pseudo-elements.`,
+          },
+          sortText: `0-${preset.name}`,
+        });
+      }
+      return items;
+    }
+  }
+
   // drop-sort values
   if (attrName === 'drop-sort') {
     const directions = ['vertical', 'horizontal', 'grid'];

@@ -293,6 +293,9 @@ export async function validateTextDocument(
     }
   }
 
+  // 15. Deprecated class-based transition CSS on route-view elements
+  detectDeprecatedTransitionCSS(text, document, diagnostics);
+
   // Post-loop: Report duplicate wildcard routes per outlet
   for (const [outletName, decls] of wildcardRoutes) {
     if (decls.length > 1) {
@@ -442,6 +445,39 @@ function getKnownModifiers(): Set<string> {
 
 function isStandardHtmlAttribute(name: string): boolean {
   return STANDARD_HTML_ATTRIBUTES.has(name.toLowerCase());
+}
+
+/**
+ * Detects deprecated class-based transition CSS patterns (e.g. .slide-enter, .fade-leave)
+ * and suggests migration to the View Transition API.
+ */
+function detectDeprecatedTransitionCSS(
+  text: string,
+  document: TextDocument,
+  diagnostics: Diagnostic[]
+): void {
+  // Match class-based transition patterns in <style> blocks
+  const styleRegex = /<style[^>]*>([\s\S]*?)<\/style>/gi;
+  const transitionClassPattern = /\.(slide|fade|scale)-(enter|leave|enter-active|leave-active|enter-from|leave-from|enter-to|leave-to)\b/g;
+
+  let styleMatch;
+  while ((styleMatch = styleRegex.exec(text)) !== null) {
+    const styleContent = styleMatch[1];
+    const styleOffset = styleMatch.index + styleMatch[0].indexOf(styleContent);
+
+    let classMatch;
+    while ((classMatch = transitionClassPattern.exec(styleContent)) !== null) {
+      const matchStart = styleOffset + classMatch.index;
+      const matchEnd = matchStart + classMatch[0].length;
+      const range = toRange(document, matchStart, matchEnd);
+      diagnostics.push({
+        severity: DiagnosticSeverity.Information,
+        range,
+        message: `No.JS: Class-based transition "${classMatch[0]}" is deprecated for route-view. Migrate to the View Transition API: use transition="slide|fade|scale|none" on route-view and ::view-transition-old/new(route-content) pseudo-elements in CSS.`,
+        source: SOURCE,
+      });
+    }
+  }
 }
 
 const STANDARD_HTML_ATTRIBUTES = new Set([

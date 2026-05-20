@@ -108,6 +108,30 @@ function getAttributeHover(attrName: string, element: ElementInfo): Hover | null
     }
   }
 
+  // View Transition API hover for transition attribute on route-view
+  if (attrName === 'transition') {
+    const isRouteView = element.tag === 'route-view'
+      || element.attributes.some(a => a.name === 'route-view');
+    if (isRouteView) {
+      return {
+        contents: {
+          kind: MarkupKind.Markdown,
+          value: '### `transition` — View Transition API\n\n'
+            + 'Specifies the transition effect for route changes using the **View Transition API**.\n\n'
+            + '**Built-in presets:**\n'
+            + '- `slide` — horizontal slide between old and new content\n'
+            + '- `fade` — crossfade between old and new content\n'
+            + '- `scale` — scale down/up between old and new content\n'
+            + '- `none` — disable transition animation\n\n'
+            + 'Custom names can be used with matching CSS:\n'
+            + '```css\n::view-transition-old(route-content) { /* exit */ }\n::view-transition-new(route-content) { /* enter */ }\n```\n\n'
+            + '**Config:** `router.viewTransition` (default: `true`)\n\n'
+            + '> **Note:** Class-based transitions (`.slide-enter`, `.slide-leave`, etc.) are deprecated for route-view. Use View Transition API presets instead.',
+        },
+      };
+    }
+  }
+
   // Check if it's a well-known companion attribute
   const companionInfo = getCompanionDescription(attrName, element);
   if (companionInfo) {
@@ -292,6 +316,35 @@ function getValueHover(attrName: string, value: string, offsetInValue: number, e
         contents: {
           kind: MarkupKind.Markdown,
           value: `**\`${value}\`** — NoJS built-in animation`,
+        },
+      };
+    }
+  }
+
+  // View Transition API presets on route-view transition attribute
+  if (attrName === 'transition') {
+    const isRouteView = element.tag === 'route-view'
+      || element.attributes.some(a => a.name === 'route-view');
+    if (isRouteView) {
+      const presetDocs: Record<string, string> = {
+        slide: '**`slide`** — View Transition API preset\n\nHorizontal slide between old and new content. Old content slides out to the left while new content slides in from the right.\n\nCSS pseudo-elements: `::view-transition-old(route-content)` / `::view-transition-new(route-content)`',
+        fade: '**`fade`** — View Transition API preset\n\nCrossfade between old and new content. Old content fades out while new content fades in simultaneously.\n\nCSS pseudo-elements: `::view-transition-old(route-content)` / `::view-transition-new(route-content)`',
+        scale: '**`scale`** — View Transition API preset\n\nOld content scales down and fades out, new content scales up and fades in.\n\nCSS pseudo-elements: `::view-transition-old(route-content)` / `::view-transition-new(route-content)`',
+        none: '**`none`** — View Transition API preset\n\nDisables transition animation. Route changes happen instantly without any visual transition.',
+      };
+      if (presetDocs[value]) {
+        return {
+          contents: {
+            kind: MarkupKind.Markdown,
+            value: presetDocs[value],
+          },
+        };
+      }
+      // Custom transition name
+      return {
+        contents: {
+          kind: MarkupKind.Markdown,
+          value: `**\`${value}\`** — Custom View Transition name\n\nThis is a custom View Transition API name. Define matching CSS using:\n\n\`\`\`css\n::view-transition-old(route-content) { /* exit animation */ }\n::view-transition-new(route-content) { /* enter animation */ }\n\`\`\``,
         },
       };
     }

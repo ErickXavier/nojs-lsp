@@ -600,9 +600,9 @@
         { "name": "ext", "type": "string", "description": "No.JS: Template file extension (default: .html)" },
         { "name": "route-index", "type": "string", "description": "No.JS: Index template name (default: 'index')" },
         { "name": "i18n-ns", "type": "string", "description": "No.JS: i18n namespace for route templates" },
-        { "name": "transition", "type": "string", "description": "No.JS: CSS transition class prefix for route changes" }
+        { "name": "transition", "type": "string", "description": "No.JS: View Transition API preset or custom name for route changes. Built-in presets: slide, fade, scale, none." }
       ],
-      "documentation": "Route rendering outlet. Displays the template matching the current route.\n\n**Example:**\n```html\n<div route-view src=\"pages\" ext=\".tpl\"></div>\n\n<!-- Named outlet -->\n<div route-view=\"sidebar\" src=\"panels\"></div>\n```\n\n**Companions:** `src`, `ext`, `route-index`, `i18n-ns`, `transition`",
+      "documentation": "Route rendering outlet. Displays the template matching the current route.\n\nUses the **View Transition API** by default for route transitions (configurable via `router.viewTransition`). The `transition` attribute accepts built-in presets or a custom name.\n\n**Built-in presets:**\n- `slide` — horizontal slide between old and new content\n- `fade` — crossfade between old and new content\n- `scale` — scale down old content, scale up new content\n- `none` — disable transition animation\n\nCSS uses `::view-transition-old(route-content)` / `::view-transition-new(route-content)` pseudo-elements.\n\n**Example:**\n```html\n<div route-view src=\"pages\" transition=\"slide\"></div>\n\n<!-- Named outlet -->\n<div route-view=\"sidebar\" src=\"panels\" transition=\"fade\"></div>\n```\n\n**Config:** `router.viewTransition` (default: `true`)\n\n**Companions:** `src`, `ext`, `route-index`, `i18n-ns`, `transition`",
       "category": "routing"
     },
     {
