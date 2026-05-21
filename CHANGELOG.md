@@ -2,6 +2,12 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.11.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.11.0...v1.11.1) — 2026-05-20
+
+### Changed
+
+- Removed NoJS-MCP references from docs and README
+
 ## [1.11.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.10.1...v1.11.0) — 2026-03-26
 
 ### Added

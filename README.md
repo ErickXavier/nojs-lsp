@@ -1,4 +1,4 @@
-# No.JS LSP — v1.11.0
+# No.JS LSP — v1.11.1
 
 VS Code extension providing full language server support for the [No.JS](https://github.com/ErickXavier/no-js) HTML-first reactive framework.
 
@@ -122,7 +122,6 @@ npm run package
 |---------|-------------|
 | [No.JS](https://github.com/ErickXavier/no-js) | Core framework — 40+ directives, 32 filters, routing, forms, i18n, animations |
 | [No.JS LSP](https://github.com/ErickXavier/nojs-lsp) | This extension — language server for VS Code and other editors |
-| [No.JS MCP](https://github.com/ErickXavier/nojs-mcp) | MCP server for AI assistants — validate, explain, scaffold |
 | [No.JS CLI](https://github.com/ErickXavier/nojs-cli) | CLI tooling — `init`, `dev`, `prebuild`, `validate`, `plugin` |
 | [No.JS Skill](https://github.com/ErickXavier/nojs-skill) | Claude Code AI skill for No.JS development |
 
