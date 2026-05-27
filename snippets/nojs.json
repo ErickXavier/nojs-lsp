@@ -154,7 +154,7 @@
       "\t<button type=\"submit\" disabled=\"!\\$form.valid\">Submit</button>",
       "</form>"
     ],
-    "description": "No.JS form with pristine-aware validation, error-class, and $form context"
+    "description": "No.JS form with pristine-aware validation, error-class, and $form context (requires @erickxavier/nojs-elements plugin since v1.13.0)"
   },
   "No.JS Template": {
     "prefix": "template",

@@ -424,6 +424,7 @@
       "valueType": "string",
       "valueDescription": "Validator rule string (pipe-separated)",
       "requiresValue": true,
+      "plugin": "@erickxavier/nojs-elements",
       "companions": [
         { "name": "error", "type": "string", "description": "No.JS: Error message or template ID (prefix with #)" },
         { "name": "error-*", "type": "string", "description": "No.JS: Per-rule error message or template ID (e.g. error-required, error-email)" },
@@ -478,6 +479,7 @@
       "valueType": "expression",
       "valueDescription": "Expression for dragged item value",
       "requiresValue": true,
+      "plugin": "@erickxavier/nojs-elements",
       "companions": [
         { "name": "drag-type", "type": "string", "description": "No.JS: Type identifier for the dragged item" },
         { "name": "drag-effect", "type": "string", "description": "No.JS: Drag effect (copy, move, link, none)" },
@@ -499,6 +501,7 @@
       "valueType": "statement",
       "valueDescription": "Statement to execute on drop",
       "requiresValue": true,
+      "plugin": "@erickxavier/nojs-elements",
       "companions": [
         { "name": "drop-accept", "type": "string", "description": "No.JS: Accepted drag types (comma-separated)" },
         { "name": "drop-effect", "type": "string", "description": "No.JS: Drop effect (copy, move, link, none)" },
@@ -520,6 +523,7 @@
       "valueType": "expression",
       "valueDescription": "List path expression",
       "requiresValue": true,
+      "plugin": "@erickxavier/nojs-elements",
       "companions": [
         { "name": "template", "type": "templateId", "description": "No.JS: Template ID for items" },
         { "name": "drag-list-key", "type": "string", "description": "No.JS: Unique key property" },
@@ -550,6 +554,7 @@
       "valueType": "none",
       "valueDescription": "No value needed",
       "requiresValue": false,
+      "plugin": "@erickxavier/nojs-elements",
       "companions": [
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name (required)" },
         { "name": "drag-multiple-class", "type": "string", "description": "No.JS: CSS class for selected items" }
