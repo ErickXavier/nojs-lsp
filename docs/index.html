@@ -279,11 +279,11 @@
             <span class="editor-filename">index.html</span>
           </div>
           <div class="editor-body">
-            <div class="editor-line"><span class="line-number">1</span><span class="line-content"><span class="tok-bracket">&lt;</span><span class="tok-tag">div</span> <span class="tok-directive">get</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">/api/users</span><span class="tok-quote">"</span></span></div>
-            <div class="editor-line"><span class="line-number">2</span><span class="line-content">     <span class="tok-companion">as</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">users</span><span class="tok-quote">"</span></span></div>
-            <div class="editor-line"><span class="line-number">3</span><span class="line-content">     <span class="tok-attr-name"></span></span></div>
+            <div class="editor-line"><span class="line-number">1</span><span class="line-content"><span class="hl-bracket">&lt;</span><span class="hl-tag">div</span> <span class="hl-directive">get</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">/api/users</span><span class="hl-quote">"</span></span></div>
+            <div class="editor-line"><span class="line-number">2</span><span class="line-content">     <span class="hl-companion">as</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">users</span><span class="hl-quote">"</span></span></div>
+            <div class="editor-line"><span class="line-number">3</span><span class="line-content">     <span class="hl-attr"></span></span></div>
             <div class="editor-line"><span class="line-number">4</span><span class="line-content"></span></div>
-            <div class="editor-line"><span class="line-number">5</span><span class="line-content"><span class="tok-bracket">&lt;/</span><span class="tok-tag">div</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">5</span><span class="line-content"><span class="hl-bracket">&lt;/</span><span class="hl-tag">div</span><span class="hl-bracket">&gt;</span></span></div>
             <div class="autocomplete" style="top: 52px">
               <div class="autocomplete-item autocomplete-item--active">
                 <span class="autocomplete-icon">N</span>
@@ -347,7 +347,7 @@
           <!-- Without LSP -->
           <div class="highlight-panel">
             <div class="highlight-panel-header highlight-panel-header--off">Without LSP</div>
-            <pre class="highlight-panel-body"><span class="tok-gray">&lt;ul get="/api/users"
+            <pre class="highlight-panel-body"><span class="hl-gray">&lt;ul get="/api/users"
     as="users"&gt;
   &lt;li each="user of users"
       if="user.active"
@@ -357,12 +357,12 @@
           <!-- With LSP -->
           <div class="highlight-panel">
             <div class="highlight-panel-header highlight-panel-header--on">With LSP</div>
-            <pre class="highlight-panel-body"><span class="tok-bracket">&lt;</span><span class="tok-tag">ul</span> <span class="tok-directive">get</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">/api/users</span><span class="tok-quote">"</span>
-<span class="tok-bracket">    </span><span class="tok-companion">as</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">users</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span>
-<span class="tok-bracket">  &lt;</span><span class="tok-tag">li</span> <span class="tok-directive">each</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user of users</span><span class="tok-quote">"</span>
-<span class="tok-bracket">      </span><span class="tok-directive">if</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.active</span><span class="tok-quote">"</span>
-<span class="tok-bracket">      </span><span class="tok-dynamic-prefix">class-</span><span class="tok-attr-name">highlight</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.vip</span><span class="tok-quote">"</span>
-<span class="tok-bracket">      </span><span class="tok-directive">bind</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.name</span> <span class="tok-pipe">|</span> <span class="tok-filter">upper</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></pre>
+            <pre class="highlight-panel-body"><span class="hl-bracket">&lt;</span><span class="hl-tag">ul</span> <span class="hl-directive">get</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">/api/users</span><span class="hl-quote">"</span>
+<span class="hl-bracket">    </span><span class="hl-companion">as</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">users</span><span class="hl-quote">"</span><span class="hl-bracket">&gt;</span>
+<span class="hl-bracket">  &lt;</span><span class="hl-tag">li</span> <span class="hl-directive">each</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user of users</span><span class="hl-quote">"</span>
+<span class="hl-bracket">      </span><span class="hl-directive">if</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user.active</span><span class="hl-quote">"</span>
+<span class="hl-bracket">      </span><span class="hl-dynamic-prefix">class-</span><span class="hl-attr">highlight</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user.vip</span><span class="hl-quote">"</span>
+<span class="hl-bracket">      </span><span class="hl-directive">bind</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user.name</span> <span class="hl-pipe">|</span> <span class="hl-filter">upper</span><span class="hl-quote">"</span><span class="hl-bracket">&gt;</span></pre>
           </div>
         </div>
       </div>
@@ -405,15 +405,15 @@
             <span class="editor-filename">page.html</span>
           </div>
           <div class="editor-body">
-            <div class="editor-line"><span class="line-number">8</span><span class="line-content"><span class="tok-bracket">&lt;</span><span class="tok-tag">section</span><span class="tok-bracket">&gt;</span></span></div>
-            <div class="editor-line"><span class="line-number">9</span><span class="line-content">  <span class="tok-bracket">&lt;</span><span class="tok-tag">div</span> <span class="tok-directive">each</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user of users</span><span class="tok-quote">"</span></span></div>
-            <div class="editor-line" style="background:rgba(14,165,233,0.08)"><span class="line-number">10</span><span class="line-content">       <span class="tok-directive">use</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="gotodef-link tok-value">user-card</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></span></div>
-            <div class="editor-line"><span class="line-number">11</span><span class="line-content">  <span class="tok-bracket">&lt;/</span><span class="tok-tag">div</span><span class="tok-bracket">&gt;</span></span></div>
-            <div class="editor-line"><span class="line-number">12</span><span class="line-content"><span class="tok-bracket">&lt;/</span><span class="tok-tag">section</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">8</span><span class="line-content"><span class="hl-bracket">&lt;</span><span class="hl-tag">section</span><span class="hl-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">9</span><span class="line-content">  <span class="hl-bracket">&lt;</span><span class="hl-tag">div</span> <span class="hl-directive">each</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user of users</span><span class="hl-quote">"</span></span></div>
+            <div class="editor-line" style="background:rgba(14,165,233,0.08)"><span class="line-number">10</span><span class="line-content">       <span class="hl-directive">use</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="gotodef-link hl-value">user-card</span><span class="hl-quote">"</span><span class="hl-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">11</span><span class="line-content">  <span class="hl-bracket">&lt;/</span><span class="hl-tag">div</span><span class="hl-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">12</span><span class="line-content"><span class="hl-bracket">&lt;/</span><span class="hl-tag">section</span><span class="hl-bracket">&gt;</span></span></div>
             <div class="editor-line"><span class="line-number">13</span><span class="line-content"></span></div>
-            <div class="editor-line"><span class="line-number">14</span><span class="line-content"><span class="tok-bracket">&lt;</span><span class="tok-tag">template</span> <span class="tok-attr-name">id</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user-card</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></span></div>
-            <div class="editor-line"><span class="line-number">15</span><span class="line-content">  <span class="tok-bracket">&lt;</span><span class="tok-tag">div</span> <span class="tok-attr-name">class</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-string">card</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;</span></span></div>
-            <div class="editor-line"><span class="line-number">16</span><span class="line-content">    <span class="tok-bracket">&lt;</span><span class="tok-tag">h3</span> <span class="tok-directive">bind</span><span class="tok-equals">=</span><span class="tok-quote">"</span><span class="tok-value">user.name</span><span class="tok-quote">"</span><span class="tok-bracket">&gt;&lt;/</span><span class="tok-tag">h3</span><span class="tok-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">14</span><span class="line-content"><span class="hl-bracket">&lt;</span><span class="hl-tag">template</span> <span class="hl-attr">id</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user-card</span><span class="hl-quote">"</span><span class="hl-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">15</span><span class="line-content">  <span class="hl-bracket">&lt;</span><span class="hl-tag">div</span> <span class="hl-attr">class</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-str">card</span><span class="hl-quote">"</span><span class="hl-bracket">&gt;</span></span></div>
+            <div class="editor-line"><span class="line-number">16</span><span class="line-content">    <span class="hl-bracket">&lt;</span><span class="hl-tag">h3</span> <span class="hl-directive">bind</span><span class="hl-equals">=</span><span class="hl-quote">"</span><span class="hl-value">user.name</span><span class="hl-quote">"</span><span class="hl-bracket">&gt;&lt;/</span><span class="hl-tag">h3</span><span class="hl-bracket">&gt;</span></span></div>
             <div class="gotodef-tooltip" style="top: 40px; right: 16px;">
               <svg style="width:14px;height:14px;margin-right:4px;vertical-align:middle;color:#0EA5E9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
               Go to Definition → line 14
