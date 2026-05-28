@@ -1,4 +1,4 @@
-# No.JS LSP — v1.11.1
+# No.JS LSP — v1.12.0
 
 VS Code extension providing full language server support for the [No.JS](https://github.com/ErickXavier/no-js) HTML-first reactive framework.
 
