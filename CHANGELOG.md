@@ -2,6 +2,14 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.13.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.0...v1.13.1) — 2026-06-01
+
+### Fixed
+
+- Derive the "Requires `@erickxavier/nojs-elements` plugin" note from the `.plugin` field in hover/completion documentation — previously the `.plugin` field was inert dead metadata and the requirement text was hand-duplicated across doc strings, so the field is now the single source of truth
+- Companion attributes now inherit the plugin requirement from their parent directive instead of needing it re-declared
+- Fixed literal `\\n` newline escaping in `nojs-custom-data.json` that broke hover rendering for `validate`, `error-class`, `validate-on`, and `validate-if`
+
 ## [1.13.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.12.0...v1.13.0) — 2026-06-01
 
 ### Changed
