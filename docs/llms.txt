@@ -49,5 +49,8 @@ NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands direc
 
 - [No.JS Framework](https://no-js.dev): The HTML-first reactive framework this LSP supports
 - [No.JS Full Docs](https://no-js.dev/llms-full.txt): Complete framework documentation in a single file
+- [NoJS Elements](https://elements.no-js.dev): UI element plugins — `drag`, `drop`, `drag-list`, `drag-multiple`, `validate` (migrated from core in v1.13.0)
+- [NoJS Skill](https://github.com/ErickXavier/nojs-skill): Claude Code AI skill for No.JS development
+- [NoJS CLI](https://github.com/ErickXavier/NoJS-Cli): Command-line tooling — `init`, `dev`, `prebuild`, `validate`, `plugin`
 - [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp): Install the extension
 - [GitHub](https://github.com/ErickXavier/nojs-lsp): Source code, issues, and contributions

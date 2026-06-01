@@ -121,6 +121,7 @@ npm run package
 | Package | Description |
 |---------|-------------|
 | [No.JS](https://github.com/ErickXavier/no-js) | Core framework — 40+ directives, 32 filters, routing, forms, i18n, animations |
+| [NoJS Elements](https://elements.no-js.dev) | UI element plugins — `drag`, `drop`, `drag-list`, `drag-multiple`, `validate` (migrated from core in v1.13.0) |
 | [No.JS LSP](https://github.com/ErickXavier/nojs-lsp) | This extension — language server for VS Code and other editors |
 | [No.JS CLI](https://github.com/ErickXavier/nojs-cli) | CLI tooling — `init`, `dev`, `prebuild`, `validate`, `plugin` |
 | [No.JS Skill](https://github.com/ErickXavier/nojs-skill) | Claude Code AI skill for No.JS development |

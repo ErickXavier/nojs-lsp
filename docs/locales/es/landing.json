@@ -124,6 +124,21 @@
         "desc": "Framework reactivo HTML-first de código abierto",
         "link": "GitHub →"
       },
+      "elements": {
+        "title": "NoJS Elements",
+        "desc": "Drag, drop y validación como plugin",
+        "link": "elements.no-js.dev →"
+      },
+      "skill": {
+        "title": "NoJS Skill",
+        "desc": "Skill de IA de Claude Code para No.JS",
+        "link": "GitHub →"
+      },
+      "cli": {
+        "title": "NoJS CLI",
+        "desc": "Herramientas de línea de comandos para No.JS",
+        "link": "GitHub →"
+      },
       "lspGithub": {
         "title": "Extensión LSP",
         "desc": "Implementación del protocolo de servidor de lenguaje",

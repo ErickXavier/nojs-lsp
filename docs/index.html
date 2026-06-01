@@ -84,11 +84,15 @@
           </a>
           <a href="https://elements.no-js.dev" target="_blank" class="eco-option" popovertarget="eco-menu" popovertargetaction="hide">
             <span class="eco-option-name">NoJS Elements</span>
-            <span class="eco-option-desc">UI component plugins</span>
+            <span class="eco-option-desc">Drag, drop &amp; validation</span>
           </a>
           <a href="https://github.com/ErickXavier/nojs-skill" target="_blank" rel="noopener noreferrer" class="eco-option" popovertarget="eco-menu" popovertargetaction="hide">
             <span class="eco-option-name">NoJS Skill</span>
             <span class="eco-option-desc">Claude Code AI skill</span>
+          </a>
+          <a href="https://github.com/ErickXavier/NoJS-Cli" target="_blank" rel="noopener noreferrer" class="eco-option" popovertarget="eco-menu" popovertargetaction="hide">
+            <span class="eco-option-name">NoJS CLI</span>
+            <span class="eco-option-desc">Command-line tooling</span>
           </a>
           <a class="eco-option current" popovertarget="eco-menu" popovertargetaction="hide">
             <span class="eco-option-name">NoJS LSP</span>
@@ -125,6 +129,12 @@
     <a href="#config" t="landing.nav.config" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
     <a href="#ecosystem" t="landing.nav.ecosystem" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
     <a href="https://github.com/ErickXavier/nojs-lsp/tree/main/docs" target="_blank" t="landing.nav.docs" on:click="document.getElementById('mobile-nav').hidePopover()"></a>
+    <div class="mobile-nav-divider"></div>
+    <!-- Ecosystem links (mirrors desktop "More" dropdown) -->
+    <a href="https://no-js.dev" target="_blank" on:click="document.getElementById('mobile-nav').hidePopover()">No.JS</a>
+    <a href="https://elements.no-js.dev" target="_blank" on:click="document.getElementById('mobile-nav').hidePopover()">NoJS Elements</a>
+    <a href="https://github.com/ErickXavier/nojs-skill" target="_blank" rel="noopener noreferrer" on:click="document.getElementById('mobile-nav').hidePopover()">NoJS Skill</a>
+    <a href="https://github.com/ErickXavier/NoJS-Cli" target="_blank" rel="noopener noreferrer" on:click="document.getElementById('mobile-nav').hidePopover()">NoJS CLI</a>
     <div class="mobile-nav-divider"></div>
     <div class="mobile-nav-lang">
       <button class="lang-option" on:click="window.NoJS.locale = 'en'" class-active="window.NoJS.locale === 'en'" popovertarget="mobile-nav">🇺🇸 English</button>
@@ -536,6 +546,27 @@
           <span class="ecosystem-link" t="landing.ecosystem.frameworkGithub.link"></span>
         </a>
 
+        <!-- NoJS Elements -->
+        <a href="https://elements.no-js.dev" target="_blank" class="ecosystem-card">
+          <h3 t="landing.ecosystem.elements.title"></h3>
+          <p t="landing.ecosystem.elements.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.elements.link"></span>
+        </a>
+
+        <!-- NoJS Skill -->
+        <a href="https://github.com/ErickXavier/nojs-skill" target="_blank" rel="noopener noreferrer" class="ecosystem-card">
+          <h3 t="landing.ecosystem.skill.title"></h3>
+          <p t="landing.ecosystem.skill.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.skill.link"></span>
+        </a>
+
+        <!-- NoJS CLI -->
+        <a href="https://github.com/ErickXavier/NoJS-Cli" target="_blank" rel="noopener noreferrer" class="ecosystem-card">
+          <h3 t="landing.ecosystem.cli.title"></h3>
+          <p t="landing.ecosystem.cli.desc"></p>
+          <span class="ecosystem-link" t="landing.ecosystem.cli.link"></span>
+        </a>
+
         <!-- LSP Extension -->
         <a href="https://github.com/ErickXavier/nojs-lsp" target="_blank" class="ecosystem-card">
           <h3 t="landing.ecosystem.lspGithub.title"></h3>
@@ -581,6 +612,7 @@
             <a href="https://no-js.dev" target="_blank">No.JS</a>
             <a href="https://elements.no-js.dev" target="_blank">NoJS Elements</a>
             <a href="https://github.com/ErickXavier/nojs-skill" target="_blank" rel="noopener noreferrer">NoJS Skill</a>
+            <a href="https://github.com/ErickXavier/NoJS-Cli" target="_blank" rel="noopener noreferrer">NoJS CLI</a>
             <a href="https://github.com/ErickXavier/nojs-lsp" target="_blank">GitHub</a>
             <a href="https://marketplace.visualstudio.com/items?itemName=exs.nojs-lsp" target="_blank" t="landing.footer.marketplace"></a>
             <a href="https://discord.gg/CaSbGYg3xY" target="_blank">Discord</a>
