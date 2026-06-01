@@ -434,7 +434,7 @@
         { "name": "as", "type": "identifier", "description": "No.JS: Expose per-field validation state as a context variable" },
         { "name": "success", "type": "templateId", "description": "No.JS: Success template for form" }
       ],
-      "documentation": "Form validation with pristine-aware errors.\n\n**On a form:** creates `$form` context with `valid`, `dirty`, `touched`, `pending`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`.\n\n**On a field:** standalone validation with error template.\n\n**Example:**\n```html\n<form validate=\"\" error-class=\"is-invalid\" validate-on=\"input blur\">\n  <input name=\"email\" validate=\"required|email\" error-required=\"Email is required\" />\n  <span if=\"$form.errors.email\" bind=\"$form.errors.email\"></span>\n</form>\n```\n\n**Built-in validators:** `required`, `email`, `url`, `min`, `max`, `custom`\n\n**Companions:** `error`, `error-*`, `error-class`, `validate-on`, `validate-if`, `as`, `success`",
+      "documentation": "Form validation with pristine-aware errors.\n\n**On a form:** creates `$form` context with `valid`, `dirty`, `touched`, `pending`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`.\n\n**On a field:** standalone validation with error template.\n\n**Example:**\n```html\n<form validate=\"\" error-class=\"is-invalid\" validate-on=\"input blur\">\n  <input name=\"email\" validate=\"required|email\" error-required=\"Email is required\" />\n  <span if=\"$form.errors.email\" bind=\"$form.errors.email\"></span>\n</form>\n```\n\n**Built-in validators:** `required`, `email`, `url`, `min`, `max`, `custom`\n\n**Companions:** `error`, `error-*`, `error-class`, `validate-on`, `validate-if`, `as`, `success`\n\n⚠️ Requires the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`) as of v1.13.0.",
       "category": "form"
     },
     {
@@ -491,7 +491,7 @@
         { "name": "drag-ghost-class", "type": "string", "description": "No.JS: CSS class for ghost element" },
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name for multi-select" }
       ],
-      "documentation": "Makes element draggable.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
+      "documentation": "Makes element draggable.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`\n\n⚠️ Requires the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`) as of v1.13.0.",
       "category": "dnd"
     },
     {
@@ -513,7 +513,7 @@
         { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
         { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: CSS class for placeholder" }
       ],
-      "documentation": "Makes element a drop target.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
+      "documentation": "Makes element a drop target.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`\n\n⚠️ Requires the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`) as of v1.13.0.",
       "category": "dnd"
     },
     {
@@ -544,7 +544,7 @@
         { "name": "drop-settle-class", "type": "string", "description": "No.JS: CSS class during settle animation" },
         { "name": "drop-empty-class", "type": "string", "description": "No.JS: CSS class when list is empty" }
       ],
-      "documentation": "Sortable list with drag and drop support.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
+      "documentation": "Sortable list with drag and drop support.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```\n\n⚠️ Requires the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`) as of v1.13.0.",
       "category": "dnd"
     },
     {
@@ -559,7 +559,7 @@
         { "name": "drag-group", "type": "string", "description": "No.JS: Group name (required)" },
         { "name": "drag-multiple-class", "type": "string", "description": "No.JS: CSS class for selected items" }
       ],
-      "documentation": "Enables multi-select drag on `drag` elements.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
+      "documentation": "Enables multi-select drag on `drag` elements.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`\n\n⚠️ Requires the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`) as of v1.13.0.",
       "category": "dnd"
     },
     {

@@ -2,6 +2,12 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.13.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.12.0...v1.13.0) — 2026-06-01
+
+### Changed
+
+- DnD (`drag`, `drop`, `drag-list`, `drag-multiple`) and `validate` metadata now mark these directives as requiring the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`), surfaced in hover/completion documentation as of NoJS v1.13.0
+
 ## [1.12.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.11.1...v1.12.0) — 2026-05-21
 
 ### Changed

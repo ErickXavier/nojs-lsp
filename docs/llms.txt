@@ -1,6 +1,6 @@
 # NoJS LSP
 
-> VS Code language server extension for the No.JS HTML-first reactive framework. Provides completions, diagnostics, hover documentation, go-to-definition, semantic highlighting, code actions, inlay hints, and 23 built-in snippets for 43+ directives and 32 filters.
+> VS Code language server extension for the No.JS HTML-first reactive framework. Provides completions, diagnostics, hover documentation, go-to-definition, semantic highlighting, code actions, inlay hints, and 23 built-in snippets for 44 directives and 32 filters.
 
 NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands directive companions (contextual attributes like `as`, `loading`, `error` for `get`), dynamic patterns (`bind-*`, `on:*`, `class-*`, `style-*`), expression syntax with pipe filters, and workspace-level awareness of stores, routes, i18n keys, and custom directives. Includes a DevTools bridge for live expression evaluation in running pages.
 
@@ -10,7 +10,7 @@ NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands direc
 
 ## Features
 
-- [Smart Completions](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/completions.md): 43+ directive completions with companion attributes, dynamic patterns, filters, validators, animations, context keys, i18n keys, routes, store properties
+- [Smart Completions](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/completions.md): 44 directive completions with companion attributes, dynamic patterns, filters, validators, animations, context keys, i18n keys, routes, store properties
 - [Hover Documentation](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/hover.md): Inline syntax docs, filter argument hints, context key descriptions, loop variable info
 - [Real-Time Diagnostics](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/diagnostics.md): Unknown directive detection with "did you mean?" suggestions, orphaned else/else-if, duplicate state/ref, invalid filters, expression syntax errors
 - [Go-to-Definition](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/go-to-definition.md): Jump to template IDs, ref declarations, store definitions, companion attribute targets
@@ -24,7 +24,7 @@ NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands direc
 
 ## Reference
 
-- [Directives](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/directives.md): All 44 exact directives + 4 dynamic patterns supported by the LSP
+- [Directives](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/directives.md): All 44 exact directives + 4 dynamic patterns supported by the LSP. The drag-and-drop directives (`drag`, `drop`, `drag-list`, `drag-multiple`) and `validate` now require the `@erickxavier/nojs-elements` plugin (`NoJS.use(NoJSElements)`) as of NoJS v1.13.0
 - [Filters](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/filters.md): All 32 built-in filters with argument signatures
 - [Validators](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/validators.md): Form validation rules reference
 - [Context Keys](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/reference/context-keys.md): `$store`, `$refs`, `$route`, `$router`, `$i18n`, `$form`
