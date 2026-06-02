@@ -2,6 +2,12 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [1.13.2](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.1...v1.13.2) — 2026-06-02
+
+### Changed
+
+- Version sync with NoJS ecosystem 1.13.2.
+
 ## [1.13.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.0...v1.13.1) — 2026-06-01
 
 ### Fixed

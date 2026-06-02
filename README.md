@@ -1,4 +1,4 @@
-# No.JS LSP — v1.13.1
+# No.JS LSP — v1.13.2
 
 [![jsDelivr hits](https://data.jsdelivr.com/v1/package/gh/erickxavier/nojs-lsp/badge)](https://www.jsdelivr.com/package/gh/erickxavier/nojs-lsp)
 
