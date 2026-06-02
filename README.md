@@ -1,5 +1,7 @@
 # No.JS LSP — v1.13.1
 
+[![jsDelivr hits](https://data.jsdelivr.com/v1/package/gh/erickxavier/nojs-lsp/badge)](https://www.jsdelivr.com/package/gh/erickxavier/nojs-lsp)
+
 VS Code extension providing full language server support for the [No.JS](https://github.com/ErickXavier/no-js) HTML-first reactive framework.
 
 Also works as a standalone language server (`--stdio`) for **Neovim**, **Sublime Text**, **Emacs**, and any LSP-compatible editor.
