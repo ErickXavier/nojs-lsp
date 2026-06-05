@@ -2,6 +2,13 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [Unreleased]
+
+### Added
+
+- 7 new companion attributes for `get` directive: `get-trigger`, `get-trigger-label`, `get-insert`, `get-page`, `get-cursor`, `get-cursor-field`, `get-threshold`
+- 5 new VS Code snippets: Infinite Scroll, Load More Button, Cursor Pagination, Lazy Load on Visible, Hover Prefetch
+
 ## [1.13.3](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.2...v1.13.3) — 2026-06-05
 
 ### Changed
