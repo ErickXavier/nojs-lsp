@@ -91,7 +91,7 @@ describe('HoverProvider', () => {
     if (hover) {
       const value = typeof hover.contents === 'string' ? hover.contents : (hover.contents as any).value;
       expect(value).toContain('foreach');
-      expect(value).toContain('inline');
+      expect(value).toContain('self-repeating');
     }
   });
 
