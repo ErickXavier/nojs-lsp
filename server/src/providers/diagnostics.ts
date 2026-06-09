@@ -102,21 +102,31 @@ export async function validateTextDocument(
           const prevAttrs = prevSibling.attributes ? Object.keys(prevSibling.attributes) : [];
           const hasIf = prevAttrs.includes('if');
           const hasElseIf = prevAttrs.includes('else-if');
-          if (!hasIf && !hasElseIf) {
+          // else (without value) is also valid after a loop directive (each/foreach/for)
+          const hasLoop = prevAttrs.includes('each') || prevAttrs.includes('foreach') || prevAttrs.includes('for');
+          const isValidAfterConditional = hasIf || hasElseIf;
+          const isValidAfterLoop = name === 'else' && hasLoop;
+          if (!isValidAfterConditional && !isValidAfterLoop) {
             const range = toRange(document, nameStart, nameEnd);
+            const validPredecessors = name === 'else'
+              ? '"if", "else-if", "each", "foreach", or "for"'
+              : '"if" or "else-if"';
             diagnostics.push({
               severity: DiagnosticSeverity.Error,
               range,
-              message: `No.JS: "${name}" must be preceded by a sibling with "if" or "else-if".`,
+              message: `No.JS: "${name}" must be preceded by a sibling with ${validPredecessors}.`,
               source: SOURCE,
             });
           }
         } else {
           const range = toRange(document, nameStart, nameEnd);
+          const validPredecessors = name === 'else'
+            ? '"if", "else-if", "each", "foreach", or "for"'
+            : '"if" or "else-if"';
           diagnostics.push({
             severity: DiagnosticSeverity.Error,
             range,
-            message: `No.JS: "${name}" must be preceded by a sibling with "if" or "else-if".`,
+            message: `No.JS: "${name}" must be preceded by a sibling with ${validPredecessors}.`,
             source: SOURCE,
           });
         }

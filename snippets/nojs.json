@@ -23,34 +23,36 @@
   "No.JS Each Loop": {
     "prefix": "each",
     "body": [
-      "<${1:li} each=\"${2:item} in ${3:items}\">",
-      "\t<${4:span} bind=\"${2:item}.$5\"></${4:span}>",
-      "</${1:li}>"
+      "<${1:li} each=\"${2:item} in ${3:items}\" bind=\"${2}.${4:name}\"></${1:li}>"
     ],
-    "description": "No.JS each loop (alias of foreach)"
+    "description": "No.JS each loop — self-repeating (alias of foreach)"
   },
   "No.JS Foreach Loop": {
     "prefix": "foreach",
     "body": [
-      "<${1:li} foreach=\"${2:item} in ${3:items}\">",
-      "\t<${4:span} bind=\"${2:item}.$5\"></${4:span}>",
-      "</${1:li}>"
+      "<${1:li} foreach=\"${2:item} in ${3:items}\" bind=\"${2}.${4:name}\"></${1:li}>"
     ],
-    "description": "No.JS foreach loop with inline template"
+    "description": "No.JS foreach loop — self-repeating"
   },
   "No.JS For Loop": {
     "prefix": "for",
     "body": [
-      "<${1:li} for=\"${2:item} in ${3:items}\">",
-      "\t<${4:span} bind=\"${2:item}.$5\"></${4:span}>",
-      "</${1:li}>"
+      "<${1:li} for=\"${2:item} in ${3:items}\" bind=\"${2}.${4:name}\"></${1:li}>"
     ],
-    "description": "No.JS for loop (alias of foreach)"
+    "description": "No.JS for loop — self-repeating (alias of foreach)"
+  },
+  "No.JS Foreach with Sibling Else": {
+    "prefix": "foreach-else",
+    "body": [
+      "<${1:li} foreach=\"${2:item} in ${3:items}\" bind=\"${2}.${4:name}\"></${1:li}>",
+      "<${1:li} else>${5:No items found}</${1:li}>"
+    ],
+    "description": "No.JS foreach loop with sibling else for empty list"
   },
   "No.JS Foreach with Template": {
     "prefix": "foreach-template",
     "body": [
-      "<${1:div} foreach=\"${2:item} in ${3:items}\" template=\"${4:item-tpl}\"></${1:div}>",
+      "<${1:li} foreach=\"${2:item} in ${3:items}\" template=\"${4:item-tpl}\"></${1:li}>",
       "",
       "<template id=\"${4:item-tpl}\">",
       "\t<${5:span} bind=\"${2:item}.$6\"></${5:span}>",
@@ -61,9 +63,7 @@
   "No.JS Foreach with Filter/Sort": {
     "prefix": "foreach-filter",
     "body": [
-      "<${1:li} foreach=\"${2:item} in ${3:items}\" filter=\"${4:item.active}\" sort=\"${5:name}\" limit=\"${6:10}\">",
-      "\t<${7:span} bind=\"${2:item}.$8\"></${7:span}>",
-      "</${1:li}>"
+      "<${1:li} foreach=\"${2:item} in ${3:items}\" filter=\"${4:item.active}\" sort=\"${5:name}\" limit=\"${6:10}\" bind=\"${2}.${7:name}\"></${1:li}>"
     ],
     "description": "No.JS foreach loop with filter, sort, and limit"
   },
@@ -71,12 +71,10 @@
     "prefix": "foreach-inline",
     "body": [
       "<${1:ul}>",
-      "\t<${2:li} foreach=\"${3:item} in ${4:items}\">",
-      "\t\t<${5:span} bind=\"${3:item}.$6\"></${5:span}>",
-      "\t</${2:li}>",
+      "\t<${2:li} foreach=\"${3:item} in ${4:items}\" bind=\"${3}.${5:name}\"></${2:li}>",
       "</${1:ul}>"
     ],
-    "description": "No.JS foreach with inline children as template (no template attr needed)"
+    "description": "No.JS foreach — self-repeating element inside container"
   },
   "No.JS HTTP GET Fetch": {
     "prefix": "get",
