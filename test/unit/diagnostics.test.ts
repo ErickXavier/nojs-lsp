@@ -71,6 +71,38 @@ describe('DiagnosticsProvider', () => {
       const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
       expect(elseError).toBeUndefined();
     });
+
+    it('reports error for sibling else after a loop element (removed in Core v1.15)', async () => {
+      const content = '<ul><li each="item in items" bind="item.name"></li><li else>No items found</li></ul>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      expect(elseError).toBeDefined();
+    });
+
+    it('does not report for else template companion on a loop element', async () => {
+      const content = '<ul><li each="item in items" else="no-items-tpl" bind="item.name"></li></ul><template id="no-items-tpl"><p>No items found</p></template>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      expect(elseError).toBeUndefined();
+    });
+
+    it('does not report for else companion using #id template reference', async () => {
+      const content = '<ul><li foreach="item in items" else="#no-items-tpl" bind="item.name"></li></ul><template id="no-items-tpl"><p>No items found</p></template>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const tplError = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      expect(elseError).toBeUndefined();
+      expect(tplError).toBeUndefined();
+    });
   });
 
   describe('Unknown filters', () => {

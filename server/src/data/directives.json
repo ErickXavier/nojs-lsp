@@ -215,7 +215,7 @@
       "companions": [
         { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
       ],
-      "documentation": "Fallback branch after `if`/`else-if`. Must follow a sibling with `if` or `else-if`.\n\n**After conditional:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else>Please log in</div>\n```\n\n**Companion:** `then`",
+      "documentation": "Fallback branch after `if`/`else-if`. Must follow a sibling with `if` or `else-if`.\n\n**After conditional:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else>Please log in</div>\n```\n\n**On loop elements** (`each`/`foreach`/`for`), `else=\"templateId\"` is the empty-state companion — the referenced template (bare id or `#id`) renders when the list is empty, null/undefined, or not an array:\n```html\n<li each=\"item in items\" else=\"no-items-tpl\" bind=\"item.name\"></li>\n<template id=\"no-items-tpl\"><p>No items found</p></template>\n```\n\nA bare `else` with no preceding `if`/`else-if` sibling is invalid — No.JS logs a console warning.\n\n**Companion:** `then`",
       "category": "conditional"
     },
     {
@@ -303,7 +303,7 @@
         { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
         { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
         { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID to render when the list is empty" },
+        { "name": "else", "type": "templateId", "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array" },
         { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
         { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
         { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
@@ -311,7 +311,7 @@
         { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
         { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
       ],
-      "documentation": "Alias of `foreach`. Self-repeating loop directive — the element with `each` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings.\n\n**Example:**\n```html\n<ul>\n  <li each=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li each=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li each=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
+      "documentation": "Alias of `foreach`. Self-repeating loop directive — the element with `each` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings.\n\n**Example:**\n```html\n<ul>\n  <li each=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li each=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li each=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\nThe `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
       "category": "loop"
     },
     {
@@ -328,7 +328,7 @@
         { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
         { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
         { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID to render when the list is empty" },
+        { "name": "else", "type": "templateId", "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array" },
         { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
         { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
         { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
@@ -336,7 +336,7 @@
         { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
         { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
       ],
-      "documentation": "Primary self-repeating loop directive — the element with `foreach` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings. Also supports **external templates** via the `template` companion. Aliases: `each`, `for`.\n\n**Self-repeating (recommended):**\n```html\n<ul>\n  <li foreach=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li foreach=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**External template:**\n```html\n<li foreach=\"item in products\" template=\"item-tpl\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li foreach=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, animation attrs",
+      "documentation": "Primary self-repeating loop directive — the element with `foreach` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings. Also supports **external templates** via the `template` companion. Aliases: `each`, `for`.\n\n**Self-repeating (recommended):**\n```html\n<ul>\n  <li foreach=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li foreach=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**External template:**\n```html\n<li foreach=\"item in products\" template=\"item-tpl\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li foreach=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\nThe `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, animation attrs",
       "category": "loop"
     },
     {
@@ -353,7 +353,7 @@
         { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
         { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
         { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID to render when the list is empty" },
+        { "name": "else", "type": "templateId", "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array" },
         { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
         { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
         { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
@@ -361,7 +361,7 @@
         { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
         { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
       ],
-      "documentation": "Alias of `foreach`. Self-repeating loop directive — the element with `for` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings.\n\n**Example:**\n```html\n<ul>\n  <li for=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li for=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li for=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
+      "documentation": "Alias of `foreach`. Self-repeating loop directive — the element with `for` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings.\n\n**Example:**\n```html\n<ul>\n  <li for=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li for=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li for=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\nThe `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
       "category": "loop"
     },
     {

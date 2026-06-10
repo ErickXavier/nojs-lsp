@@ -2,6 +2,15 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+
+- **BREAKING (Core v1.15 sync):** Sibling `else` after loop directives (`each`/`foreach`/`for`) is no longer valid — diagnostics now report it as an error and suggest the `else="templateId"` companion instead
+- `else="templateId"` companion on loop elements no longer triggers a false "orphaned else" diagnostic
+- Template ID references (`else`, `then`, `use`, `template`, etc.) now accept the `#id` form in addition to the bare id
+- Loop directive docs, hovers, and the `else` directive docs updated with v1.15 empty-state semantics: the else template renders when the list is empty (`[]`) or null/undefined/not an array
+
 ## [1.14.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.3...v1.14.0) — 2026-06-09
 
 ### Added

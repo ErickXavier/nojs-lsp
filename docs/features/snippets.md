@@ -57,6 +57,20 @@ All snippets use tab stops (`$1`, `$2`, …) so you can cycle through placeholde
 
 > `each` and `for` are aliases for `foreach` with identical capabilities.
 
+### No.JS Foreach with Else Template Ref
+
+**Prefix:** `foreach-else-template`
+
+```html
+<li foreach="item in items" else="no-items" bind="item.name"></li>
+
+<template id="no-items">
+  <span>No items found</span>
+</template>
+```
+
+> The `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.
+
 ### No.JS Foreach with Template
 
 **Prefix:** `foreach-template`

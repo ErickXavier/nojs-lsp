@@ -97,38 +97,27 @@ export async function validateTextDocument(
 
       // 3. Orphaned else / else-if
       if (name === 'else' || name === 'else-if') {
-        const prevSibling = getPreviousSibling(el.node);
-        if (prevSibling) {
-          const prevAttrs = prevSibling.attributes ? Object.keys(prevSibling.attributes) : [];
-          const hasIf = prevAttrs.includes('if');
-          const hasElseIf = prevAttrs.includes('else-if');
-          // else (without value) is also valid after a loop directive (each/foreach/for)
-          const hasLoop = prevAttrs.includes('each') || prevAttrs.includes('foreach') || prevAttrs.includes('for');
-          const isValidAfterConditional = hasIf || hasElseIf;
-          const isValidAfterLoop = name === 'else' && hasLoop;
-          if (!isValidAfterConditional && !isValidAfterLoop) {
+        // `else` on an element that also has `if` or a loop directive
+        // (each/foreach/for) is the companion form (else="templateId") —
+        // not the standalone else directive. Skip the orphan check.
+        const isElseCompanion = name === 'else' &&
+          directivesOnElement.some(d => d === 'if' || d === 'each' || d === 'foreach' || d === 'for');
+        if (!isElseCompanion) {
+          const prevSibling = getPreviousSibling(el.node);
+          const prevAttrs = prevSibling?.attributes ? Object.keys(prevSibling.attributes) : [];
+          const isValidAfterConditional = prevAttrs.includes('if') || prevAttrs.includes('else-if');
+          if (!isValidAfterConditional) {
             const range = toRange(document, nameStart, nameEnd);
-            const validPredecessors = name === 'else'
-              ? '"if", "else-if", "each", "foreach", or "for"'
-              : '"if" or "else-if"';
+            const loopHint = name === 'else'
+              ? ' For loop empty states, use else="templateId" on the loop element instead.'
+              : '';
             diagnostics.push({
               severity: DiagnosticSeverity.Error,
               range,
-              message: `No.JS: "${name}" must be preceded by a sibling with ${validPredecessors}.`,
+              message: `No.JS: "${name}" must be preceded by a sibling with "if" or "else-if".${loopHint}`,
               source: SOURCE,
             });
           }
-        } else {
-          const range = toRange(document, nameStart, nameEnd);
-          const validPredecessors = name === 'else'
-            ? '"if", "else-if", "each", "foreach", or "for"'
-            : '"if" or "else-if"';
-          diagnostics.push({
-            severity: DiagnosticSeverity.Error,
-            range,
-            message: `No.JS: "${name}" must be preceded by a sibling with ${validPredecessors}.`,
-            source: SOURCE,
-          });
         }
       }
 
@@ -246,8 +235,9 @@ export async function validateTextDocument(
       if ((name === 'use' || name === 'then' || name === 'else' || name === 'loading' ||
            name === 'error' || name === 'empty' || name === 'success' || name === 'template' ||
            name === 'error-boundary') && value) {
-        // Only check if it looks like a template ID (simple identifier, not an expression)
-        const templateId = value.trim();
+        // Only check if it looks like a template ID (simple identifier, not an expression).
+        // A leading `#` is accepted and equivalent to the bare id (e.g. else="#no-items").
+        const templateId = value.trim().replace(/^#/, '');
         if (templateId && /^[\w-]+$/.test(templateId)) {
           referencedTemplateIds.push({ id: templateId, nameStart: valueStart, nameEnd: valueEnd });
         }
