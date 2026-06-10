@@ -59,7 +59,7 @@
     },
     {
       "name": "else",
-      "description": { "kind": "markdown", "value": "No.JS: Fallback branch after `if`/`else-if`, or empty-list fallback after a loop (`each`/`foreach`/`for`). No value needed.\n\n**After conditional:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else>Please log in</div>\n```\n\n**After loop (empty list):**\n```html\n<li each=\"item in items\" bind=\"item.name\"></li>\n<li else>No items found</li>\n```\n\n**Companion:** `then`" },
+      "description": { "kind": "markdown", "value": "No.JS: Fallback branch after `if`/`else-if`. No value needed.\n\n**After conditional:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else>Please log in</div>\n```\n\n**Companion:** `then`" },
       "valueSet": "v"
     },
     {
@@ -76,15 +76,15 @@
     },
     {
       "name": "each",
-      "description": { "kind": "markdown", "value": "No.JS: Self-repeating loop — the element with `each` IS the template that gets cloned for each item. Syntax: `\"item in list\"`.\n\n```html\n<ul>\n  <li each=\"user in users\" bind=\"user.name\"></li>\n  <li else>No users found</li>\n</ul>\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`\n\n**Sibling else:** Place `<el else>` after the loop element to show when the list is empty." }
+      "description": { "kind": "markdown", "value": "No.JS: Self-repeating loop — the element with `each` IS the template that gets cloned for each item. Syntax: `\"item in list\"`.\n\n```html\n<ul>\n  <li each=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**Empty list fallback:**\n```html\n<li each=\"user in users\" else=\"noUsersTpl\" bind=\"user.name\"></li>\n<template id=\"noUsersTpl\"><li>No users found</li></template>\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `template`, `else` (template ID), `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`" }
     },
     {
       "name": "foreach",
-      "description": { "kind": "markdown", "value": "No.JS: Primary self-repeating loop — the element with `foreach` IS the template that gets cloned for each item. Syntax: `\"item in list\"`. Aliases: `each`, `for`.\n\n**Self-repeating (recommended):**\n```html\n<ul>\n  <li foreach=\"user in users\" bind=\"user.name\"></li>\n  <li else>No users found</li>\n</ul>\n```\n\n**External template:**\n```html\n<li foreach=\"item in products\" template=\"item-tpl\"></li>\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `else`, `filter`, `sort`, `limit`, `offset`, `template` (optional), `key`, animation attrs\n\n**Sibling else:** Place `<el else>` after the loop element to show when the list is empty." }
+      "description": { "kind": "markdown", "value": "No.JS: Primary self-repeating loop — the element with `foreach` IS the template that gets cloned for each item. Syntax: `\"item in list\"`. Aliases: `each`, `for`.\n\n**Self-repeating (recommended):**\n```html\n<ul>\n  <li foreach=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**Empty list fallback:**\n```html\n<li foreach=\"user in users\" else=\"noUsersTpl\" bind=\"user.name\"></li>\n<template id=\"noUsersTpl\"><li>No users found</li></template>\n```\n\n**External template:**\n```html\n<li foreach=\"item in products\" template=\"item-tpl\"></li>\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `else` (template ID), `filter`, `sort`, `limit`, `offset`, `template` (optional), `key`, animation attrs" }
     },
     {
       "name": "for",
-      "description": { "kind": "markdown", "value": "No.JS: Alias of `foreach`. Self-repeating loop — the element with `for` IS the template that gets cloned for each item. Syntax: `\"item in list\"`.\n\n```html\n<ul>\n  <li for=\"user in users\" bind=\"user.name\"></li>\n  <li else>No users found</li>\n</ul>\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `else`, `filter`, `sort`, `limit`, `offset`, `template`, `key`, animation attrs\n\n**Sibling else:** Place `<el else>` after the loop element to show when the list is empty." }
+      "description": { "kind": "markdown", "value": "No.JS: Alias of `foreach`. Self-repeating loop — the element with `for` IS the template that gets cloned for each item. Syntax: `\"item in list\"`.\n\n```html\n<ul>\n  <li for=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**Empty list fallback:**\n```html\n<li for=\"user in users\" else=\"noUsersTpl\" bind=\"user.name\"></li>\n<template id=\"noUsersTpl\"><li>No users found</li></template>\n```\n\nLoop context: `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `else` (template ID), `filter`, `sort`, `limit`, `offset`, `template`, `key`, animation attrs" }
     },
     {
       "name": "trigger",

@@ -41,14 +41,6 @@
     ],
     "description": "No.JS for loop — self-repeating (alias of foreach)"
   },
-  "No.JS Foreach with Sibling Else": {
-    "prefix": "foreach-else",
-    "body": [
-      "<${1:li} foreach=\"${2:item} in ${3:items}\" bind=\"${2}.${4:name}\"></${1:li}>",
-      "<${1:li} else>${5:No items found}</${1:li}>"
-    ],
-    "description": "No.JS foreach loop with sibling else for empty list"
-  },
   "No.JS Foreach with Else Template Ref": {
     "prefix": "foreach-else-template",
     "body": [
