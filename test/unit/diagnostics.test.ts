@@ -103,6 +103,71 @@ describe('DiagnosticsProvider', () => {
       expect(elseError).toBeUndefined();
       expect(tplError).toBeUndefined();
     });
+
+    it('does not report for else after else-if sibling (conditional chains unchanged)', async () => {
+      const content = '<div><span if="a">A</span><span else-if="b">B</span><span else>C</span></div>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseError = diagnostics.find(d => d.message.includes('must be preceded'));
+      expect(elseError).toBeUndefined();
+    });
+
+    it('reports error for orphaned else-if without the loop hint', async () => {
+      const content = '<div><span else-if="b">B</span></div>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseIfError = diagnostics.find(d => d.message.includes('"else-if" must be preceded'));
+      expect(elseIfError).toBeDefined();
+      expect(elseIfError!.message).not.toContain('else="templateId"');
+    });
+
+    it('sibling else after a loop element error includes the else="templateId" hint', async () => {
+      const content = '<ul><li each="item in items" bind="item.name"></li><li else>No items</li></ul>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      expect(elseError).toBeDefined();
+      expect(elseError!.message).toContain('else="templateId"');
+    });
+
+    it('reports error for sibling else after foreach and for loop variants', async () => {
+      for (const loopDir of ['foreach', 'for']) {
+        const content = `<ul><li ${loopDir}="item in items" bind="item.name"></li><li else>No items</li></ul>`;
+        const doc = createDocument(content);
+        const conn = createMockConnection();
+        await validateTextDocument(doc, conn as any);
+        const diagnostics = conn.getDiagnostics();
+        const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+        expect(elseError).toBeDefined();
+      }
+    });
+
+    it('does not report for else template companion on an if element', async () => {
+      const content = '<div if="show" else="fallback-tpl">Visible</div><template id="fallback-tpl"><p>Hidden</p></template>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      expect(elseError).toBeUndefined();
+    });
+
+    it('reports missing template for #id else companion using the bare id', async () => {
+      const content = '<ul><li each="item in items" else="#missing-tpl" bind="item.name"></li></ul>';
+      const doc = createDocument(content);
+      const conn = createMockConnection();
+      await validateTextDocument(doc, conn as any);
+      const diagnostics = conn.getDiagnostics();
+      const tplError = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      expect(tplError).toBeDefined();
+      expect(tplError!.message).toContain('Template "missing-tpl"');
+    });
   });
 
   describe('Unknown filters', () => {
