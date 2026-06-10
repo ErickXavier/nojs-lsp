@@ -382,6 +382,8 @@ Fallback branch after `if` or `else-if`. Must follow a sibling with `if` or `els
 <div else>Default content</div>
 ```
 
+> On loop elements (`each`/`foreach`/`for`), `else="templateId"` is the empty-state companion — the referenced template (bare id or `#id`) renders when the list is empty, null/undefined, or not an array. A bare `else` with no preceding `if`/`else-if` sibling is invalid; No.JS logs a console warning.
+
 #### `show`
 
 Toggles element visibility via CSS `display`. Element stays in DOM.
@@ -494,7 +496,7 @@ Loops over a collection using `"item in list"` syntax. Supports filtering, sorti
 | Name | Type | Description |
 |------|------|-------------|
 | `index` | identifier | Custom index variable name |
-| `else` | templateId | Template ID for empty list |
+| `else` | templateId | Template ID (bare id or `#id`) rendered when the list is empty, null/undefined, or not an array |
 | `key` | expression | Unique key expression for DOM optimization |
 | `filter` | expression | Filter expression |
 | `sort` | string | Property to sort by |
