@@ -11,6 +11,19 @@ All notable changes to the **No.JS LSP** extension will be documented in this fi
 - Template ID references (`else`, `then`, `use`, `template`, etc.) now accept the `#id` form in addition to the bare id
 - Loop directive docs, hovers, and the `else` directive docs updated with v1.15 empty-state semantics: the else template renders when the list is empty (`[]`) or null/undefined/not an array
 
+## [1.14.1](https://github.com/ErickXavier/nojs-lsp/compare/v1.14.0...v1.14.1) — 2026-06-11
+
+### Fixed
+
+- Fixed `route` snippet: changed `<route-view>` element to `<div route-view>` attribute selector
+- Removed all `bind-text` references from snippets (text binding is plain `bind`)
+- Added standalone `animate` directive entry to directives.json
+- Added 8 HTTP pagination attributes to nojs-custom-data.json
+- Marked `from` loop companion as deprecated in custom-data
+- Removed phantom filter arguments (truncate.suffix, sortBy.direction, number/currency.locale, datetime.format)
+- Added head directives and pagination companions to docs/reference/directives.md
+- Fixed filter examples in docs/reference/filters.md (each syntax, phantom args)
+
 ## [1.14.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.3...v1.14.0) — 2026-06-09
 
 ### Added
