@@ -83,7 +83,7 @@
     "prefix": "get",
     "body": [
       "<${1:div} get=\"${2:/api/endpoint}\" as=\"${3:data}\">",
-      "\t<${4:span} bind-text=\"${3:data}.$5\"></${4:span}>",
+      "\t<${4:span} bind=\"${3:data}.$5\"></${4:span}>",
       "</${1:div}>"
     ],
     "description": "No.JS HTTP GET fetch with data binding"
@@ -183,16 +183,16 @@
   "No.JS Bind Attribute": {
     "prefix": "bind",
     "body": [
-      "<${1:div} bind-${2:text}=\"${3:expression}\"></${1:div}>"
+      "<${1:div} bind=\"${2:expression}\"></${1:div}>"
     ],
-    "description": "No.JS bind attribute directive"
+    "description": "No.JS bind directive for text content"
   },
   "No.JS Route View": {
     "prefix": "route",
     "body": [
-      "<route-view src=\"${1:pages/}\"></route-view>"
+      "<div route-view src=\"${1:pages/}\"></div>"
     ],
-    "description": "No.JS route view component"
+    "description": "No.JS route view with file-based routing"
   },
   "No.JS i18n": {
     "prefix": "t",

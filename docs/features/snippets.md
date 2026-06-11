@@ -51,7 +51,7 @@ All snippets use tab stops (`$1`, `$2`, …) so you can cycle through placeholde
 
 ```html
 <div each="item in items">
-  <span bind-text="item."></span>
+  <span bind="item."></span>
 </div>
 ```
 
@@ -103,7 +103,7 @@ All snippets use tab stops (`$1`, `$2`, …) so you can cycle through placeholde
 
 ```html
 <div get="/api/endpoint" as="data">
-  <span bind-text="data."></span>
+  <span bind="data."></span>
 </div>
 ```
 
@@ -257,7 +257,7 @@ NoJS.notify(); // flush DOM bindings after store mutation
 **Prefix:** `bind`
 
 ```html
-<div bind-text="expression"></div>
+<div bind="expression"></div>
 ```
 
 ---
@@ -269,7 +269,7 @@ NoJS.notify(); // flush DOM bindings after store mutation
 **Prefix:** `route`
 
 ```html
-<route-view src="pages/"></route-view>
+<div route-view src="pages/"></div>
 ```
 
 ### NoJS: 404 Catch-All Route
