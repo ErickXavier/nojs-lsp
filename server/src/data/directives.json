@@ -8,9 +8,21 @@
       "valueDescription": "JS object literal",
       "requiresValue": true,
       "companions": [
-        { "name": "persist", "type": "boolean", "description": "No.JS: Persist state to localStorage" },
-        { "name": "persist-key", "type": "string", "description": "No.JS: Custom localStorage key" },
-        { "name": "persist-fields", "type": "string", "description": "No.JS: Comma-separated list of state fields to persist selectively" }
+        {
+          "name": "persist",
+          "type": "boolean",
+          "description": "No.JS: Persist state to localStorage"
+        },
+        {
+          "name": "persist-key",
+          "type": "string",
+          "description": "No.JS: Custom localStorage key"
+        },
+        {
+          "name": "persist-fields",
+          "type": "string",
+          "description": "No.JS: Comma-separated list of state fields to persist selectively"
+        }
       ],
       "documentation": "Declares reactive state on the element. The value is evaluated as a JavaScript object literal.\n\n**Example:**\n```html\n<div state=\"{ count: 0, name: 'World' }\">\n```\n\n**Companions:** `persist`, `persist-key`, `persist-fields`",
       "category": "state"
@@ -23,7 +35,11 @@
       "valueDescription": "Store name string",
       "requiresValue": true,
       "companions": [
-        { "name": "value", "type": "expression", "description": "No.JS: Initial store data as JS object literal" }
+        {
+          "name": "value",
+          "type": "expression",
+          "description": "No.JS: Initial store data as JS object literal"
+        }
       ],
       "documentation": "Declares a named global store accessible via `$store.name`.\n\n**Example:**\n```html\n<div store=\"cart\" value=\"{ items: [], total: 0 }\">\n```\n\n**Companion:** `value`",
       "category": "state"
@@ -36,7 +52,11 @@
       "valueDescription": "Property name string",
       "requiresValue": true,
       "companions": [
-        { "name": "expr", "type": "expression", "description": "No.JS: Expression to evaluate" }
+        {
+          "name": "expr",
+          "type": "expression",
+          "description": "No.JS: Expression to evaluate"
+        }
       ],
       "documentation": "Declares a computed property that auto-updates when dependencies change.\n\n**Example:**\n```html\n<div computed=\"fullName\" expr=\"firstName + ' ' + lastName\">\n```\n\n**Companion:** `expr`",
       "category": "state"
@@ -49,7 +69,11 @@
       "valueDescription": "Expression to watch",
       "requiresValue": true,
       "companions": [
-        { "name": "on:change", "type": "statement", "description": "No.JS: Handler executed on change; receives $old, $new" }
+        {
+          "name": "on:change",
+          "type": "statement",
+          "description": "No.JS: Handler executed on change; receives $old, $new"
+        }
       ],
       "documentation": "Watches an expression for changes and runs a handler.\n\n**Example:**\n```html\n<div watch=\"count\" on:change=\"console.log($old, $new)\">\n```\n\n**Companion:** `on:change`\n**Handler variables:** `$old`, `$new`",
       "category": "state"
@@ -62,32 +86,148 @@
       "valueDescription": "URL string or expression",
       "requiresValue": true,
       "companions": [
-        { "name": "as", "type": "identifier", "description": "No.JS: Variable name for response data" },
-        { "name": "loading", "type": "templateId", "description": "No.JS: Template ID shown while loading" },
-        { "name": "error", "type": "templateId", "description": "No.JS: Template ID shown on error" },
-        { "name": "empty", "type": "templateId", "description": "No.JS: Template ID shown when response is empty" },
-        { "name": "success", "type": "templateId", "description": "No.JS: Template ID shown on success" },
-        { "name": "then", "type": "expression", "description": "No.JS: Expression executed on success" },
-        { "name": "redirect", "type": "string", "description": "No.JS: Path to redirect after success" },
-        { "name": "confirm", "type": "string", "description": "No.JS: Confirmation message before request" },
-        { "name": "refresh", "type": "number", "description": "No.JS: Auto-refresh interval in ms" },
-        { "name": "cached", "type": "boolean", "description": "No.JS: Enable response caching" },
-        { "name": "body", "type": "expression", "description": "No.JS: Request body expression" },
-        { "name": "headers", "type": "expression", "description": "No.JS: Custom request headers object" },
-        { "name": "var", "type": "identifier", "description": "No.JS: Variable name for additional data" },
-        { "name": "into", "type": "string", "description": "No.JS: Store name to put response into" },
-        { "name": "retry", "type": "number", "description": "No.JS: Number of retry attempts" },
-        { "name": "retry-delay", "type": "number", "description": "No.JS: Delay between retries in ms" },
-        { "name": "params", "type": "expression", "description": "No.JS: Query parameters object" },
-        { "name": "debounce", "type": "number", "description": "No.JS: Debounce delay in ms" },
-        { "name": "skeleton", "type": "string", "description": "No.JS: ID (without #) of a DOM element to hide while loading and restore on response. Prevents CLS — element must start visible in HTML." },
-        { "name": "get-trigger", "type": "enum", "description": "No.JS: Controls when the GET request fires", "values": ["load", "visible", "hover", "none", "scroll", "button"] },
-        { "name": "get-trigger-label", "type": "string", "description": "No.JS: Label text for the auto-generated Load More button (get-trigger=\"button\")" },
-        { "name": "get-insert", "type": "enum", "description": "No.JS: How fetched content is inserted into the container", "values": ["append", "prepend"] },
-        { "name": "get-page", "type": "number", "description": "No.JS: Initial page number for offset-based pagination (auto-increments)" },
-        { "name": "get-cursor", "type": "boolean", "description": "No.JS: Enable cursor-based pagination (mutually exclusive with get-page)" },
-        { "name": "get-cursor-field", "type": "string", "description": "No.JS: Dot-notation path to cursor value in JSON response (e.g. 'meta.nextCursor')" },
-        { "name": "get-threshold", "type": "string", "description": "No.JS: IntersectionObserver rootMargin for scroll/visible triggers (e.g. '200px')" }
+        {
+          "name": "as",
+          "type": "identifier",
+          "description": "No.JS: Variable name for response data"
+        },
+        {
+          "name": "loading",
+          "type": "templateId",
+          "description": "No.JS: Template ID shown while loading"
+        },
+        {
+          "name": "error",
+          "type": "templateId",
+          "description": "No.JS: Template ID shown on error"
+        },
+        {
+          "name": "empty",
+          "type": "templateId",
+          "description": "No.JS: Template ID shown when response is empty"
+        },
+        {
+          "name": "success",
+          "type": "templateId",
+          "description": "No.JS: Template ID shown on success"
+        },
+        {
+          "name": "then",
+          "type": "expression",
+          "description": "No.JS: Expression executed on success"
+        },
+        {
+          "name": "redirect",
+          "type": "string",
+          "description": "No.JS: Path to redirect after success"
+        },
+        {
+          "name": "confirm",
+          "type": "string",
+          "description": "No.JS: Confirmation message before request"
+        },
+        {
+          "name": "refresh",
+          "type": "number",
+          "description": "No.JS: Auto-refresh interval in ms"
+        },
+        {
+          "name": "cached",
+          "type": "boolean",
+          "description": "No.JS: Enable response caching"
+        },
+        {
+          "name": "body",
+          "type": "expression",
+          "description": "No.JS: Request body expression"
+        },
+        {
+          "name": "headers",
+          "type": "expression",
+          "description": "No.JS: Custom request headers object"
+        },
+        {
+          "name": "var",
+          "type": "identifier",
+          "description": "No.JS: Variable name for additional data"
+        },
+        {
+          "name": "into",
+          "type": "string",
+          "description": "No.JS: Store name to put response into"
+        },
+        {
+          "name": "retry",
+          "type": "number",
+          "description": "No.JS: Number of retry attempts"
+        },
+        {
+          "name": "retry-delay",
+          "type": "number",
+          "description": "No.JS: Delay between retries in ms"
+        },
+        {
+          "name": "params",
+          "type": "expression",
+          "description": "No.JS: Query parameters object"
+        },
+        {
+          "name": "debounce",
+          "type": "number",
+          "description": "No.JS: Debounce delay in ms"
+        },
+        {
+          "name": "skeleton",
+          "type": "string",
+          "description": "No.JS: ID (without #) of a DOM element to hide while loading and restore on response. Prevents CLS — element must start visible in HTML."
+        },
+        {
+          "name": "get-trigger",
+          "type": "enum",
+          "description": "No.JS: Controls when the GET request fires",
+          "values": [
+            "load",
+            "visible",
+            "hover",
+            "none",
+            "scroll",
+            "button"
+          ]
+        },
+        {
+          "name": "get-trigger-label",
+          "type": "string",
+          "description": "No.JS: Label text for the auto-generated Load More button (get-trigger=\"button\")"
+        },
+        {
+          "name": "get-insert",
+          "type": "enum",
+          "description": "No.JS: How fetched content is inserted into the container",
+          "values": [
+            "append",
+            "prepend"
+          ]
+        },
+        {
+          "name": "get-page",
+          "type": "number",
+          "description": "No.JS: Initial page number for offset-based pagination (auto-increments)"
+        },
+        {
+          "name": "get-cursor",
+          "type": "boolean",
+          "description": "No.JS: Enable cursor-based pagination (mutually exclusive with get-page)"
+        },
+        {
+          "name": "get-cursor-field",
+          "type": "string",
+          "description": "No.JS: Dot-notation path to cursor value in JSON response (e.g. 'meta.nextCursor')"
+        },
+        {
+          "name": "get-threshold",
+          "type": "string",
+          "description": "No.JS: IntersectionObserver rootMargin for scroll/visible triggers (e.g. '200px')"
+        }
       ],
       "documentation": "Performs an HTTP GET request and makes response data available.\n\n**Example:**\n```html\n<div get=\"/api/users\" as=\"users\" loading=\"spinner-tpl\">\n  <li each=\"user in users\" bind=\"user.name\">\n</div>\n```\n\n**Companions:** `as`, `loading`, `error`, `empty`, `success`, `then`, `redirect`, `confirm`, `refresh`, `cached`, `body`, `headers`, `var`, `into`, `retry`, `retry-delay`, `params`, `debounce`, `skeleton`, `get-trigger`, `get-trigger-label`, `get-insert`, `get-page`, `get-cursor`, `get-cursor-field`, `get-threshold`",
       "category": "http"
@@ -181,13 +321,41 @@
       "valueDescription": "JS boolean expression",
       "requiresValue": true,
       "companions": [
-        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render when true" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID to render when false" },
-        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
-        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
-        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
-        { "name": "transition", "type": "string", "description": "No.JS: CSS transition name" },
-        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+        {
+          "name": "then",
+          "type": "templateId",
+          "description": "No.JS: Template ID to render when true"
+        },
+        {
+          "name": "else",
+          "type": "templateId",
+          "description": "No.JS: Template ID to render when false"
+        },
+        {
+          "name": "animate-enter",
+          "type": "animation",
+          "description": "No.JS: Enter animation name"
+        },
+        {
+          "name": "animate",
+          "type": "animation",
+          "description": "No.JS: Enter animation name (alias)"
+        },
+        {
+          "name": "animate-leave",
+          "type": "animation",
+          "description": "No.JS: Leave animation name"
+        },
+        {
+          "name": "transition",
+          "type": "string",
+          "description": "No.JS: CSS transition name"
+        },
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        }
       ],
       "documentation": "Conditionally renders the element. Removes from DOM when expression is false.\n\n**Example:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else-if=\"isGuest\">Hello Guest</div>\n<div else>Please log in</div>\n```\n\n**Companions:** `then`, `else`, `animate-enter`, `animate-leave`, `transition`, `animate-duration`",
       "category": "conditional"
@@ -200,7 +368,11 @@
       "valueDescription": "JS boolean expression",
       "requiresValue": true,
       "companions": [
-        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render when true" }
+        {
+          "name": "then",
+          "type": "templateId",
+          "description": "No.JS: Template ID to render when true"
+        }
       ],
       "documentation": "Conditional branch after `if`. Must follow a sibling with `if` or `else-if`.\n\n**Example:**\n```html\n<div else-if=\"isAdmin\">Admin panel</div>\n```\n\n**Companion:** `then`",
       "category": "conditional"
@@ -213,7 +385,11 @@
       "valueDescription": "No value needed",
       "requiresValue": false,
       "companions": [
-        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
+        {
+          "name": "then",
+          "type": "templateId",
+          "description": "No.JS: Template ID to render"
+        }
       ],
       "documentation": "Fallback branch after `if`/`else-if`. Must follow a sibling with `if` or `else-if`.\n\n**After conditional:**\n```html\n<div if=\"isLoggedIn\">Welcome!</div>\n<div else>Please log in</div>\n```\n\n**On loop elements** (`each`/`foreach`/`for`), `else=\"templateId\"` is the empty-state companion — the referenced template (bare id or `#id`) renders when the list is empty, null/undefined, or not an array:\n```html\n<li each=\"item in items\" else=\"no-items-tpl\" bind=\"item.name\"></li>\n<template id=\"no-items-tpl\"><p>No items found</p></template>\n```\n\nA bare `else` with no preceding `if`/`else-if` sibling is invalid — No.JS logs a console warning.\n\n**Companion:** `then`",
       "category": "conditional"
@@ -226,11 +402,31 @@
       "valueDescription": "JS boolean expression",
       "requiresValue": true,
       "companions": [
-        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
-        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
-        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
-        { "name": "transition", "type": "string", "description": "No.JS: CSS transition name" },
-        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+        {
+          "name": "animate-enter",
+          "type": "animation",
+          "description": "No.JS: Enter animation name"
+        },
+        {
+          "name": "animate",
+          "type": "animation",
+          "description": "No.JS: Enter animation name (alias)"
+        },
+        {
+          "name": "animate-leave",
+          "type": "animation",
+          "description": "No.JS: Leave animation name"
+        },
+        {
+          "name": "transition",
+          "type": "string",
+          "description": "No.JS: CSS transition name"
+        },
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        }
       ],
       "documentation": "Toggles element visibility via CSS `display`. Element stays in DOM.\n\n**Example:**\n```html\n<div show=\"isVisible\">Visible when true</div>\n```\n\n**Companions:** `animate-enter`, `animate-leave`, `transition`, `animate-duration`",
       "category": "conditional"
@@ -243,11 +439,31 @@
       "valueDescription": "JS boolean expression",
       "requiresValue": true,
       "companions": [
-        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
-        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
-        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
-        { "name": "transition", "type": "string", "description": "No.JS: CSS transition name" },
-        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+        {
+          "name": "animate-enter",
+          "type": "animation",
+          "description": "No.JS: Enter animation name"
+        },
+        {
+          "name": "animate",
+          "type": "animation",
+          "description": "No.JS: Enter animation name (alias)"
+        },
+        {
+          "name": "animate-leave",
+          "type": "animation",
+          "description": "No.JS: Leave animation name"
+        },
+        {
+          "name": "transition",
+          "type": "string",
+          "description": "No.JS: CSS transition name"
+        },
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        }
       ],
       "documentation": "Opposite of `show`. Hides element via CSS `display: none` when true.\n\n**Example:**\n```html\n<div hide=\"isLoading\">Content</div>\n```",
       "category": "conditional"
@@ -271,7 +487,11 @@
       "valueDescription": "Value to match against parent switch expression",
       "requiresValue": true,
       "companions": [
-        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
+        {
+          "name": "then",
+          "type": "templateId",
+          "description": "No.JS: Template ID to render"
+        }
       ],
       "documentation": "Switch case. Used inside a `switch` container.\n\n**Example:**\n```html\n<p case=\"admin\">Admin panel</p>\n<p case=\"editor\" then=\"editor-tpl\"></p>\n```",
       "category": "conditional"
@@ -284,7 +504,11 @@
       "valueDescription": "No value needed",
       "requiresValue": false,
       "companions": [
-        { "name": "then", "type": "templateId", "description": "No.JS: Template ID to render" }
+        {
+          "name": "then",
+          "type": "templateId",
+          "description": "No.JS: Template ID to render"
+        }
       ],
       "documentation": "Default case in a `switch` block. Renders when no `case` matches.\n\n**Example:**\n```html\n<p default>Guest view</p>\n```",
       "category": "conditional"
@@ -297,19 +521,71 @@
       "valueDescription": "\"item in list\" syntax",
       "requiresValue": true,
       "companions": [
-        { "name": "index", "type": "identifier", "description": "No.JS: Custom index variable name" },
-        { "name": "filter", "type": "expression", "description": "No.JS: Filter expression" },
-        { "name": "sort", "type": "string", "description": "No.JS: Property to sort by" },
-        { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
-        { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
-        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array" },
-        { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
-        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
-        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
-        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
-        { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
-        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+        {
+          "name": "index",
+          "type": "identifier",
+          "description": "No.JS: Custom index variable name"
+        },
+        {
+          "name": "filter",
+          "type": "expression",
+          "description": "No.JS: Filter expression"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "No.JS: Property to sort by"
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "No.JS: Max items to show"
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "description": "No.JS: Number of items to skip"
+        },
+        {
+          "name": "template",
+          "type": "templateId",
+          "description": "No.JS: Template ID for item rendering"
+        },
+        {
+          "name": "else",
+          "type": "templateId",
+          "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array"
+        },
+        {
+          "name": "key",
+          "type": "expression",
+          "description": "No.JS: Unique key expression for DOM optimization"
+        },
+        {
+          "name": "animate-enter",
+          "type": "animation",
+          "description": "No.JS: Enter animation name"
+        },
+        {
+          "name": "animate",
+          "type": "animation",
+          "description": "No.JS: Enter animation name (alias)"
+        },
+        {
+          "name": "animate-leave",
+          "type": "animation",
+          "description": "No.JS: Leave animation name"
+        },
+        {
+          "name": "animate-stagger",
+          "type": "number",
+          "description": "No.JS: Stagger delay between items in ms"
+        },
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        }
       ],
       "documentation": "Alias of `foreach`. Self-repeating loop directive — the element with `each` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings.\n\n**Example:**\n```html\n<ul>\n  <li each=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li each=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li each=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\nThe `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
       "category": "loop"
@@ -322,19 +598,71 @@
       "valueDescription": "\"item in list\" syntax",
       "requiresValue": true,
       "companions": [
-        { "name": "index", "type": "identifier", "description": "No.JS: Custom index variable name" },
-        { "name": "filter", "type": "expression", "description": "No.JS: Filter expression" },
-        { "name": "sort", "type": "string", "description": "No.JS: Property to sort by" },
-        { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
-        { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
-        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array" },
-        { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
-        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
-        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
-        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
-        { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
-        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+        {
+          "name": "index",
+          "type": "identifier",
+          "description": "No.JS: Custom index variable name"
+        },
+        {
+          "name": "filter",
+          "type": "expression",
+          "description": "No.JS: Filter expression"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "No.JS: Property to sort by"
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "No.JS: Max items to show"
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "description": "No.JS: Number of items to skip"
+        },
+        {
+          "name": "template",
+          "type": "templateId",
+          "description": "No.JS: Template ID for item rendering"
+        },
+        {
+          "name": "else",
+          "type": "templateId",
+          "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array"
+        },
+        {
+          "name": "key",
+          "type": "expression",
+          "description": "No.JS: Unique key expression for DOM optimization"
+        },
+        {
+          "name": "animate-enter",
+          "type": "animation",
+          "description": "No.JS: Enter animation name"
+        },
+        {
+          "name": "animate",
+          "type": "animation",
+          "description": "No.JS: Enter animation name (alias)"
+        },
+        {
+          "name": "animate-leave",
+          "type": "animation",
+          "description": "No.JS: Leave animation name"
+        },
+        {
+          "name": "animate-stagger",
+          "type": "number",
+          "description": "No.JS: Stagger delay between items in ms"
+        },
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        }
       ],
       "documentation": "Primary self-repeating loop directive — the element with `foreach` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings. Also supports **external templates** via the `template` companion. Aliases: `each`, `for`.\n\n**Self-repeating (recommended):**\n```html\n<ul>\n  <li foreach=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li foreach=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**External template:**\n```html\n<li foreach=\"item in products\" template=\"item-tpl\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li foreach=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\nThe `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, animation attrs",
       "category": "loop"
@@ -347,19 +675,71 @@
       "valueDescription": "\"item in list\" syntax",
       "requiresValue": true,
       "companions": [
-        { "name": "index", "type": "identifier", "description": "No.JS: Custom index variable name" },
-        { "name": "filter", "type": "expression", "description": "No.JS: Filter expression" },
-        { "name": "sort", "type": "string", "description": "No.JS: Property to sort by" },
-        { "name": "limit", "type": "number", "description": "No.JS: Max items to show" },
-        { "name": "offset", "type": "number", "description": "No.JS: Number of items to skip" },
-        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for item rendering" },
-        { "name": "else", "type": "templateId", "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array" },
-        { "name": "key", "type": "expression", "description": "No.JS: Unique key expression for DOM optimization" },
-        { "name": "animate-enter", "type": "animation", "description": "No.JS: Enter animation name" },
-        { "name": "animate", "type": "animation", "description": "No.JS: Enter animation name (alias)" },
-        { "name": "animate-leave", "type": "animation", "description": "No.JS: Leave animation name" },
-        { "name": "animate-stagger", "type": "number", "description": "No.JS: Stagger delay between items in ms" },
-        { "name": "animate-duration", "type": "number", "description": "No.JS: Animation duration in ms" }
+        {
+          "name": "index",
+          "type": "identifier",
+          "description": "No.JS: Custom index variable name"
+        },
+        {
+          "name": "filter",
+          "type": "expression",
+          "description": "No.JS: Filter expression"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "No.JS: Property to sort by"
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "No.JS: Max items to show"
+        },
+        {
+          "name": "offset",
+          "type": "number",
+          "description": "No.JS: Number of items to skip"
+        },
+        {
+          "name": "template",
+          "type": "templateId",
+          "description": "No.JS: Template ID for item rendering"
+        },
+        {
+          "name": "else",
+          "type": "templateId",
+          "description": "No.JS: Template ID (bare id or #id) to render when the list is empty, null/undefined, or not an array"
+        },
+        {
+          "name": "key",
+          "type": "expression",
+          "description": "No.JS: Unique key expression for DOM optimization"
+        },
+        {
+          "name": "animate-enter",
+          "type": "animation",
+          "description": "No.JS: Enter animation name"
+        },
+        {
+          "name": "animate",
+          "type": "animation",
+          "description": "No.JS: Enter animation name (alias)"
+        },
+        {
+          "name": "animate-leave",
+          "type": "animation",
+          "description": "No.JS: Leave animation name"
+        },
+        {
+          "name": "animate-stagger",
+          "type": "number",
+          "description": "No.JS: Stagger delay between items in ms"
+        },
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        }
       ],
       "documentation": "Alias of `foreach`. Self-repeating loop directive — the element with `for` IS the template that gets cloned for each item. Uses `\"item in list\"` syntax. The element is removed from the DOM and replaced by comment markers; clones are inserted between them as siblings.\n\n**Example:**\n```html\n<ul>\n  <li for=\"user in users\" bind=\"user.name\"></li>\n</ul>\n```\n\n**With filter/sort:**\n```html\n<li for=\"item in products\" filter=\"item.price > 10\" sort=\"name\" limit=\"5\" bind=\"item.name\"></li>\n```\n\n**Empty list fallback (else=\"templateId\"):**\n```html\n<li for=\"item in items\" else=\"noItemsTpl\" bind=\"item.name\"></li>\n<template id=\"noItemsTpl\"><li>No items found</li></template>\n```\nThe `else` template (bare id or `#id`) renders when the list is empty (`[]`) or null/undefined/not an array.\n\n**Loop context variables:** `$index`, `$count`, `$first`, `$last`, `$even`, `$odd`\n\n**Companions:** `index`, `filter`, `sort`, `limit`, `offset`, `template`, `else`, `key`, `animate-enter`, `animate-leave`, `animate-stagger`, `animate-duration`",
       "category": "loop"
@@ -372,7 +752,11 @@
       "valueDescription": "Custom event name",
       "requiresValue": true,
       "companions": [
-        { "name": "trigger-data", "type": "expression", "description": "No.JS: Event detail data expression" }
+        {
+          "name": "trigger-data",
+          "type": "expression",
+          "description": "No.JS: Event detail data expression"
+        }
       ],
       "documentation": "Dispatches a custom event.\n\n**Example:**\n```html\n<button on:click=\"count++\" trigger=\"countChanged\" trigger-data=\"count\">\n```\n\n**Companion:** `trigger-data`",
       "category": "event"
@@ -396,7 +780,11 @@
       "valueDescription": "Template ID",
       "requiresValue": true,
       "companions": [
-        { "name": "var-*", "type": "expression", "description": "No.JS: Slot parameter (pattern: var-name=\"expr\")" }
+        {
+          "name": "var-*",
+          "type": "expression",
+          "description": "No.JS: Slot parameter (pattern: var-name=\"expr\")"
+        }
       ],
       "documentation": "Inserts a `<template>` by ID, optionally passing slot parameters.\n\n**Example:**\n```html\n<template id=\"greeting\">\n  <h1 bind=\"name\"></h1>\n</template>\n<div use=\"greeting\" var-name=\"'World'\">\n```\n\n**Companions:** `var-*` (slot parameters)",
       "category": "template"
@@ -409,17 +797,61 @@
       "valueDescription": "URL string (supports interpolation)",
       "requiresValue": true,
       "companions": [
-        { "name": "method", "type": "string", "description": "No.JS: HTTP method (default: get)" },
-        { "name": "as", "type": "identifier", "description": "No.JS: Variable name for response data (default: \"data\")" },
-        { "name": "loading", "type": "templateId", "description": "No.JS: Template ID shown while loading" },
-        { "name": "into", "type": "string", "description": "No.JS: Store name for response" },
-        { "name": "success", "type": "templateId", "description": "No.JS: Template ID on success" },
-        { "name": "error", "type": "templateId", "description": "No.JS: Template ID on error" },
-        { "name": "then", "type": "expression", "description": "No.JS: Expression on success" },
-        { "name": "redirect", "type": "string", "description": "No.JS: Path to redirect after success" },
-        { "name": "confirm", "type": "string", "description": "No.JS: Confirmation message" },
-        { "name": "body", "type": "expression", "description": "No.JS: Request body expression" },
-        { "name": "headers", "type": "expression", "description": "No.JS: Custom request headers object" }
+        {
+          "name": "method",
+          "type": "string",
+          "description": "No.JS: HTTP method (default: get)"
+        },
+        {
+          "name": "as",
+          "type": "identifier",
+          "description": "No.JS: Variable name for response data (default: \"data\")"
+        },
+        {
+          "name": "loading",
+          "type": "templateId",
+          "description": "No.JS: Template ID shown while loading"
+        },
+        {
+          "name": "into",
+          "type": "string",
+          "description": "No.JS: Store name for response"
+        },
+        {
+          "name": "success",
+          "type": "templateId",
+          "description": "No.JS: Template ID on success"
+        },
+        {
+          "name": "error",
+          "type": "templateId",
+          "description": "No.JS: Template ID on error"
+        },
+        {
+          "name": "then",
+          "type": "expression",
+          "description": "No.JS: Expression on success"
+        },
+        {
+          "name": "redirect",
+          "type": "string",
+          "description": "No.JS: Path to redirect after success"
+        },
+        {
+          "name": "confirm",
+          "type": "string",
+          "description": "No.JS: Confirmation message"
+        },
+        {
+          "name": "body",
+          "type": "expression",
+          "description": "No.JS: Request body expression"
+        },
+        {
+          "name": "headers",
+          "type": "expression",
+          "description": "No.JS: Custom request headers object"
+        }
       ],
       "documentation": "HTTP call triggered by user action.\n\n**Example:**\n```html\n<button call=\"/api/delete/1\" method=\"delete\" confirm=\"Are you sure?\" loading=\"spinner-tpl\">\n```\n\n**Companions:** `method`, `as`, `loading`, `into`, `success`, `error`, `then`, `redirect`, `confirm`, `body`, `headers`",
       "category": "http"
@@ -433,13 +865,41 @@
       "requiresValue": true,
       "plugin": "@erickxavier/nojs-elements",
       "companions": [
-        { "name": "error", "type": "string", "description": "No.JS: Error message or template ID (prefix with #)" },
-        { "name": "error-*", "type": "string", "description": "No.JS: Per-rule error message or template ID (e.g. error-required, error-email)" },
-        { "name": "error-class", "type": "string", "description": "No.JS: CSS class(es) applied to invalid fields" },
-        { "name": "validate-on", "type": "string", "description": "No.JS: Validation trigger events (space-separated: input, blur, focusout, submit)" },
-        { "name": "validate-if", "type": "expression", "description": "No.JS: Conditional expression; field is only validated when truthy" },
-        { "name": "as", "type": "identifier", "description": "No.JS: Expose per-field validation state as a context variable" },
-        { "name": "success", "type": "templateId", "description": "No.JS: Success template for form" }
+        {
+          "name": "error",
+          "type": "string",
+          "description": "No.JS: Error message or template ID (prefix with #)"
+        },
+        {
+          "name": "error-*",
+          "type": "string",
+          "description": "No.JS: Per-rule error message or template ID (e.g. error-required, error-email)"
+        },
+        {
+          "name": "error-class",
+          "type": "string",
+          "description": "No.JS: CSS class(es) applied to invalid fields"
+        },
+        {
+          "name": "validate-on",
+          "type": "string",
+          "description": "No.JS: Validation trigger events (space-separated: input, blur, focusout, submit)"
+        },
+        {
+          "name": "validate-if",
+          "type": "expression",
+          "description": "No.JS: Conditional expression; field is only validated when truthy"
+        },
+        {
+          "name": "as",
+          "type": "identifier",
+          "description": "No.JS: Expose per-field validation state as a context variable"
+        },
+        {
+          "name": "success",
+          "type": "templateId",
+          "description": "No.JS: Success template for form"
+        }
       ],
       "documentation": "Form validation with pristine-aware errors.\n\n**On a form:** creates `$form` context with `valid`, `dirty`, `touched`, `pending`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`.\n\n**On a field:** standalone validation with error template.\n\n**Example:**\n```html\n<form validate=\"\" error-class=\"is-invalid\" validate-on=\"input blur\">\n  <input name=\"email\" validate=\"required|email\" error-required=\"Email is required\" />\n  <span if=\"$form.errors.email\" bind=\"$form.errors.email\"></span>\n</form>\n```\n\n**Built-in validators:** `required`, `email`, `url`, `min`, `max`, `custom`\n\n**Companions:** `error`, `error-*`, `error-class`, `validate-on`, `validate-if`, `as`, `success`",
       "category": "form"
@@ -463,7 +923,11 @@
       "valueDescription": "Translation key",
       "requiresValue": true,
       "companions": [
-        { "name": "t-html", "type": "boolean", "description": "No.JS: Render translation as sanitized HTML (via _sanitizeHtml()) instead of plain text" }
+        {
+          "name": "t-html",
+          "type": "boolean",
+          "description": "No.JS: Render translation as sanitized HTML (via _sanitizeHtml()) instead of plain text"
+        }
       ],
       "documentation": "i18n translation. Value is the translation key.\n\n**Example:**\n```html\n<span t=\"greeting\" t-name=\"World\">\n```\n\n**Companions:** `t-*` (interpolation parameters), `t-html`\n\nInterpolation params are passed as `t-{param}` attributes.",
       "category": "i18n"
@@ -488,15 +952,51 @@
       "requiresValue": true,
       "plugin": "@erickxavier/nojs-elements",
       "companions": [
-        { "name": "drag-type", "type": "string", "description": "No.JS: Type identifier for the dragged item" },
-        { "name": "drag-effect", "type": "string", "description": "No.JS: Drag effect (copy, move, link, none)" },
-        { "name": "drag-handle", "type": "string", "description": "No.JS: CSS selector for drag handle" },
-        { "name": "drag-image", "type": "string", "description": "No.JS: CSS selector for custom drag image" },
-        { "name": "drag-image-offset", "type": "string", "description": "No.JS: Offset for drag image (x,y)" },
-        { "name": "drag-disabled", "type": "expression", "description": "No.JS: Expression to disable dragging" },
-        { "name": "drag-class", "type": "string", "description": "No.JS: CSS class while dragging" },
-        { "name": "drag-ghost-class", "type": "string", "description": "No.JS: CSS class for ghost element" },
-        { "name": "drag-group", "type": "string", "description": "No.JS: Group name for multi-select" }
+        {
+          "name": "drag-type",
+          "type": "string",
+          "description": "No.JS: Type identifier for the dragged item"
+        },
+        {
+          "name": "drag-effect",
+          "type": "string",
+          "description": "No.JS: Drag effect (copy, move, link, none)"
+        },
+        {
+          "name": "drag-handle",
+          "type": "string",
+          "description": "No.JS: CSS selector for drag handle"
+        },
+        {
+          "name": "drag-image",
+          "type": "string",
+          "description": "No.JS: CSS selector for custom drag image"
+        },
+        {
+          "name": "drag-image-offset",
+          "type": "string",
+          "description": "No.JS: Offset for drag image (x,y)"
+        },
+        {
+          "name": "drag-disabled",
+          "type": "expression",
+          "description": "No.JS: Expression to disable dragging"
+        },
+        {
+          "name": "drag-class",
+          "type": "string",
+          "description": "No.JS: CSS class while dragging"
+        },
+        {
+          "name": "drag-ghost-class",
+          "type": "string",
+          "description": "No.JS: CSS class for ghost element"
+        },
+        {
+          "name": "drag-group",
+          "type": "string",
+          "description": "No.JS: Group name for multi-select"
+        }
       ],
       "documentation": "Makes element draggable.\n\n**Example:**\n```html\n<div drag=\"item\" drag-type=\"card\" drag-class=\"dragging\">\n```\n\n**Companions:** `drag-type`, `drag-effect`, `drag-handle`, `drag-image`, `drag-image-offset`, `drag-disabled`, `drag-class`, `drag-ghost-class`, `drag-group`",
       "category": "dnd"
@@ -510,15 +1010,51 @@
       "requiresValue": true,
       "plugin": "@erickxavier/nojs-elements",
       "companions": [
-        { "name": "drop-accept", "type": "string", "description": "No.JS: Accepted drag types (comma-separated)" },
-        { "name": "drop-effect", "type": "string", "description": "No.JS: Drop effect (copy, move, link, none)" },
-        { "name": "drop-class", "type": "string", "description": "No.JS: CSS class on valid dragover" },
-        { "name": "drop-reject-class", "type": "string", "description": "No.JS: CSS class on invalid dragover" },
-        { "name": "drop-disabled", "type": "expression", "description": "No.JS: Expression to disable dropping" },
-        { "name": "drop-max", "type": "expression", "description": "No.JS: Max items accepted" },
-        { "name": "drop-sort", "type": "string", "description": "No.JS: Sort direction (vertical, horizontal, grid)" },
-        { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
-        { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: CSS class for placeholder" }
+        {
+          "name": "drop-accept",
+          "type": "string",
+          "description": "No.JS: Accepted drag types (comma-separated)"
+        },
+        {
+          "name": "drop-effect",
+          "type": "string",
+          "description": "No.JS: Drop effect (copy, move, link, none)"
+        },
+        {
+          "name": "drop-class",
+          "type": "string",
+          "description": "No.JS: CSS class on valid dragover"
+        },
+        {
+          "name": "drop-reject-class",
+          "type": "string",
+          "description": "No.JS: CSS class on invalid dragover"
+        },
+        {
+          "name": "drop-disabled",
+          "type": "expression",
+          "description": "No.JS: Expression to disable dropping"
+        },
+        {
+          "name": "drop-max",
+          "type": "expression",
+          "description": "No.JS: Max items accepted"
+        },
+        {
+          "name": "drop-sort",
+          "type": "string",
+          "description": "No.JS: Sort direction (vertical, horizontal, grid)"
+        },
+        {
+          "name": "drop-placeholder",
+          "type": "string",
+          "description": "No.JS: Placeholder HTML/tag"
+        },
+        {
+          "name": "drop-placeholder-class",
+          "type": "string",
+          "description": "No.JS: CSS class for placeholder"
+        }
       ],
       "documentation": "Makes element a drop target.\n\n**Example:**\n```html\n<div drop=\"items.push($drag)\" drop-accept=\"card\" drop-class=\"over\">\n```\n\n**Handler variables:** `$drag`, `$dragType`, `$dragEffect`, `$dropIndex`, `$source`, `$target`, `$el`",
       "category": "dnd"
@@ -532,24 +1068,96 @@
       "requiresValue": true,
       "plugin": "@erickxavier/nojs-elements",
       "companions": [
-        { "name": "template", "type": "templateId", "description": "No.JS: Template ID for items" },
-        { "name": "drag-list-key", "type": "string", "description": "No.JS: Unique key property" },
-        { "name": "drag-list-item", "type": "string", "description": "No.JS: Item variable name in template" },
-        { "name": "drop-sort", "type": "string", "description": "No.JS: Sort direction" },
-        { "name": "drag-type", "type": "string", "description": "No.JS: Type identifier" },
-        { "name": "drop-accept", "type": "string", "description": "No.JS: Accepted drag types" },
-        { "name": "drag-list-copy", "type": "boolean", "description": "No.JS: Copy instead of move" },
-        { "name": "drag-list-remove", "type": "boolean", "description": "No.JS: Remove from source after drag" },
-        { "name": "drag-disabled", "type": "expression", "description": "No.JS: Disable dragging" },
-        { "name": "drop-disabled", "type": "expression", "description": "No.JS: Disable dropping" },
-        { "name": "drop-max", "type": "expression", "description": "No.JS: Max items" },
-        { "name": "drop-placeholder", "type": "string", "description": "No.JS: Placeholder HTML/tag" },
-        { "name": "drop-placeholder-class", "type": "string", "description": "No.JS: Placeholder CSS class" },
-        { "name": "drag-class", "type": "string", "description": "No.JS: CSS class while dragging" },
-        { "name": "drop-class", "type": "string", "description": "No.JS: CSS class on valid dragover" },
-        { "name": "drop-reject-class", "type": "string", "description": "No.JS: CSS class on invalid dragover" },
-        { "name": "drop-settle-class", "type": "string", "description": "No.JS: CSS class during settle animation" },
-        { "name": "drop-empty-class", "type": "string", "description": "No.JS: CSS class when list is empty" }
+        {
+          "name": "template",
+          "type": "templateId",
+          "description": "No.JS: Template ID for items"
+        },
+        {
+          "name": "drag-list-key",
+          "type": "string",
+          "description": "No.JS: Unique key property"
+        },
+        {
+          "name": "drag-list-item",
+          "type": "string",
+          "description": "No.JS: Item variable name in template"
+        },
+        {
+          "name": "drop-sort",
+          "type": "string",
+          "description": "No.JS: Sort direction"
+        },
+        {
+          "name": "drag-type",
+          "type": "string",
+          "description": "No.JS: Type identifier"
+        },
+        {
+          "name": "drop-accept",
+          "type": "string",
+          "description": "No.JS: Accepted drag types"
+        },
+        {
+          "name": "drag-list-copy",
+          "type": "boolean",
+          "description": "No.JS: Copy instead of move"
+        },
+        {
+          "name": "drag-list-remove",
+          "type": "boolean",
+          "description": "No.JS: Remove from source after drag"
+        },
+        {
+          "name": "drag-disabled",
+          "type": "expression",
+          "description": "No.JS: Disable dragging"
+        },
+        {
+          "name": "drop-disabled",
+          "type": "expression",
+          "description": "No.JS: Disable dropping"
+        },
+        {
+          "name": "drop-max",
+          "type": "expression",
+          "description": "No.JS: Max items"
+        },
+        {
+          "name": "drop-placeholder",
+          "type": "string",
+          "description": "No.JS: Placeholder HTML/tag"
+        },
+        {
+          "name": "drop-placeholder-class",
+          "type": "string",
+          "description": "No.JS: Placeholder CSS class"
+        },
+        {
+          "name": "drag-class",
+          "type": "string",
+          "description": "No.JS: CSS class while dragging"
+        },
+        {
+          "name": "drop-class",
+          "type": "string",
+          "description": "No.JS: CSS class on valid dragover"
+        },
+        {
+          "name": "drop-reject-class",
+          "type": "string",
+          "description": "No.JS: CSS class on invalid dragover"
+        },
+        {
+          "name": "drop-settle-class",
+          "type": "string",
+          "description": "No.JS: CSS class during settle animation"
+        },
+        {
+          "name": "drop-empty-class",
+          "type": "string",
+          "description": "No.JS: CSS class when list is empty"
+        }
       ],
       "documentation": "Sortable list with drag and drop support.\n\n**Example:**\n```html\n<ul drag-list=\"items\" template=\"item-tpl\" drag-type=\"card\">\n```",
       "category": "dnd"
@@ -563,8 +1171,16 @@
       "requiresValue": false,
       "plugin": "@erickxavier/nojs-elements",
       "companions": [
-        { "name": "drag-group", "type": "string", "description": "No.JS: Group name (required)" },
-        { "name": "drag-multiple-class", "type": "string", "description": "No.JS: CSS class for selected items" }
+        {
+          "name": "drag-group",
+          "type": "string",
+          "description": "No.JS: Group name (required)"
+        },
+        {
+          "name": "drag-multiple-class",
+          "type": "string",
+          "description": "No.JS: CSS class for selected items"
+        }
       ],
       "documentation": "Enables multi-select drag on `drag` elements.\n\n**Example:**\n```html\n<div drag=\"item\" drag-multiple drag-group=\"cards\">\n```\n\n**Companions:** `drag-group` (required), `drag-multiple-class`",
       "category": "dnd"
@@ -588,14 +1204,46 @@
       "valueDescription": "Route path pattern or \"*\" for catch-all wildcard",
       "requiresValue": true,
       "companions": [
-        { "name": "route-active", "type": "string", "description": "No.JS: CSS class added when route is active (default: 'active')" },
-        { "name": "route-active-exact", "type": "string", "description": "No.JS: CSS class added only on exact path match" },
-        { "name": "lazy", "type": "string", "description": "No.JS: Loading strategy for route template (priority or ondemand)" },
-        { "name": "outlet", "type": "string", "description": "No.JS: Named route-view outlet target (default: 'default')" },
-        { "name": "page-title", "type": "expression", "description": "No.JS: Sets document.title on each navigation. Value is a JS expression; use single-quoted strings: page-title=\"'About | Site'\". Can access $route and $store." },
-        { "name": "page-description", "type": "expression", "description": "No.JS: Creates/updates <meta name=\"description\"> on each navigation. Value is a JS expression." },
-        { "name": "page-canonical", "type": "expression", "description": "No.JS: Creates/updates <link rel=\"canonical\"> on each navigation. Value is a JS expression." },
-        { "name": "page-jsonld", "type": "string", "description": "No.JS: Creates/updates <script type=\"application/ld+json\" data-nojs> on each navigation. Value is a JSON string with {placeholder} interpolation." }
+        {
+          "name": "route-active",
+          "type": "string",
+          "description": "No.JS: CSS class added when route is active (default: 'active')"
+        },
+        {
+          "name": "route-active-exact",
+          "type": "string",
+          "description": "No.JS: CSS class added only on exact path match"
+        },
+        {
+          "name": "lazy",
+          "type": "string",
+          "description": "No.JS: Loading strategy for route template (priority or ondemand)"
+        },
+        {
+          "name": "outlet",
+          "type": "string",
+          "description": "No.JS: Named route-view outlet target (default: 'default')"
+        },
+        {
+          "name": "page-title",
+          "type": "expression",
+          "description": "No.JS: Sets document.title on each navigation. Value is a JS expression; use single-quoted strings: page-title=\"'About | Site'\". Can access $route and $store."
+        },
+        {
+          "name": "page-description",
+          "type": "expression",
+          "description": "No.JS: Creates/updates <meta name=\"description\"> on each navigation. Value is a JS expression."
+        },
+        {
+          "name": "page-canonical",
+          "type": "expression",
+          "description": "No.JS: Creates/updates <link rel=\"canonical\"> on each navigation. Value is a JS expression."
+        },
+        {
+          "name": "page-jsonld",
+          "type": "string",
+          "description": "No.JS: Creates/updates <script type=\"application/ld+json\" data-nojs> on each navigation. Value is a JSON string with {placeholder} interpolation."
+        }
       ],
       "documentation": "Turns an `<a>` element into a route link that navigates without page reload. Also used on `<template>` elements to define routes.\n\nUse `route=\"*\"` on a `<template>` to create a catch-all wildcard route for 404 pages. The wildcard matches when no other route matches the current path. Use `$route.matched` (boolean) to check whether an explicit route matched (`true`) or a wildcard/fallback is rendering (`false`).\n\n**Route head attributes** — update `<head>` on every navigation:\n- `page-title=\"'Title | Site'\"` — sets `document.title`\n- `page-description=\"product.description\"` — updates `<meta name=\"description\">`\n- `page-canonical=\"'/products/' + $route.params.id\"` — updates `<link rel=\"canonical\">`\n- `page-jsonld='{\"@type\":\"Product\"}` — updates JSON-LD structured data\n\n**Example:**\n```html\n<a route=\"/about\">About</a>\n<template route=\"/dashboard\" lazy=\"ondemand\" outlet=\"sidebar\">\n<template route=\"/products/:id\"\n          page-title=\"'Product ' + $route.params.id + ' | Store'\"\n          page-description=\"'View product detail'\"\n          page-canonical=\"'/products/' + $route.params.id\">\n\n<!-- Catch-all 404 -->\n<template route=\"*\">\n  <h1>404</h1>\n  <p>Path <code bind=\"$route.path\"></code> not found.</p>\n</template>\n```\n\n**Companions:** `route-active`, `route-active-exact`, `lazy`, `outlet`, `page-title`, `page-description`, `page-canonical`, `page-jsonld`",
       "category": "routing"
@@ -608,11 +1256,31 @@
       "valueDescription": "Outlet name (optional, empty for default outlet)",
       "requiresValue": false,
       "companions": [
-        { "name": "src", "type": "string", "description": "No.JS: File-based routing folder path" },
-        { "name": "ext", "type": "string", "description": "No.JS: Template file extension (default: .html)" },
-        { "name": "route-index", "type": "string", "description": "No.JS: Index template name (default: 'index')" },
-        { "name": "i18n-ns", "type": "string", "description": "No.JS: i18n namespace for route templates" },
-        { "name": "transition", "type": "string", "description": "No.JS: View Transition API preset or custom name for route changes. Built-in presets: slide, fade, scale, none." }
+        {
+          "name": "src",
+          "type": "string",
+          "description": "No.JS: File-based routing folder path"
+        },
+        {
+          "name": "ext",
+          "type": "string",
+          "description": "No.JS: Template file extension (default: .html)"
+        },
+        {
+          "name": "route-index",
+          "type": "string",
+          "description": "No.JS: Index template name (default: 'index')"
+        },
+        {
+          "name": "i18n-ns",
+          "type": "string",
+          "description": "No.JS: i18n namespace for route templates"
+        },
+        {
+          "name": "transition",
+          "type": "string",
+          "description": "No.JS: View Transition API preset or custom name for route changes. Built-in presets: slide, fade, scale, none."
+        }
       ],
       "documentation": "Route rendering outlet. Displays the template matching the current route.\n\nUses the **View Transition API** by default for route transitions (configurable via `router.viewTransition`). The `transition` attribute accepts built-in presets or a custom name.\n\n**Built-in presets:**\n- `slide` — horizontal slide between old and new content\n- `fade` — crossfade between old and new content\n- `scale` — scale down old content, scale up new content\n- `none` — disable transition animation\n\nCSS uses `::view-transition-old(route-content)` / `::view-transition-new(route-content)` pseudo-elements.\n\n**Example:**\n```html\n<div route-view src=\"pages\" transition=\"slide\"></div>\n\n<!-- Named outlet -->\n<div route-view=\"sidebar\" src=\"panels\" transition=\"fade\"></div>\n```\n\n**Config:** `router.viewTransition` (default: `true`)\n\n**Companions:** `src`, `ext`, `route-index`, `i18n-ns`, `transition`",
       "category": "routing"
@@ -625,7 +1293,11 @@
       "valueDescription": "JS boolean expression",
       "requiresValue": true,
       "companions": [
-        { "name": "redirect", "type": "string", "description": "No.JS: Path to redirect to when guard fails" }
+        {
+          "name": "redirect",
+          "type": "string",
+          "description": "No.JS: Path to redirect to when guard fails"
+        }
       ],
       "documentation": "Route guard that prevents navigation when the expression is falsy.\n\n**Example:**\n```html\n<template route=\"/admin\" guard=\"isLoggedIn\" redirect=\"/login\">\n  <h1>Admin Panel</h1>\n</template>\n```\n\n**Companion:** `redirect`",
       "category": "routing"
@@ -684,6 +1356,28 @@
       "companions": [],
       "documentation": "Creates or updates `<script type=\"application/ld+json\" data-nojs>` in `<head>`. Unlike other head directives, the JSON-LD template is written as the **element body** (not the attribute value). Use `{expression}` placeholders for dynamic values. Place on a `<div hidden>` element.\n\n**Example:**\n```html\n<div hidden page-jsonld>\n  {\n    \"@context\": \"https://schema.org\",\n    \"@type\": \"Product\",\n    \"name\": \"{product.name}\",\n    \"offers\": { \"@type\": \"Offer\", \"price\": \"{product.price}\" }\n  }\n</div>\n```\n\nThe `data-nojs` marker distinguishes this tag from hand-written JSON-LD. Structural JSON braces are not interpreted as placeholders — only `{variable}` patterns matching an identifier are.",
       "category": "head"
+    },
+    {
+      "name": "animate",
+      "pattern": false,
+      "priority": 15,
+      "valueType": "animation",
+      "valueDescription": "Animation name",
+      "requiresValue": false,
+      "companions": [
+        {
+          "name": "animate-duration",
+          "type": "number",
+          "description": "No.JS: Animation duration in ms"
+        },
+        {
+          "name": "transition",
+          "type": "string",
+          "description": "No.JS: CSS transition name"
+        }
+      ],
+      "documentation": "Standalone enter animation directive. Plays an enter animation when the element appears in the DOM (e.g. cloned error templates, static markup). Skipped when `if`, `show`, or `hide` is present on the same element — those directives handle animation themselves.\n\n**Example:**\n```html\n<div animate=\"fadeIn\">Animated on appear</div>\n<div animate=\"bounceIn\" animate-duration=\"500\">Slow bounce</div>\n<div animate transition=\"slide\">CSS transition on appear</div>\n```\n\nThe value can be an animation name or left empty when using `animate-enter` or `transition` instead.\n\n**Companions:** `animate-duration`, `transition`",
+      "category": "animation"
     }
   ],
   "patterns": [
@@ -695,7 +1389,22 @@
       "valueDescription": "JS expression",
       "requiresValue": true,
       "documentation": "Dynamically binds an HTML attribute to a JS expression.\n\n**Example:**\n```html\n<a bind-href=\"url\">Link</a>\n<img bind-src=\"imageUrl\">\n```\n\n**Boolean attributes:** `disabled`, `readonly`, `checked`, `selected`, `hidden`, `required`\n\n**Common targets:** `href`, `src`, `class`, `title`, `alt`, `placeholder`, `action`, `value`",
-      "commonTargets": ["href", "src", "class", "title", "alt", "placeholder", "action", "value", "disabled", "readonly", "checked", "selected", "hidden", "required"],
+      "commonTargets": [
+        "href",
+        "src",
+        "class",
+        "title",
+        "alt",
+        "placeholder",
+        "action",
+        "value",
+        "disabled",
+        "readonly",
+        "checked",
+        "selected",
+        "hidden",
+        "required"
+      ],
       "category": "binding"
     },
     {
@@ -706,7 +1415,10 @@
       "valueDescription": "JS boolean expression (or object/array for map/list)",
       "requiresValue": true,
       "documentation": "Conditionally applies CSS class(es).\n\n**Example:**\n```html\n<div class-active=\"isActive\">\n<div class-map=\"{ active: isActive, hidden: !show }\">\n<div class-list=\"['base', isActive ? 'active' : '']\">\n```\n\n**Sub-behaviors:** `class-map` (object → classes), `class-list` (array → classes)",
-      "subBehaviors": ["class-map", "class-list"],
+      "subBehaviors": [
+        "class-map",
+        "class-list"
+      ],
       "category": "styling"
     },
     {
@@ -717,7 +1429,9 @@
       "valueDescription": "JS expression (CSS value)",
       "requiresValue": true,
       "documentation": "Dynamically sets a CSS style property. Attribute name is kebab-case, converted to camelCase.\n\n**Example:**\n```html\n<div style-color=\"textColor\">\n<div style-font-size=\"fontSize + 'px'\">\n<div style-map=\"{ color: textColor, fontSize: size + 'px' }\">\n```\n\n**Sub-behavior:** `style-map` (object → styles)",
-      "subBehaviors": ["style-map"],
+      "subBehaviors": [
+        "style-map"
+      ],
       "category": "styling"
     },
     {
@@ -728,20 +1442,126 @@
       "valueDescription": "JS statement(s)",
       "requiresValue": true,
       "documentation": "Listens for DOM events and executes JS statement(s).\n\n**Example:**\n```html\n<button on:click=\"count++\">Increment</button>\n<form on:submit.prevent=\"handleSubmit()\">\n<input on:keydown.enter=\"search()\">\n```\n\n**Modifiers:** `.prevent`, `.stop`, `.once`, `.self`, `.debounce`, `.throttle`\n**Key modifiers:** `.enter`, `.escape`, `.tab`, `.space`, `.delete`, `.backspace`, `.up`, `.down`, `.left`, `.right`, `.ctrl`, `.alt`, `.shift`, `.meta`\n\n**Handler variables:** `$event`, `$el`",
-      "commonEvents": ["click", "submit", "input", "change", "focus", "blur", "keydown", "keyup", "keypress", "mouseenter", "mouseleave", "mouseover", "mouseout", "mousedown", "mouseup", "dblclick", "contextmenu", "wheel", "scroll", "resize", "load", "error", "touchstart", "touchend", "touchmove"],
+      "commonEvents": [
+        "click",
+        "submit",
+        "input",
+        "change",
+        "focus",
+        "blur",
+        "keydown",
+        "keyup",
+        "keypress",
+        "mouseenter",
+        "mouseleave",
+        "mouseover",
+        "mouseout",
+        "mousedown",
+        "mouseup",
+        "dblclick",
+        "contextmenu",
+        "wheel",
+        "scroll",
+        "resize",
+        "load",
+        "error",
+        "touchstart",
+        "touchend",
+        "touchmove"
+      ],
       "modifiers": {
-        "behavioral": ["prevent", "stop", "once", "self"],
-        "timing": ["debounce", "throttle"],
-        "key": ["enter", "escape", "tab", "space", "delete", "backspace", "up", "down", "left", "right", "ctrl", "alt", "shift", "meta"]
+        "behavioral": [
+          "prevent",
+          "stop",
+          "once",
+          "self"
+        ],
+        "timing": [
+          "debounce",
+          "throttle"
+        ],
+        "key": [
+          "enter",
+          "escape",
+          "tab",
+          "space",
+          "delete",
+          "backspace",
+          "up",
+          "down",
+          "left",
+          "right",
+          "ctrl",
+          "alt",
+          "shift",
+          "meta"
+        ]
       },
       "category": "event"
     }
   ],
-  "lifecycleEvents": ["mounted", "init", "updated", "unmounted", "error"],
-  "contextKeys": ["$watch", "$notify", "$set", "$parent", "$refs", "$store", "$route", "$router", "$i18n", "$form", "$el", "$event", "$error", "$rule"],
-  "loopContextVars": ["$index", "$count", "$first", "$last", "$even", "$odd"],
-  "eventHandlerVars": ["$event", "$el"],
-  "watchHandlerVars": ["$old", "$new"],
-  "dropHandlerVars": ["$drag", "$dragType", "$dragEffect", "$dropIndex", "$source", "$target", "$el"],
-  "animations": ["fadeIn", "fadeOut", "fadeInUp", "fadeInDown", "fadeOutUp", "fadeOutDown", "slideInLeft", "slideInRight", "slideOutLeft", "slideOutRight", "zoomIn", "zoomOut", "bounceIn", "bounceOut"]
+  "lifecycleEvents": [
+    "mounted",
+    "init",
+    "updated",
+    "unmounted",
+    "error"
+  ],
+  "contextKeys": [
+    "$watch",
+    "$notify",
+    "$set",
+    "$parent",
+    "$refs",
+    "$store",
+    "$route",
+    "$router",
+    "$i18n",
+    "$form",
+    "$el",
+    "$event",
+    "$error",
+    "$rule"
+  ],
+  "loopContextVars": [
+    "$index",
+    "$count",
+    "$first",
+    "$last",
+    "$even",
+    "$odd"
+  ],
+  "eventHandlerVars": [
+    "$event",
+    "$el"
+  ],
+  "watchHandlerVars": [
+    "$old",
+    "$new"
+  ],
+  "dropHandlerVars": [
+    "$drag",
+    "$dragType",
+    "$dragEffect",
+    "$dropIndex",
+    "$source",
+    "$target",
+    "$el"
+  ],
+  "animations": [
+    "fadeIn",
+    "fadeOut",
+    "fadeInUp",
+    "fadeInDown",
+    "fadeOutUp",
+    "fadeOutDown",
+    "slideInLeft",
+    "slideInRight",
+    "slideOutLeft",
+    "slideOutRight",
+    "zoomIn",
+    "zoomOut",
+    "bounceIn",
+    "bounceOut"
+  ]
 }
