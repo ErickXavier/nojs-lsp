@@ -23,6 +23,7 @@ All notable changes to the **No.JS LSP** extension will be documented in this fi
 - Removed phantom filter arguments (truncate.suffix, sortBy.direction, number/currency.locale, datetime.format)
 - Added head directives and pagination companions to docs/reference/directives.md
 - Fixed filter examples in docs/reference/filters.md (each syntax, phantom args)
+- Fixed `date` filter entry in filters.json: renamed phantom `format` arg to `fmt`, added `short` default, corrected `YYYY-MM-DD` example to `date:'long'`
 
 ## [1.14.0](https://github.com/ErickXavier/nojs-lsp/compare/v1.13.3...v1.14.0) — 2026-06-09
 
