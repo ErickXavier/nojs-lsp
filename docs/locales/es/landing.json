@@ -24,7 +24,7 @@
       "subtitle": "Desde autocompletado inteligente hasta diagnósticos en tiempo real, el LSP de No.JS trae todo el conocimiento del framework a VS Code.",
       "completions": {
         "title": "Autocompletado Inteligente",
-        "desc": "Más de 39 directivas, atributos dinámicos, sugerencias de compañeros, modificadores de eventos, argumentos de filtros, claves i18n, rutas y propiedades de stores — contextual e instantáneo."
+        "desc": "Más de 45 directivas, atributos dinámicos, sugerencias de compañeros, modificadores de eventos, argumentos de filtros, claves i18n, rutas y propiedades de stores — contextual e instantáneo."
       },
       "hover": {
         "title": "Documentación al Hover",
@@ -64,7 +64,7 @@
         "title": "Inteligencia Contextual",
         "desc": "El LSP entiende la relación entre directivas. Agrega una directiva get e instantáneamente sugiere atributos compañeros como as, error, empty, success y cached.",
         "items": [
-          "Más de 39 autocompletados de directivas",
+          "Más de 45 autocompletados de directivas",
           "Reconocimiento de atributos compañeros",
           "Argumentos de filtros con tipos y valores por defecto",
           "Sugerencias de claves i18n y rutas"

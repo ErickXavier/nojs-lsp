@@ -1,5 +1,6 @@
-# No.JS LSP — v1.13.2
+# No.JS LSP — v1.14.1
 
+![version](https://img.shields.io/badge/version-1.14.1-blue)
 [![jsDelivr hits](https://data.jsdelivr.com/v1/package/gh/erickxavier/nojs-lsp/badge)](https://www.jsdelivr.com/package/gh/erickxavier/nojs-lsp)
 
 VS Code extension providing full language server support for the [No.JS](https://github.com/ErickXavier/no-js) HTML-first reactive framework.
@@ -9,7 +10,7 @@ Also works as a standalone language server (`--stdio`) for **Neovim**, **Sublime
 ## Features
 
 ### Completions
-- **Directive completions** — All 40+ No.JS directives (`state`, `if`, `get`, `foreach`, `model`, etc.)
+- **Directive completions** — All 45+ No.JS directives (`state`, `if`, `get`, `foreach`, `model`, etc.)
 - **Dynamic directives** — `bind-*`, `on:*`, `class-*`, `style-*` with common targets/events
 - **Companion attributes** — Context-aware: shows `as`, `loading`, `error` only when `get` is present
 - **Event modifiers** — `.prevent`, `.stop`, `.once`, `.debounce`, `.throttle`, key modifiers

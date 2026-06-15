@@ -24,7 +24,7 @@ code --install-extension EXS.nojs-lsp
 If you have a `.vsix` file (e.g., from a pre-release build):
 
 ```sh
-code --install-extension nojs-lsp-1.10.0.vsix
+code --install-extension nojs-lsp-1.14.1.vsix
 ```
 
 Or in VS Code: **Extensions** → **⋯** menu → **Install from VSIX…**
@@ -78,7 +78,7 @@ For full details, see [Configuration](reference/configuration.md).
 
 ## Key Features
 
-- **[Completions](features/completions.md)** — 39+ directives, 32 filters, validators, animations, context keys, i18n keys, routes, and store properties.
+- **[Completions](features/completions.md)** — 45+ directives, 32 filters, validators, animations, context keys, i18n keys, routes, and store properties.
 - **[Hover](features/hover.md)** — Inline docs with syntax, examples, and companion attribute descriptions.
 - **[Diagnostics](features/diagnostics.md)** — Unknown directive warnings with "did you mean?" suggestions, orphaned `else` detection, expression validation, and more.
 - **[Go-to-Definition](features/go-to-definition.md)** — Jump to `<template>` definitions, `ref` declarations, and `store` sources.
