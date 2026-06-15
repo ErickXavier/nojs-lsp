@@ -58,12 +58,25 @@ export class DevToolsBridge {
   private _pending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Error) => void }>();
   private _connected = false;
   private _targetUrl: string | null = null;
+  private _enabled = false;
 
   constructor(options?: Partial<DevToolsBridgeOptions>) {
     this._options = {
       port: options?.port ?? 9222,
       host: options?.host ?? 'localhost',
     };
+  }
+
+  /**
+   * Enable the bridge. Must be called before connect().
+   * Requires the user to explicitly set nojs.devtools.enabled: true.
+   */
+  enable(): void {
+    this._enabled = true;
+  }
+
+  get enabled(): boolean {
+    return this._enabled;
   }
 
   get connected(): boolean {
@@ -89,6 +102,7 @@ export class DevToolsBridge {
   }
 
   async connect(): Promise<boolean> {
+    if (!this._enabled) return false;
     if (!this._isLoopback(this._options.host)) return false;
     try {
       const targets = await this._listTargets();

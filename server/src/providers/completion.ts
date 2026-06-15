@@ -1,4 +1,5 @@
 import {
+  CancellationToken,
   CompletionItem,
   CompletionItemKind,
   CompletionParams,
@@ -43,16 +44,19 @@ export interface CompletionSettings {
 }
 
 export function onCompletion(documents: TextDocuments<TextDocument>, getSettings?: (uri: string) => Promise<CompletionSettings>) {
-  return async (params: CompletionParams): Promise<CompletionItem[]> => {
+  return async (params: CompletionParams, token?: CancellationToken): Promise<CompletionItem[]> => {
     const document = documents.get(params.textDocument.uri);
     if (!document) return [];
 
+    if (token?.isCancellationRequested) return [];
     const settings = getSettings ? await getSettings(document.uri) : { filtersEnabled: true, customFilters: [], customValidators: [] };
-    const wsData = getWorkspaceData(documents);
+    if (token?.isCancellationRequested) return [];
+    const wsData = getWorkspaceData(documents, token);
 
     const htmlDoc = parseHtmlDocument(document);
     const context = getCursorContext(document, params.position, htmlDoc);
 
+    if (token?.isCancellationRequested) return [];
     switch (context.type) {
       case 'attributeName':
         return getAttributeNameCompletions(context, wsData, document.getText());

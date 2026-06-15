@@ -111,6 +111,7 @@ connection.onDidChangeConfiguration(async (change) => {
     const hostChanged = bridge && bridge.options.host !== dt.host;
     if (!bridge || !bridge.connected || portChanged || hostChanged) {
       const newBridge = createDevToolsBridge({ port: dt.port, host: dt.host });
+      newBridge.enable();
       const ok = await newBridge.connect();
       connection.console.log(ok
         ? `[NoJS DevTools] Connected to ${newBridge.targetUrl}`
@@ -188,6 +189,24 @@ connection.onDocumentLinks(onDocumentLinks(documents));
 connection.languages.semanticTokens.on(onSemanticTokens(documents));
 connection.onCodeAction(onCodeAction(documents));
 connection.languages.inlayHint.on(onInlayHints(documents));
+
+// ─── Process-level exception handlers ───
+// LSP servers must be resilient — log errors but keep the process alive.
+
+process.on('uncaughtException', (error: Error) => {
+  connection.console.error(
+    `[NoJS LSP] Uncaught exception: ${error.message}\n${error.stack ?? ''}`
+  );
+});
+
+process.on('unhandledRejection', (reason: unknown) => {
+  const message = reason instanceof Error
+    ? `${reason.message}\n${reason.stack ?? ''}`
+    : String(reason);
+  connection.console.error(
+    `[NoJS LSP] Unhandled rejection: ${message}`
+  );
+});
 
 // Start listening
 documents.listen(connection);
