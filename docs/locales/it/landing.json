@@ -24,7 +24,7 @@
       "subtitle": "Dal completamento intelligente alle diagnostiche in tempo reale, il LSP di No.JS porta tutta la conoscenza del framework in VS Code.",
       "completions": {
         "title": "Completamento Intelligente",
-        "desc": "Oltre 39 direttive, attributi dinamici, suggerimenti di compagni, modificatori di eventi, argomenti dei filtri, chiavi i18n, route e proprietà degli store — contestuale e istantaneo."
+        "desc": "Oltre 45 direttive, attributi dinamici, suggerimenti di compagni, modificatori di eventi, argomenti dei filtri, chiavi i18n, route e proprietà degli store — contestuale e istantaneo."
       },
       "hover": {
         "title": "Documentazione al Hover",
@@ -64,7 +64,7 @@
         "title": "Intelligenza Contestuale",
         "desc": "Il LSP comprende la relazione tra le direttive. Aggiungi una direttiva get e suggerisce istantaneamente attributi compagni come as, error, empty, success e cached.",
         "items": [
-          "Oltre 39 completamenti di direttive",
+          "Oltre 45 completamenti di direttive",
           "Riconoscimento degli attributi compagni",
           "Argomenti dei filtri con tipi e valori predefiniti",
           "Suggerimenti di chiavi i18n e percorsi di route"

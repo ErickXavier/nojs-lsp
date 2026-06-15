@@ -24,7 +24,7 @@
       "subtitle": "Do autocompletar inteligente aos diagnósticos em tempo real, o LSP do No.JS traz todo o conhecimento do framework para o VS Code.",
       "completions": {
         "title": "Autocompletar Inteligente",
-        "desc": "Mais de 39 diretivas, atributos dinâmicos, sugestões de companheiros, modificadores de eventos, argumentos de filtros, chaves i18n, rotas e propriedades de stores — contextual e instantâneo."
+        "desc": "Mais de 45 diretivas, atributos dinâmicos, sugestões de companheiros, modificadores de eventos, argumentos de filtros, chaves i18n, rotas e propriedades de stores — contextual e instantâneo."
       },
       "hover": {
         "title": "Documentação no Hover",
@@ -64,7 +64,7 @@
         "title": "Inteligência Contextual",
         "desc": "O LSP entende a relação entre diretivas. Adicione uma diretiva get e ele instantaneamente sugere atributos companheiros como as, error, empty, success e cached.",
         "items": [
-          "Mais de 39 autocompletações de diretivas",
+          "Mais de 45 autocompletações de diretivas",
           "Reconhecimento de atributos companheiros",
           "Argumentos de filtros com tipos e padrões",
           "Sugestões de chaves i18n e caminhos de rotas"

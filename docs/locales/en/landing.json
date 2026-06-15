@@ -24,7 +24,7 @@
       "subtitle": "From intelligent completions to real-time diagnostics, the No.JS LSP brings the full framework knowledge into VS Code.",
       "completions": {
         "title": "Smart Completions",
-        "desc": "All 39+ directives, dynamic attributes, companion suggestions, event modifiers, filter arguments, i18n keys, routes, and store properties — context-aware and instant."
+        "desc": "All 45+ directives, dynamic attributes, companion suggestions, event modifiers, filter arguments, i18n keys, routes, and store properties — context-aware and instant."
       },
       "hover": {
         "title": "Hover Documentation",
@@ -64,7 +64,7 @@
         "title": "Context-Aware Intelligence",
         "desc": "The LSP understands the relationship between directives. Add a get directive and it instantly suggests companion attributes like as, error, empty, success, and cached.",
         "items": [
-          "39+ directive completions",
+          "45+ directive completions",
           "Companion attribute awareness",
           "Filter arguments with types & defaults",
           "i18n key and route path suggestions"

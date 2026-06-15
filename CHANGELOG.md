@@ -2,7 +2,7 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased]
+## [Unreleased](https://github.com/ErickXavier/nojs-lsp/compare/v1.14.1...HEAD)
 
 ### Changed
 

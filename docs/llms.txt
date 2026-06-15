@@ -1,6 +1,6 @@
 # NoJS LSP
 
-> VS Code language server extension for the No.JS HTML-first reactive framework. Provides completions, diagnostics, hover documentation, go-to-definition, semantic highlighting, code actions, inlay hints, and 23 built-in snippets for 44 directives and 32 filters.
+> VS Code language server extension for the No.JS HTML-first reactive framework. Provides completions, diagnostics, hover documentation, go-to-definition, semantic highlighting, code actions, inlay hints, and 23 built-in snippets for 45 directives and 32 filters.
 
 NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands directive companions (contextual attributes like `as`, `loading`, `error` for `get`), dynamic patterns (`bind-*`, `on:*`, `class-*`, `style-*`), expression syntax with pipe filters, and workspace-level awareness of stores, routes, i18n keys, and custom directives. Includes a DevTools bridge for live expression evaluation in running pages.
 
@@ -10,7 +10,7 @@ NoJS LSP gives IDE-grade support for No.JS HTML attributes. It understands direc
 
 ## Features
 
-- [Smart Completions](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/completions.md): 44 directive completions with companion attributes, dynamic patterns, filters, validators, animations, context keys, i18n keys, routes, store properties
+- [Smart Completions](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/completions.md): 45 directive completions with companion attributes, dynamic patterns, filters, validators, animations, context keys, i18n keys, routes, store properties
 - [Hover Documentation](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/hover.md): Inline syntax docs, filter argument hints, context key descriptions, loop variable info
 - [Real-Time Diagnostics](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/diagnostics.md): Unknown directive detection with "did you mean?" suggestions, orphaned else/else-if, duplicate state/ref, invalid filters, expression syntax errors
 - [Go-to-Definition](https://github.com/ErickXavier/nojs-lsp/blob/main/docs/features/go-to-definition.md): Jump to template IDs, ref declarations, store definitions, companion attribute targets
