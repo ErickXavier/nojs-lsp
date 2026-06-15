@@ -9,6 +9,7 @@
 import { Connection } from 'vscode-languageserver/node';
 import { TextDocuments } from 'vscode-languageserver/node';
 import { TextDocument } from 'vscode-languageserver-textdocument';
+import { CancellationToken } from 'vscode-languageserver/node';
 import { URI } from 'vscode-uri';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -45,14 +46,17 @@ function flattenKeys(obj: Record<string, any>, prefix = ''): { key: string; valu
  *   locales/{locale}.json  (flat mode)
  *   locales/{locale}/*.json  (namespace mode)
  */
-export function scanI18nKeys(workspaceRoot: string): I18nKeyInfo[] {
+export function scanI18nKeys(workspaceRoot: string, token?: CancellationToken): I18nKeyInfo[] {
   const results: I18nKeyInfo[] = [];
   const localesDirs = findDirectories(workspaceRoot, 'locales');
 
   for (const localesDir of localesDirs) {
+    if (token?.isCancellationRequested) return results;
     const entries = safeReaddir(localesDir);
     for (const entry of entries) {
+      if (token?.isCancellationRequested) return results;
       const fullPath = path.join(localesDir, entry);
+      if (!isWithinWorkspace(fullPath)) continue;
       const stat = safeStat(fullPath);
       if (!stat) continue;
 
@@ -66,7 +70,9 @@ export function scanI18nKeys(workspaceRoot: string): I18nKeyInfo[] {
         const locale = entry;
         const nsFiles = safeReaddir(fullPath).filter(f => f.endsWith('.json'));
         for (const nsFile of nsFiles) {
+          if (token?.isCancellationRequested) return results;
           const nsPath = path.join(fullPath, nsFile);
+          if (!isWithinWorkspace(nsPath)) continue;
           const ns = nsFile.replace('.json', '');
           const keys = parseLocaleFile(nsPath, locale, ns);
           results.push(...keys);
@@ -137,6 +143,7 @@ function scanRoutesRecursive(baseDir: string, dir: string, ext: string, results:
   const entries = safeReaddir(dir);
   for (const entry of entries) {
     const fullPath = path.join(dir, entry);
+    if (!isWithinWorkspace(fullPath)) continue;
     const stat = safeStat(fullPath);
     if (!stat) continue;
 
@@ -263,18 +270,21 @@ export interface CustomDirectiveInfo {
 /**
  * Scan JS files for NoJS.directive() calls to detect custom directives.
  */
-export function scanCustomDirectives(workspaceRoot: string): CustomDirectiveInfo[] {
+export function scanCustomDirectives(workspaceRoot: string, token?: CancellationToken): CustomDirectiveInfo[] {
   const results: CustomDirectiveInfo[] = [];
-  scanJsFilesForDirectives(workspaceRoot, results, 0);
+  scanJsFilesForDirectives(workspaceRoot, results, 0, token);
   return results;
 }
 
-function scanJsFilesForDirectives(dir: string, results: CustomDirectiveInfo[], depth: number): void {
+function scanJsFilesForDirectives(dir: string, results: CustomDirectiveInfo[], depth: number, token?: CancellationToken): void {
   if (depth > 5) return; // limit recursion depth
+  if (token?.isCancellationRequested) return;
   const entries = safeReaddir(dir);
   for (const entry of entries) {
+    if (token?.isCancellationRequested) return;
     if (entry === 'node_modules' || entry.startsWith('.')) continue;
     const fullPath = path.join(dir, entry);
+    if (!isWithinWorkspace(fullPath)) continue;
     const stat = safeStat(fullPath);
     if (!stat) continue;
 
@@ -291,7 +301,7 @@ function scanJsFilesForDirectives(dir: string, results: CustomDirectiveInfo[], d
         // skip unreadable files
       }
     } else if (stat.isDirectory()) {
-      scanJsFilesForDirectives(fullPath, results, depth + 1);
+      scanJsFilesForDirectives(fullPath, results, depth + 1, token);
     }
   }
 }
@@ -370,6 +380,7 @@ function findDirsRecursive(dir: string, name: string, results: string[], depth: 
   for (const entry of entries) {
     if (entry === 'node_modules' || entry.startsWith('.')) continue;
     const fullPath = path.join(dir, entry);
+    if (!isWithinWorkspace(fullPath)) continue;
     const stat = safeStat(fullPath);
     if (!stat) continue;
     if (stat.isDirectory()) {
@@ -379,6 +390,23 @@ function findDirsRecursive(dir: string, name: string, results: string[], depth: 
         findDirsRecursive(fullPath, name, results, depth + 1);
       }
     }
+  }
+}
+
+/**
+ * Resolve symlinks and verify the real path stays within the workspace root.
+ * Returns false if the path escapes the workspace or cannot be resolved.
+ */
+export function isWithinWorkspace(filePath: string): boolean {
+  if (workspaceRoots.length === 0) return true; // no workspace set → allow
+  try {
+    const resolved = fs.realpathSync(filePath);
+    return workspaceRoots.some(root => {
+      const normalizedRoot = fs.realpathSync(root) + path.sep;
+      return resolved === fs.realpathSync(root) || resolved.startsWith(normalizedRoot);
+    });
+  } catch {
+    return false; // unresolvable symlinks are rejected
   }
 }
 
@@ -425,7 +453,7 @@ export function setWorkspaceRoots(roots: string[]): void {
   cachedData = null; // invalidate cache
 }
 
-export function getWorkspaceData(documents: TextDocuments<TextDocument>): WorkspaceData {
+export function getWorkspaceData(documents: TextDocuments<TextDocument>, token?: CancellationToken): WorkspaceData {
   if (cachedData) return cachedData;
 
   const i18nKeys: I18nKeyInfo[] = [];
@@ -433,9 +461,12 @@ export function getWorkspaceData(documents: TextDocuments<TextDocument>): Worksp
   const customDirectives: CustomDirectiveInfo[] = [];
 
   for (const root of workspaceRoots) {
-    i18nKeys.push(...scanI18nKeys(root));
+    if (token?.isCancellationRequested) return emptyWorkspaceData();
+    i18nKeys.push(...scanI18nKeys(root, token));
+    if (token?.isCancellationRequested) return emptyWorkspaceData();
     routes.push(...scanRoutes(root));
-    customDirectives.push(...scanCustomDirectives(root));
+    if (token?.isCancellationRequested) return emptyWorkspaceData();
+    customDirectives.push(...scanCustomDirectives(root, token));
   }
 
   // Also scan inline scripts
@@ -446,11 +477,16 @@ export function getWorkspaceData(documents: TextDocuments<TextDocument>): Worksp
   // Scan template vars from all open documents
   const templateVars: TemplateVarInfo[] = [];
   for (const doc of documents.all()) {
+    if (token?.isCancellationRequested) return emptyWorkspaceData();
     templateVars.push(...scanTemplateVars(doc.getText()));
   }
 
   cachedData = { i18nKeys, routes, storeProperties, customDirectives, templateVars };
   return cachedData;
+}
+
+function emptyWorkspaceData(): WorkspaceData {
+  return { i18nKeys: [], routes: [], storeProperties: [], customDirectives: [], templateVars: [] };
 }
 
 export function invalidateCache(): void {
