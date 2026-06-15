@@ -108,9 +108,7 @@
     "start": "node docs/dev-server.js",
     "compile": "node esbuild.mjs",
     "watch": "node esbuild.mjs --watch",
-    "lint": "eslint client/src server/src --ext .ts",
     "test": "jest",
-    "test:e2e": "npm run compile && npx playwright test --config test/e2e/playwright.config.ts",
     "package": "vsce package",
     "vscode:prepublish": "npm run compile"
   },

@@ -168,6 +168,7 @@ function validateDoc(document: TextDocument) {
 }
 
 documents.onDidChangeContent((change) => {
+  invalidateCache();
   validateDoc(change.document);
 });
 
