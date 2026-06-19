@@ -397,6 +397,13 @@
     ],
     "description": "Lazy load content when element becomes visible"
   },
+  "No.JS i18n Proxy": {
+    "prefix": "nojs-i18n-proxy",
+    "body": [
+      "\\$i18n.${1:namespace}.${2:key}"
+    ],
+    "description": "No.JS: Access translations via the reactive $i18n proxy using dot-notation (e.g. $i18n.shell.sidebar.intro)"
+  },
   "No.JS Hover Prefetch": {
     "prefix": ["nojs-hover-prefetch", "nojs-hover-trigger"],
     "body": [

@@ -596,6 +596,26 @@ function getAttributeValueCompletions(context: CursorContext & { type: 'attribut
     }
   }
 
+  // $i18n. sub-property completions (reserved properties + dot-notation translation access)
+  if (directive && partial.includes('$i18n.')) {
+    const afterI18n = partial.substring(partial.lastIndexOf('$i18n.') + 6);
+    const i18nProps: { name: string; detail: string }[] = [
+      { name: 'locale', detail: 'string — current active locale code' },
+      { name: 'locales', detail: 'string[] — list of available locale codes' },
+      { name: 't', detail: 'function — classic translation lookup: $i18n.t(key, params)' },
+      { name: 'setLocale', detail: 'function — switch locale: $i18n.setLocale(code)' },
+    ];
+    for (const prop of i18nProps) {
+      if (afterI18n && !prop.name.toLowerCase().startsWith(afterI18n.toLowerCase())) continue;
+      items.push({
+        label: `$i18n.${prop.name}`,
+        kind: CompletionItemKind.Property,
+        detail: `No.JS: ${prop.detail}`,
+        sortText: `0-${prop.name}`,
+      });
+    }
+  }
+
   // Context keys in expression values
   if (directive && partial.includes('$')) {
     const afterDollar = partial.substring(partial.lastIndexOf('$'));

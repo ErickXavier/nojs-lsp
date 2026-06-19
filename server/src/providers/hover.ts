@@ -153,7 +153,7 @@ const CONTEXT_KEY_DOCS: Record<string, string> = {
   '$store': 'No.JS: **`$store`** — Access to the global reactive store.\n\nUsage: `$store.user.name`',
   '$route': 'No.JS: **`$route`** — Current route information (path, params, query, hash, matched).\n\nUsage: `$route.params.id`, `$route.matched`',
   '$router': 'No.JS: **`$router`** — Router instance for programmatic navigation.\n\nUsage: `$router.push(\'/about\')`',
-  '$i18n': 'No.JS: **`$i18n`** — Internationalization helper for translations.\n\nUsage: `$i18n.t(\'greeting\')`',
+  '$i18n': 'No.JS: **`$i18n`** — Reactive i18n Proxy. Access translations as dot-notation properties.\n\nUsage: `$i18n.shell.sidebar.intro` resolves to the translation string.\n\nReserved properties: `locale` (current locale), `locales` (available locales), `t(key, params)` (classic lookup), `setLocale(code)` (switch locale).',
   '$form': 'No.JS: **`$form`** — Form validation state and methods.\n\nProperties: `valid`, `dirty`, `touched`, `pending`, `submitting`, `errors`, `values`, `fields`, `firstError`, `errorCount`, `reset()`\n\nUsage: `$form.valid`, `$form.errors.email`, `$form.fields.email.touched`',
   '$el': 'No.JS: **`$el`** — Reference to the current DOM element.',
   '$event': 'No.JS: **`$event`** — The native DOM event object in event handlers.',
