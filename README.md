@@ -1,6 +1,6 @@
-# No.JS LSP — v1.14.1
+# No.JS LSP
 
-![version](https://img.shields.io/badge/version-1.14.1-blue)
+![version](https://img.shields.io/github/v/tag/no-js-dev/nojs-lsp?label=version)
 [![jsDelivr hits](https://data.jsdelivr.com/v1/package/gh/no-js-dev/nojs-lsp/badge)](https://www.jsdelivr.com/package/gh/no-js-dev/nojs-lsp)
 
 VS Code extension providing full language server support for the [No.JS](https://github.com/no-js-dev/nojs) HTML-first reactive framework.
