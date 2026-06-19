@@ -2,7 +2,13 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.14.1...HEAD)
+## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.0...HEAD)
+
+## [1.15.0](https://github.com/no-js-dev/nojs-lsp/compare/v1.14.1...v1.15.0) — 2026-06-19
+
+### Added
+
+- `feat(i18n): add $i18n reactive proxy completions and snippets`
 
 ### Changed
 
