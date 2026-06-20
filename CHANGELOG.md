@@ -2,7 +2,20 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.2...HEAD)
+## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.3...HEAD)
+
+## [1.15.3](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.2...v1.15.3) — 2026-06-20
+
+### Changed
+
+- chore(deps): upgrade TypeScript to 6.x
+- chore(deps): upgrade vscode-languageserver to 10.x
+- chore(deps): upgrade vscode-languageclient to 10.x
+- chore(deps): require Node.js >= 20.0.0
+
+### Fixed
+
+- fix(types): adapt code-actions provider and tests for `Diagnostic.message` type change in vscode-languageserver 10.x (`string | MarkupContent`)
 
 ## [1.15.2] - 2026-06-20
 
