@@ -2,7 +2,12 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.1...HEAD)
+## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.2...HEAD)
+
+## [1.15.2] - 2026-06-20
+
+### Fixed
+- fix(build): ensure all dist files contain correct version on release
 
 ## [1.15.1](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.0...v1.15.1) — 2026-06-20
 
