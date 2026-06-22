@@ -2,6 +2,11 @@ import { TextDocument } from 'vscode-languageserver-textdocument';
 import { Diagnostic, DiagnosticSeverity } from 'vscode-languageserver/node';
 import { validateTextDocument } from '../../server/src/providers/diagnostics';
 
+/** Extract message string from Diagnostic (vscode-languageserver 10.x: message is string | MarkupContent) */
+function msg(d: Diagnostic): string {
+  return typeof d.message === 'string' ? d.message : d.message.value;
+}
+
 function createDocument(content: string): TextDocument {
   return TextDocument.create('file:///test.html', 'html', 1, content);
 }
@@ -60,7 +65,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const unknown = diagnostics.find(d => d.message.includes('Unknown directive'));
+      const unknown = diagnostics.find(d => msg(d).includes('Unknown directive'));
       expect(unknown).toBeUndefined();
     });
 
@@ -70,7 +75,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const unknown = diagnostics.find(d => d.message.includes('Unknown directive'));
+      const unknown = diagnostics.find(d => msg(d).includes('Unknown directive'));
       expect(unknown).toBeUndefined();
     });
 
@@ -80,7 +85,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const unknown = diagnostics.find(d => d.message.includes('Unknown directive'));
+      const unknown = diagnostics.find(d => msg(d).includes('Unknown directive'));
       expect(unknown).toBeUndefined();
     });
 
@@ -90,7 +95,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const unknown = diagnostics.find(d => d.message.includes('Unknown directive'));
+      const unknown = diagnostics.find(d => msg(d).includes('Unknown directive'));
       expect(unknown).toBeUndefined();
     });
   });
@@ -103,7 +108,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const getError = diagnostics.find(d => d.message.includes('"get" requires a value'));
+      const getError = diagnostics.find(d => msg(d).includes('"get" requires a value'));
       expect(getError).toBeDefined();
       expect(getError!.severity).toBe(DiagnosticSeverity.Error);
     });
@@ -114,7 +119,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const getError = diagnostics.find(d => d.message.includes('"get" requires a value'));
+      const getError = diagnostics.find(d => msg(d).includes('"get" requires a value'));
       expect(getError).toBeDefined();
     });
 
@@ -124,7 +129,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const getError = diagnostics.find(d => d.message.includes('"get" requires a value'));
+      const getError = diagnostics.find(d => msg(d).includes('"get" requires a value'));
       expect(getError).toBeDefined();
     });
 
@@ -134,7 +139,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const getError = diagnostics.find(d => d.message.includes('"get" requires'));
+      const getError = diagnostics.find(d => msg(d).includes('"get" requires'));
       expect(getError).toBeUndefined();
     });
 
@@ -144,7 +149,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const nsError = diagnostics.find(d => d.message.includes('"i18n-ns" requires'));
+      const nsError = diagnostics.find(d => msg(d).includes('"i18n-ns" requires'));
       expect(nsError).toBeUndefined();
     });
 
@@ -154,7 +159,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const bindError = diagnostics.find(d => d.message.includes('"bind" requires a value'));
+      const bindError = diagnostics.find(d => msg(d).includes('"bind" requires a value'));
       expect(bindError).toBeDefined();
     });
   });
@@ -167,7 +172,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
       expect(elseError).toBeDefined();
     });
 
@@ -177,7 +182,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
       expect(elseError).toBeUndefined();
     });
 
@@ -187,7 +192,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
       expect(elseError).toBeDefined();
     });
 
@@ -197,7 +202,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
       expect(elseError).toBeUndefined();
     });
 
@@ -207,8 +212,8 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
-      const tplError = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
+      const tplError = diagnostics.find(d => msg(d).includes('referenced but not defined'));
       expect(elseError).toBeUndefined();
       expect(tplError).toBeUndefined();
     });
@@ -219,7 +224,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('must be preceded'));
       expect(elseError).toBeUndefined();
     });
 
@@ -229,7 +234,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseIfError = diagnostics.find(d => d.message.includes('"else-if" must be preceded'));
+      const elseIfError = diagnostics.find(d => msg(d).includes('"else-if" must be preceded'));
       expect(elseIfError).toBeDefined();
       expect(elseIfError!.message).not.toContain('else="templateId"');
     });
@@ -240,7 +245,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
       expect(elseError).toBeDefined();
       expect(elseError!.message).toContain('else="templateId"');
     });
@@ -252,7 +257,7 @@ describe('DiagnosticsProvider', () => {
         const conn = createMockConnection();
         await validateTextDocument(doc, conn as any);
         const diagnostics = conn.getDiagnostics();
-        const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+        const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
         expect(elseError).toBeDefined();
       }
     });
@@ -263,7 +268,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const elseError = diagnostics.find(d => d.message.includes('"else" must be preceded'));
+      const elseError = diagnostics.find(d => msg(d).includes('"else" must be preceded'));
       expect(elseError).toBeUndefined();
     });
 
@@ -273,7 +278,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const tplError = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      const tplError = diagnostics.find(d => msg(d).includes('referenced but not defined'));
       expect(tplError).toBeDefined();
       expect(tplError!.message).toContain('Template "missing-tpl"');
     });
@@ -287,7 +292,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const filterWarn = diagnostics.find(d => d.message.includes('Unknown filter'));
+      const filterWarn = diagnostics.find(d => msg(d).includes('Unknown filter'));
       expect(filterWarn).toBeDefined();
     });
 
@@ -297,7 +302,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const filterWarn = diagnostics.find(d => d.message.includes('Unknown filter'));
+      const filterWarn = diagnostics.find(d => msg(d).includes('Unknown filter'));
       expect(filterWarn).toBeUndefined();
     });
 
@@ -307,7 +312,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const filterWarns = diagnostics.filter(d => d.message.includes('Unknown filter'));
+      const filterWarns = diagnostics.filter(d => msg(d).includes('Unknown filter'));
       expect(filterWarns.length).toBe(2);
     });
 
@@ -317,7 +322,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const filterWarn = diagnostics.find(d => d.message.includes('Unknown filter'));
+      const filterWarn = diagnostics.find(d => msg(d).includes('Unknown filter'));
       expect(filterWarn).toBeUndefined();
     });
 
@@ -332,7 +337,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const filterWarn = diagnostics.find(d => d.message.includes('Unknown filter'));
+      const filterWarn = diagnostics.find(d => msg(d).includes('Unknown filter'));
       expect(filterWarn).toBeDefined();
     });
 
@@ -342,7 +347,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const filterWarn = diagnostics.find(d => d.message.includes('Unknown filter'));
+      const filterWarn = diagnostics.find(d => msg(d).includes('Unknown filter'));
       expect(filterWarn).toBeUndefined();
     });
   });
@@ -355,7 +360,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupState = diagnostics.filter(d => d.message.includes('Duplicate state declaration'));
+      const dupState = diagnostics.filter(d => msg(d).includes('Duplicate state declaration'));
       expect(dupState.length).toBeGreaterThanOrEqual(2);
     });
 
@@ -365,7 +370,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupState = diagnostics.find(d => d.message.includes('Duplicate state declaration'));
+      const dupState = diagnostics.find(d => msg(d).includes('Duplicate state declaration'));
       expect(dupState).toBeUndefined();
     });
 
@@ -375,7 +380,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupState = diagnostics.filter(d => d.message.includes('Duplicate state declaration'));
+      const dupState = diagnostics.filter(d => msg(d).includes('Duplicate state declaration'));
       expect(dupState.length).toBeGreaterThanOrEqual(2);
     });
 
@@ -385,7 +390,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupState = diagnostics.find(d => d.message.includes('Duplicate state declaration'));
+      const dupState = diagnostics.find(d => msg(d).includes('Duplicate state declaration'));
       expect(dupState).toBeUndefined();
     });
   });
@@ -398,7 +403,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const animWarn = diagnostics.find(d => d.message.includes('Unknown animation'));
+      const animWarn = diagnostics.find(d => msg(d).includes('Unknown animation'));
       expect(animWarn).toBeDefined();
     });
 
@@ -408,7 +413,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const animWarn = diagnostics.find(d => d.message.includes('Unknown animation'));
+      const animWarn = diagnostics.find(d => msg(d).includes('Unknown animation'));
       expect(animWarn).toBeUndefined();
     });
 
@@ -418,7 +423,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const animWarn = diagnostics.find(d => d.message.includes('Unknown animation'));
+      const animWarn = diagnostics.find(d => msg(d).includes('Unknown animation'));
       expect(animWarn).toBeUndefined();
     });
 
@@ -428,7 +433,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const animWarn = diagnostics.find(d => d.message.includes('Unknown animation'));
+      const animWarn = diagnostics.find(d => msg(d).includes('Unknown animation'));
       expect(animWarn).toBeUndefined();
     });
 
@@ -438,7 +443,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const animWarns = diagnostics.filter(d => d.message.includes('Unknown animation'));
+      const animWarns = diagnostics.filter(d => msg(d).includes('Unknown animation'));
       expect(animWarns.length).toBe(2);
     });
   });
@@ -451,7 +456,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modWarn = diagnostics.find(d => d.message.includes('Unknown event modifier'));
+      const modWarn = diagnostics.find(d => msg(d).includes('Unknown event modifier'));
       expect(modWarn).toBeDefined();
       expect(modWarn!.message).toContain('badmod');
     });
@@ -462,7 +467,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modWarn = diagnostics.find(d => d.message.includes('Unknown event modifier'));
+      const modWarn = diagnostics.find(d => msg(d).includes('Unknown event modifier'));
       expect(modWarn).toBeUndefined();
     });
 
@@ -472,7 +477,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modWarn = diagnostics.find(d => d.message.includes('Unknown event modifier'));
+      const modWarn = diagnostics.find(d => msg(d).includes('Unknown event modifier'));
       expect(modWarn).toBeUndefined();
     });
 
@@ -482,7 +487,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modWarns = diagnostics.filter(d => d.message.includes('Unknown event modifier'));
+      const modWarns = diagnostics.filter(d => msg(d).includes('Unknown event modifier'));
       // The code breaks after the first unknown modifier
       expect(modWarns.length).toBe(1);
       expect(modWarns[0].message).toContain('badmod');
@@ -497,7 +502,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const valWarn = diagnostics.find(d => d.message.includes('Unknown validator'));
+      const valWarn = diagnostics.find(d => msg(d).includes('Unknown validator'));
       expect(valWarn).toBeDefined();
       expect(valWarn!.message).toContain('notAValidator');
     });
@@ -508,7 +513,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const valWarn = diagnostics.find(d => d.message.includes('Unknown validator'));
+      const valWarn = diagnostics.find(d => msg(d).includes('Unknown validator'));
       expect(valWarn).toBeUndefined();
     });
 
@@ -518,7 +523,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const valWarns = diagnostics.filter(d => d.message.includes('Unknown validator'));
+      const valWarns = diagnostics.filter(d => msg(d).includes('Unknown validator'));
       expect(valWarns.length).toBe(2);
     });
 
@@ -528,7 +533,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const valWarn = diagnostics.find(d => d.message.includes('Unknown validator'));
+      const valWarn = diagnostics.find(d => msg(d).includes('Unknown validator'));
       expect(valWarn).toBeUndefined();
     });
 
@@ -538,7 +543,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const valWarn = diagnostics.find(d => d.message.includes('Unknown validator'));
+      const valWarn = diagnostics.find(d => msg(d).includes('Unknown validator'));
       expect(valWarn).toBeUndefined();
     });
   });
@@ -551,7 +556,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modelWarn = diagnostics.find(d => d.message.includes('"model" is typically used'));
+      const modelWarn = diagnostics.find(d => msg(d).includes('"model" is typically used'));
       expect(modelWarn).toBeDefined();
       expect(modelWarn!.message).toContain('<div>');
     });
@@ -562,7 +567,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modelWarn = diagnostics.find(d => d.message.includes('"model" is typically used'));
+      const modelWarn = diagnostics.find(d => msg(d).includes('"model" is typically used'));
       expect(modelWarn).toBeUndefined();
     });
 
@@ -572,7 +577,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modelWarn = diagnostics.find(d => d.message.includes('"model" is typically used'));
+      const modelWarn = diagnostics.find(d => msg(d).includes('"model" is typically used'));
       expect(modelWarn).toBeUndefined();
     });
 
@@ -582,7 +587,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modelWarn = diagnostics.find(d => d.message.includes('"model" is typically used'));
+      const modelWarn = diagnostics.find(d => msg(d).includes('"model" is typically used'));
       expect(modelWarn).toBeUndefined();
     });
 
@@ -592,7 +597,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const modelWarn = diagnostics.find(d => d.message.includes('"model" is typically used'));
+      const modelWarn = diagnostics.find(d => msg(d).includes('"model" is typically used'));
       expect(modelWarn).toBeDefined();
       expect(modelWarn!.message).toContain('<span>');
     });
@@ -606,7 +611,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupRef = diagnostics.filter(d => d.message.includes('Duplicate ref'));
+      const dupRef = diagnostics.filter(d => msg(d).includes('Duplicate ref'));
       expect(dupRef.length).toBeGreaterThanOrEqual(2);
     });
 
@@ -616,7 +621,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupRef = diagnostics.find(d => d.message.includes('Duplicate ref'));
+      const dupRef = diagnostics.find(d => msg(d).includes('Duplicate ref'));
       expect(dupRef).toBeUndefined();
     });
 
@@ -626,7 +631,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const dupRef = diagnostics.find(d => d.message.includes('Duplicate ref'));
+      const dupRef = diagnostics.find(d => msg(d).includes('Duplicate ref'));
       expect(dupRef).toBeUndefined();
     });
   });
@@ -639,7 +644,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const tplWarn = diagnostics.find(d => d.message.includes('Template "missingTpl" is referenced but not defined'));
+      const tplWarn = diagnostics.find(d => msg(d).includes('Template "missingTpl" is referenced but not defined'));
       expect(tplWarn).toBeDefined();
     });
 
@@ -649,7 +654,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const tplWarn = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      const tplWarn = diagnostics.find(d => msg(d).includes('referenced but not defined'));
       expect(tplWarn).toBeUndefined();
     });
 
@@ -659,7 +664,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const tplWarns = diagnostics.filter(d => d.message.includes('referenced but not defined'));
+      const tplWarns = diagnostics.filter(d => msg(d).includes('referenced but not defined'));
       expect(tplWarns.length).toBe(4);
     });
 
@@ -669,7 +674,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const tplWarn = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      const tplWarn = diagnostics.find(d => msg(d).includes('referenced but not defined'));
       expect(tplWarn).toBeUndefined();
     });
 
@@ -680,7 +685,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const tplWarn = diagnostics.find(d => d.message.includes('referenced but not defined'));
+      const tplWarn = diagnostics.find(d => msg(d).includes('referenced but not defined'));
       expect(tplWarn).toBeUndefined();
     });
   });
@@ -693,7 +698,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const wildcardWarns = diagnostics.filter(d => d.message.includes('Duplicate wildcard route'));
+      const wildcardWarns = diagnostics.filter(d => msg(d).includes('Duplicate wildcard route'));
       expect(wildcardWarns.length).toBeGreaterThanOrEqual(2);
     });
 
@@ -703,7 +708,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const wildcardWarn = diagnostics.find(d => d.message.includes('Duplicate wildcard route'));
+      const wildcardWarn = diagnostics.find(d => msg(d).includes('Duplicate wildcard route'));
       expect(wildcardWarn).toBeUndefined();
     });
 
@@ -713,7 +718,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const wildcardWarn = diagnostics.find(d => d.message.includes('Duplicate wildcard route'));
+      const wildcardWarn = diagnostics.find(d => msg(d).includes('Duplicate wildcard route'));
       expect(wildcardWarn).toBeUndefined();
     });
 
@@ -723,7 +728,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const wildcardWarn = diagnostics.find(d => d.message.includes('Duplicate wildcard route'));
+      const wildcardWarn = diagnostics.find(d => msg(d).includes('Duplicate wildcard route'));
       expect(wildcardWarn).toBeUndefined();
     });
   });
@@ -736,7 +741,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const asWarn = diagnostics.find(d => d.message.includes('missing the "as" companion'));
+      const asWarn = diagnostics.find(d => msg(d).includes('missing the "as" companion'));
       expect(asWarn).toBeDefined();
     });
 
@@ -746,7 +751,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const asWarn = diagnostics.find(d => d.message.includes('missing the "as" companion'));
+      const asWarn = diagnostics.find(d => msg(d).includes('missing the "as" companion'));
       expect(asWarn).toBeUndefined();
     });
 
@@ -757,7 +762,7 @@ describe('DiagnosticsProvider', () => {
         const conn = createMockConnection();
         await validateTextDocument(doc, conn as any);
         const diagnostics = conn.getDiagnostics();
-        const asWarn = diagnostics.find(d => d.message.includes('missing the "as" companion'));
+        const asWarn = diagnostics.find(d => msg(d).includes('missing the "as" companion'));
         expect(asWarn).toBeDefined();
       }
     });
@@ -774,7 +779,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const syntaxHint = diagnostics.find(d => d.message.includes('Possible syntax error'));
+      const syntaxHint = diagnostics.find(d => msg(d).includes('Possible syntax error'));
       expect(syntaxHint).toBeDefined();
       expect(syntaxHint!.severity).toBe(DiagnosticSeverity.Hint);
     });
@@ -785,7 +790,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const syntaxHint = diagnostics.find(d => d.message.includes('Possible syntax error'));
+      const syntaxHint = diagnostics.find(d => msg(d).includes('Possible syntax error'));
       expect(syntaxHint).toBeUndefined();
     });
 
@@ -795,7 +800,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const syntaxHint = diagnostics.find(d => d.message.includes('Possible syntax error'));
+      const syntaxHint = diagnostics.find(d => msg(d).includes('Possible syntax error'));
       expect(syntaxHint).toBeUndefined();
     });
 
@@ -805,7 +810,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const syntaxHint = diagnostics.find(d => d.message.includes('Possible syntax error'));
+      const syntaxHint = diagnostics.find(d => msg(d).includes('Possible syntax error'));
       expect(syntaxHint).toBeUndefined();
     });
 
@@ -815,7 +820,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const syntaxHint = diagnostics.find(d => d.message.includes('Possible syntax error'));
+      const syntaxHint = diagnostics.find(d => msg(d).includes('Possible syntax error'));
       expect(syntaxHint).toBeUndefined();
     });
 
@@ -826,7 +831,7 @@ describe('DiagnosticsProvider', () => {
         const conn = createMockConnection();
         await validateTextDocument(doc, conn as any);
         const diagnostics = conn.getDiagnostics();
-        const syntaxHint = diagnostics.find(d => d.message.includes('Possible syntax error'));
+        const syntaxHint = diagnostics.find(d => msg(d).includes('Possible syntax error'));
         expect(syntaxHint).toBeUndefined();
       }
     });
@@ -840,7 +845,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const cssWarn = diagnostics.find(d => d.message.includes('deprecated'));
+      const cssWarn = diagnostics.find(d => msg(d).includes('deprecated'));
       expect(cssWarn).toBeDefined();
       expect(cssWarn!.severity).toBe(DiagnosticSeverity.Information);
     });
@@ -851,7 +856,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const cssWarn = diagnostics.find(d => d.message.includes('.fade-leave'));
+      const cssWarn = diagnostics.find(d => msg(d).includes('.fade-leave'));
       expect(cssWarn).toBeDefined();
     });
 
@@ -861,7 +866,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const cssWarns = diagnostics.filter(d => d.message.includes('deprecated'));
+      const cssWarns = diagnostics.filter(d => msg(d).includes('deprecated'));
       expect(cssWarns.length).toBe(2);
     });
 
@@ -871,7 +876,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const cssWarn = diagnostics.find(d => d.message.includes('deprecated'));
+      const cssWarn = diagnostics.find(d => msg(d).includes('deprecated'));
       expect(cssWarn).toBeUndefined();
     });
 
@@ -881,7 +886,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const cssWarn = diagnostics.find(d => d.message.includes('deprecated'));
+      const cssWarn = diagnostics.find(d => msg(d).includes('deprecated'));
       expect(cssWarn).toBeUndefined();
     });
   });
@@ -915,7 +920,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const templateError = diagnostics.find(d => d.message.includes('template'));
+      const templateError = diagnostics.find(d => msg(d).includes('template'));
       expect(templateError).toBeUndefined();
     });
 
@@ -925,7 +930,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const reqError = diagnostics.find(d => d.message.includes('"foreach" requires a value'));
+      const reqError = diagnostics.find(d => msg(d).includes('"foreach" requires a value'));
       expect(reqError).toBeDefined();
     });
   });
@@ -937,7 +942,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const forError = diagnostics.find(d => d.message.includes('"for"'));
+      const forError = diagnostics.find(d => msg(d).includes('"for"'));
       expect(forError).toBeUndefined();
     });
 
@@ -947,7 +952,7 @@ describe('DiagnosticsProvider', () => {
       const conn = createMockConnection();
       await validateTextDocument(doc, conn as any);
       const diagnostics = conn.getDiagnostics();
-      const reqError = diagnostics.find(d => d.message.includes('"for" requires a value'));
+      const reqError = diagnostics.find(d => msg(d).includes('"for" requires a value'));
       expect(reqError).toBeDefined();
     });
   });

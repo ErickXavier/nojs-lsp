@@ -29,21 +29,23 @@ export function onCodeAction(documents: TextDocuments<TextDocument>) {
     const actions: CodeAction[] = [];
 
     for (const diag of diagnostics) {
+      const msg = typeof diag.message === 'string' ? diag.message : diag.message.value;
+
       // Quick fix: add missing `as` for HTTP directives
-      if (diag.message.includes('missing the "as" companion attribute')) {
+      if (msg.includes('missing the "as" companion attribute')) {
         const action = createAddAsAction(document, diag);
         if (action) actions.push(action);
       }
 
       // Quick fix: "did you mean?" for unknown directive
-      if (diag.message.startsWith('No.JS: Unknown directive')) {
+      if (msg.startsWith('No.JS: Unknown directive')) {
         const suggestions = createDidYouMeanActions(document, diag);
         actions.push(...suggestions);
       }
 
       // Quick fix: add `else` sibling for `if`
-      if (diag.message.includes('"else" must be preceded by') ||
-          diag.message.includes('"else-if" must be preceded by')) {
+      if (msg.includes('"else" must be preceded by') ||
+          msg.includes('"else-if" must be preceded by')) {
         // No automatic fix — this is informational
       }
     }
@@ -92,7 +94,8 @@ function createDidYouMeanActions(document: TextDocument, diag: Diagnostic): Code
   const actions: CodeAction[] = [];
 
   // Extract the unknown directive name from the message
-  const match = diag.message.match(/No\.JS: Unknown directive "(\w[\w-]*)"/);
+  const msg = typeof diag.message === 'string' ? diag.message : diag.message.value;
+  const match = msg.match(/No\.JS: Unknown directive "(\w[\w-]*)"/);
   if (!match) return actions;
 
   const unknown = match[1];

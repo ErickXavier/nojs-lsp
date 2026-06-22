@@ -7,7 +7,7 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/test/e2e/'],
   moduleFileExtensions: ['ts', 'js', 'json'],
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.test.json' }],
   },
   moduleNameMapper: {
     '^vscode$': '<rootDir>/test/__mocks__/vscode.ts',
