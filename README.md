@@ -1,11 +1,37 @@
 # No.JS LSP
 
 ![version](https://img.shields.io/github/v/tag/no-js-dev/nojs-lsp?label=version)
-[![jsDelivr hits](https://data.jsdelivr.com/v1/package/gh/no-js-dev/nojs-lsp/badge)](https://www.jsdelivr.com/package/gh/no-js-dev/nojs-lsp)
+[![VS Code Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/EXS.nojs-lsp)](https://marketplace.visualstudio.com/items?itemName=EXS.nojs-lsp)
+[![VS Code Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/EXS.nojs-lsp)](https://marketplace.visualstudio.com/items?itemName=EXS.nojs-lsp)
 
 VS Code extension providing full language server support for the [No.JS](https://github.com/no-js-dev/nojs) HTML-first reactive framework.
 
 Also works as a standalone language server (`--stdio`) for **Neovim**, **Sublime Text**, **Emacs**, and any LSP-compatible editor.
+
+## Installation
+
+### VS Code Marketplace
+
+1. Open VS Code.
+2. Go to **Extensions** (`Ctrl+Shift+X` / `Cmd+Shift+X`).
+3. Search for **"NoJS"**.
+4. Click **Install** on **No.JS LSP** by EXS.
+
+Or install from the command line:
+
+```sh
+code --install-extension EXS.nojs-lsp
+```
+
+### Manual VSIX Install
+
+Download the `.vsix` file from [GitHub Releases](https://github.com/no-js-dev/nojs-lsp/releases) and install it:
+
+```sh
+code --install-extension nojs-lsp-<version>.vsix
+```
+
+Or in VS Code: **Extensions** → **⋯** menu → **Install from VSIX…**
 
 ## Features
 
@@ -88,7 +114,7 @@ Also works as a standalone language server (`--stdio`) for **Neovim**, **Sublime
 - HTTP method badge for `get`/`post`/`put`/`patch`/`delete` with `as`
 
 ### Snippets
-- 31 built-in snippets for common patterns (`if`, `foreach`, `each`, `for`, `get`, `store`, `form`, `call`, `notify`, `page-title`, `plugin`, etc.)
+- 41 built-in snippets for common patterns (`if`, `foreach`, `each`, `for`, `get`, `store`, `form`, `call`, `notify`, `page-title`, `plugin`, etc.)
 
 ## Configuration
 

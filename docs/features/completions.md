@@ -20,7 +20,7 @@ Completions activate on these characters:
 
 ## Directive Completions
 
-When typing an attribute name, the LSP suggests all 39 built-in directives grouped by category. Each item shows its category, description, and inserts a value placeholder for directives that require one.
+When typing an attribute name, the LSP suggests all 45 built-in directives grouped by category. Each item shows its category, description, and inserts a value placeholder for directives that require one.
 
 ```html
 <!-- Type "st" to see: state, store, style-* -->
