@@ -1,6 +1,6 @@
 # Snippets
 
-The No.JS extension ships 23 code snippets for quickly scaffolding common patterns. Type a prefix in an HTML file and press Tab or select from the completion menu to expand the snippet.
+The No.JS extension ships 41 code snippets for quickly scaffolding common patterns. Type a prefix in an HTML file and press Tab or select from the completion menu to expand the snippet.
 
 All snippets use tab stops (`$1`, `$2`, …) so you can cycle through placeholders with Tab.
 

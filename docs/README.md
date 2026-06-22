@@ -28,7 +28,7 @@ Language server for the No.JS framework — completions, hover docs, diagnostics
 
 | Document | Description |
 |----------|-------------|
-| [Directives](reference/directives.md) | All 39+ supported directives with categories and companions |
+| [Directives](reference/directives.md) | All 45+ supported directives with categories and companions |
 | [Filters](reference/filters.md) | All 32 built-in filters with arguments and descriptions |
 | [Validators](reference/validators.md) | Built-in form validators |
 | [Context Keys](reference/context-keys.md) | `$store`, `$refs`, `$route`, `$router`, `$i18n`, `$form` |

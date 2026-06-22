@@ -83,6 +83,6 @@ For full details, see [Configuration](reference/configuration.md).
 - **[Diagnostics](features/diagnostics.md)** — Unknown directive warnings with "did you mean?" suggestions, orphaned `else` detection, expression validation, and more.
 - **[Go-to-Definition](features/go-to-definition.md)** — Jump to `<template>` definitions, `ref` declarations, and `store` sources.
 - **[Semantic Highlighting](features/semantic-highlighting.md)** — Distinct colors for directive names, filters, stores, and loop variables.
-- **[Snippets](features/snippets.md)** — 23 built-in snippets for common patterns like `if`/`else`, `foreach`, `get`, `store`, and `form`.
+- **[Snippets](features/snippets.md)** — 41 built-in snippets for common patterns like `if`/`else`, `foreach`, `get`, `store`, and `form`.
 
 See the full [documentation index](README.md) for all features.
