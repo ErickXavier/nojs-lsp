@@ -2,7 +2,16 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.3...HEAD)
+## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.4...HEAD)
+
+## [1.15.4](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.3...v1.15.4) — 2026-06-22
+
+### Fixed
+
+- fix(docs): replace jsDelivr badge with VS Code Marketplace badges
+- fix(docs): add Installation section to README (Marketplace, CLI, VSIX)
+- fix(docs): update snippet count from 31/23 to 41 across README and docs
+- fix(docs): update directive count from 39/40 to 45 across README and docs
 
 ## [1.15.3](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.2...v1.15.3) — 2026-06-20
 
