@@ -2,12 +2,13 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.4...HEAD)
+## [1.15.5](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.4...v1.15.5) — 2026-06-24
 
 ### Fixed
 
 - fix(data): remove incorrect `source` property from error-boundary CustomEvent detail in nojs-custom-data.json (core only dispatches `{ message, error }`)
 - fix(docs): update snippet count from 23 to 41 and directive count from 44 to 45 in llms.txt
+- fix(docs): sync docs with core, remove CLI references
 
 ### Changed
 
