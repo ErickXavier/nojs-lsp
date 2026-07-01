@@ -2,7 +2,13 @@
 
 All notable changes to the **No.JS LSP** extension will be documented in this file.
 
-## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.6...HEAD)
+## [Unreleased](https://github.com/no-js-dev/nojs-lsp/compare/v1.16.0...HEAD)
+
+## [1.16.0](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.6...v1.16.0) — 2026-07-01
+
+### Changed
+
+- Version aligned with the NoJS ecosystem release. (No i18n config-key completions yet — tracked separately as LSP-38.)
 
 ## [1.15.6](https://github.com/no-js-dev/nojs-lsp/compare/v1.15.5...v1.15.6) — 2026-06-25
 
